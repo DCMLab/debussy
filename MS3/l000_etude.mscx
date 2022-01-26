@@ -8926,6 +8926,7 @@
           </voice>
         </Measure>
       <Measure len="4/8">
+        <irregular>1</irregular>
         <vspacerDown>9.8758</vspacerDown>
         <voice>
           <KeySig>
@@ -12244,6 +12245,7 @@
           </voice>
         </Measure>
       <Measure len="16/32">
+        <irregular>1</irregular>
         <voice>
           <Chord>
             <durationType>eighth</durationType>

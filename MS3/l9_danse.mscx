@@ -17,6 +17,8 @@
     <showFrames>1</showFrames>
     <showMargins>0</showMargins>
     <metaTag name="arranger"></metaTag>
+    <metaTag name="composed_end">1880</metaTag>
+    <metaTag name="composed_start">1880</metaTag>
     <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright">Public Domain Work </metaTag>
     <metaTag name="creationDate">2021-10-08</metaTag>

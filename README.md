@@ -8,4 +8,5 @@ Please note that the `meta_ corpora` branch should be used with collections of c
 # Overview
 |file_name |measures|labels|standard|annotators|reviewers|
 |----------|-------:|-----:|--------|----------|---------|
+|l000_etude|        |     0|        |          |         |
 |l000_etude|      71|     0|        |          |         |

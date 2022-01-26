@@ -9148,16 +9148,16 @@
             </BarLine>
           </voice>
         </Measure>
-      <Measure len="25/32">
+      <Measure>
         <stretch>0</stretch>
         <voice>
           <Rest>
             <visible>0</visible>
             <durationType>measure</durationType>
-            <duration>25/32</duration>
+            <duration>4/4</duration>
             </Rest>
           <location>
-            <fractions>-9/32</fractions>
+            <fractions>-1/2</fractions>
             </location>
           <Tempo>
             <tempo>0.75</tempo>
@@ -23767,7 +23767,7 @@
             </Chord>
           </voice>
         </Measure>
-      <Measure len="25/32">
+      <Measure>
         <voice>
           <Tuplet>
             <visible>0</visible>
@@ -23973,7 +23973,7 @@
             </Chord>
           <Chord>
             <staffMove>-1</staffMove>
-            <durationType>eighth</durationType>
+            <durationType>quarter</durationType>
             <Note>
               <Spanner type="Tie">
                 <Tie>
@@ -23990,6 +23990,12 @@
               <tpc>15</tpc>
               </Note>
             </Chord>
+          <Rest>
+            <durationType>32nd</durationType>
+            </Rest>
+          <Rest>
+            <durationType>16th</durationType>
+            </Rest>
           </voice>
         <voice>
           <Chord>

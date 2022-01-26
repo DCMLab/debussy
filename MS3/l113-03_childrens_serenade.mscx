@@ -97,6 +97,8 @@
     <showFrames>1</showFrames>
     <showMargins>0</showMargins>
     <metaTag name="arranger"></metaTag>
+    <metaTag name="composed_end">1908</metaTag>
+    <metaTag name="composed_start">1908</metaTag>
     <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2019-05-20</metaTag>
@@ -108,6 +110,7 @@
     <metaTag name="poet"></metaTag>
     <metaTag name="source">https://musescore.com/user/29737597/scores/5703647</metaTag>
     <metaTag name="translator"></metaTag>
+    <metaTag name="typesetter">https://musescore.com/user/29737597</metaTag>
     <metaTag name="workNumber"></metaTag>
     <metaTag name="workTitle">Serenade for the Doll</metaTag>
     <Part>

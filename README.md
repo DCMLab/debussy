@@ -6,7 +6,7 @@ Please note that the `meta_ corpora` branch should be used with collections of c
 
 
 # Overview
-|        file_name         |measures|labels|standard|annotators|reviewers|
-|--------------------------|-------:|-----:|--------|----------|---------|
-|l113-03_childrens_serenade|     124|     0|        |          |         |
-|l9_danse                  |      92|     0|        |          |         |
+|file_name |measures|labels|standard|annotators|reviewers|
+|----------|-------:|-----:|--------|----------|---------|
+|l000_etude|        |     0|        |          |         |
+|l000_etude|      71|     0|        |          |         |

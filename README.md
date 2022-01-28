@@ -10,6 +10,7 @@ Delicious dataset
 |l000_etude                  |      71|     0|        |          |         |
 |l000_soirs                  |      23|     0|        |          |         |
 |l009_danse                  |      92|     0|        |          |         |
+|l066-01_arabesques-premiere |     107|     0|        |          |         |
 |l067_mazurka                |     138|     0|        |          |         |
 |l068_reverie                |     101|     0|        |          |         |
 |l069_tarentelle             |     333|     0|        |          |         |
@@ -46,7 +47,20 @@ Delicious dataset
 |l117-10_preludes_cathedrale |      89|     0|        |          |         |
 |l117-12_preludes_minstrels  |      89|     0|        |          |         |
 |l121_plus                   |     148|     0|        |          |         |
+|l123-01_preludes_brouillards|      52|     0|        |          |         |
+|l123-02_preludes_feuilles   |      52|     0|        |          |         |
+|l123-03_preludes_puerta     |      90|     0|        |          |         |
+|l123-04_preludes_fees       |     127|     0|        |          |         |
+|l123-05_preludes_bruyeres   |      51|     0|        |          |         |
+|l123-06_preludes_general    |     109|     0|        |          |         |
+|l123-07_preludes_terrasse   |      45|     0|        |          |         |
+|l123-08_preludes_ondine     |      74|     0|        |          |         |
+|l123-09_preludes_hommage    |      54|     0|        |          |         |
+|l123-10_preludes_canope     |      33|     0|        |          |         |
+|l123-11_preludes_tierces    |     165|     0|        |          |         |
+|l123-12_preludes_feux       |     100|     0|        |          |         |
 |l132_berceuse               |      68|     0|        |          |         |
 |l133_page                   |      38|     0|        |          |         |
 |l136-01_etudes_cinq         |     116|     0|        |          |         |
+|l136-11_etudes_arpeges      |      67|     0|        |          |         |
 |l138_elegie                 |      21|     0|        |          |         |

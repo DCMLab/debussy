@@ -4,6 +4,7 @@ import numpy as np
 import math
 from scipy import ndimage
 from scipy.stats import entropy
+from scipy.stats.stats import pearsonr
 
 MOZART_PROFILES = {
  'major': {0: 0.20033700035703508,
@@ -31,44 +32,10 @@ MOZART_PROFILES = {
   10: 0.020386372564054407,
   11: 0.07959216183789804}}
 
-
-def compute_magnitude_entropy(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
-    vec = []
-    for i in range(7):
-        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
-    sel = np.array([ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec])
-    entr = ent.spectral_entropy(sel, 1, method='fft')
-    return entr[1:]
-
-def compute_magnitudes(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
-    vec = []
-    for i in range(7):
-        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
-    sel = np.array([ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec])
-    return sel[4]
-
-def compute_peaks(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
-    vec = []
-    for i in range(7):
-        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
-    sel = [ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec]
-    return [len(find_peaks(list(magnitudes))[0]) for magnitudes in sel]
-
-def compute_entropy_phase(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.round(np.angle(apply_dft_to_pitch_class_matrix(arr1)), 2)
-    vec = []
-    coeffs = []
-    height = int(utm.shape[0] * ver_ratio)-1
-    sel = np.array(utm[height,:,:]).T
-    entr = ent.spectral_entropy(sel, 1, method='fft')
-    return entr[1:]
+def max_correlation(row, rotated_kp):
+    coeffs_major = np.array([pearsonr(row, kp)[0] for kp in rotated_kp.values()])[:12]
+    coeffs_minor = np.array([pearsonr(row, kp)[0] for kp in rotated_kp.values()])[12:]
+    return coeffs_major.max(), coeffs_minor.max()
 
 def build_utm_from_one_row(res):
     """
@@ -83,6 +50,15 @@ def build_utm_from_one_row(res):
     for i in range(1, pcv_nmb):
         for j in range(0, pcv_nmb-i):
             res[i][i+j] = res[0][i+j] + res[i-1][i+j-1]
+    return res
+
+def build_max_utm_from_one_row(res):
+    """
+    """
+    pcv_nmb = np.shape(res)[0]
+    for i in range(1, pcv_nmb):
+        for j in range(0, pcv_nmb-i):
+            res[i][i+j] = np.max(np.array([res[0][i+j],res[i-1][i+j-1]]), axis=0)
     return res
 
 
@@ -106,8 +82,29 @@ def pitch_class_matrix_to_tritone(pc_mat, build_utm = True):
         new_res[0] = res 
         res = build_utm_from_one_row(new_res)
         
-    return res
+    res = np.sum(res, axis=2)
+    res[res != 0.] = 1
+    return res.reshape((pcv_nmb, pcv_nmb, 1))
 
+def pitch_class_matrix_to_minor_major(pc_mat, rotated_kp, build_utm = True):
+    """
+    This functions takes a list of N pitch class distributions,
+    modelised by a matrix of float numbers, and apply the 
+    DFT individually to all the pitch class distributions.
+    """
+    pcv_nmb, _ = np.shape(pc_mat)
+    res_dimensions = (pcv_nmb, 2)
+    res = np.full(res_dimensions, (0.), np.float64)
+
+    for i in range(pcv_nmb):
+        res[i] = np.array(max_correlation(pc_mat[i], rotated_kp))#coeff 7 to 11 are uninteresting (conjugates of coeff 6 to 1).
+    
+    if build_utm:
+        new_res = np.full((pcv_nmb, pcv_nmb, 2), (0.), np.float64)
+        new_res[0] = res 
+        res = build_max_utm_from_one_row(new_res) #this does not make sense for major and minor
+        
+    return res
 
 def most_resonant(score, aw_size=4):
     arr1 = produce_pitch_class_matrix_from_filename(score, aw_size)
@@ -211,3 +208,45 @@ def max_utm_to_ws_utm(utm_max, utm_argmax, utm, how):
     
     
     return res
+
+
+# still to adjust from Digital Musicology project
+
+def compute_magnitude_entropy(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
+    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
+    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
+    vec = []
+    for i in range(7):
+        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
+    sel = np.array([ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec])
+    entr = ent.spectral_entropy(sel, 1, method='fft')
+    return entr[1:]
+
+def compute_magnitudes(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
+    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
+    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
+    vec = []
+    for i in range(7):
+        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
+    sel = np.array([ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec])
+    return sel[4]
+
+def compute_peaks(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
+    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
+    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
+    vec = []
+    for i in range(7):
+        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
+    sel = [ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec]
+    return [len(find_peaks(list(magnitudes))[0]) for magnitudes in sel]
+
+def compute_entropy_phase(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
+    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
+    utm = np.round(np.angle(apply_dft_to_pitch_class_matrix(arr1)), 2)
+    vec = []
+    coeffs = []
+    height = int(utm.shape[0] * ver_ratio)-1
+    sel = np.array(utm[height,:,:]).T
+    entr = ent.spectral_entropy(sel, 1, method='fft')
+    return entr[1:]
+

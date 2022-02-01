@@ -2,7 +2,9 @@
 
 Delicious dataset
 
-Command for creating pitch class vectors: `python slices.py -q 1 -p pc --normalize -o pcvs`
+Command for creating pitch class vectors: `python slices.py -q 1 -p pc -w 0.5 --normalize -o pcvs
+` where `-q 1` means slices of length 1 quarter, `-p pc` using pitch classes 0..11, `-w 0.5`
+weighting grace notes by half of their durations, and `-o pcvs` the output directory.
 
 
 # Overview

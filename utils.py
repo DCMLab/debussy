@@ -2,7 +2,8 @@ from wavescapes import *
 from glob import glob
 import numpy as np
 import math
-
+from scipy import ndimage
+from scipy.stats import entropy
 
 
 def compute_magnitude_entropy(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
@@ -43,14 +44,54 @@ def compute_entropy_phase(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
     entr = ent.spectral_entropy(sel, 1, method='fft')
     return entr[1:]
 
+def build_utm_from_one_row(res):
+    """
+    given a NxN matrix whose first row is the only
+    one that's filled with values, this function fills
+    all the above row by summing for each row's element
+    the two closest element from the row below. This
+    method of summing builds an upper-triangle-matrix
+    whose structure represent all hierarchical level.
+    """
+    pcv_nmb = np.shape(res)[0]
+    for i in range(1, pcv_nmb):
+        for j in range(0, pcv_nmb-i):
+            res[i][i+j] = res[0][i+j] + res[i-1][i+j-1]
+    return res
+
+
+def pitch_class_matrix_to_tritone(pc_mat, build_utm = True):
+    """
+    This functions takes a list of N pitch class distributions,
+    modelised by a matrix of float numbers, and apply the 
+    DFT individually to all the pitch class distributions.
+    """
+    pcv_nmb, pc_nmb = np.shape(pc_mat)
+    #+1 to hold room for the 0th coefficient
+    coeff_nmb = int(pc_nmb/2)+1
+    res_dimensions = (pcv_nmb, coeff_nmb)
+    res = np.full(res_dimensions, (0.), np.float64)
+
+    for i in range(pcv_nmb):
+        res[i] = (pc_mat[i] * np.roll(pc_mat[i], 6))[:coeff_nmb] #coeff 7 to 11 are uninteresting (conjugates of coeff 6 to 1).
+    
+    if build_utm:
+        new_res = np.full((pcv_nmb, pcv_nmb, coeff_nmb), (0.), np.float64)
+        new_res[0] = res 
+        res = build_utm_from_one_row(new_res)
+        
+    return res
+
+
 def most_resonant(score, aw_size=4):
     arr1 = produce_pitch_class_matrix_from_filename(score, aw_size)
     utm = apply_dft_to_pitch_class_matrix(arr1)
     utm_magnitude = np.abs(utm)
     utm_max = np.max(utm_magnitude[:,:,1:], axis=2)
     utm_argmax = np.argmax(utm_magnitude[:,:,1:], axis=2)
+    utm_entropy = 1 / entropy(utm_magnitude[:,:,1:], axis=2)
 
-    return (utm_max, utm_argmax, utm)
+    return (utm_max, utm_entropy, utm_argmax, utm)
 
 
 def stand(v):
@@ -99,31 +140,21 @@ def zeroth_coeff_cm(value, curr_max, curr_argmax):
     angle = curr_argmax
     return (angle, magn)
     
-def center_of_mass_v(utm_max, utm_argmax, utm):
+def center_of_mass_v(utm_interest, utm):
     shape_x, shape_y = np.shape(utm)[:2]
     for y in range(shape_y):
         for x in range(shape_x):
             curr_value = utm[y][x]
-            curr_max = utm_max[y][x]
-            curr_argmax = utm_argmax[y][x]
+            curr_max = utm_interest[y][x]
             if np.any(curr_value):
-                utm_max[y][x] = zeroth_coeff_cm(curr_value, curr_max, curr_argmax)[1]
-            for z in range(6):
-                utm[y][x][z] = zeroth_coeff_cm(curr_value, curr_value[z], 0)[1]
-     
+                utm_interest[y][x] = zeroth_coeff_cm(curr_value, curr_max, 0)[1]
     
-    #ignore x axis
-    utm_max = np.sum(utm_max, axis=1) #shape (N,)
-    weight_sum = 0
-    nomi = 0
-    for i in range(utm_max.shape[0]):
-        nomi += i*utm_max[i]
-        weight_sum += utm_max[i]
-    y = nomi/weight_sum
     
-    return y/(utm_max.shape[0]-1)
+    vcom, hcom = ndimage.measurements.center_of_mass(utm_interest)
 
-def max_utm_to_ws_utm(utm_max, utm_argmax, utm):
+    return (hcom/shape_x, vcom/shape_y)
+
+def max_utm_to_ws_utm(utm_max, utm_argmax, utm, how):
     """
     Converts an upper triangle matrix filled with Fourier coefficients into 
     an upper triangle matrix filled with color values that serves as the mathematical model
@@ -144,8 +175,12 @@ def max_utm_to_ws_utm(utm_max, utm_argmax, utm):
             curr_max = utm_max[y][x]
             curr_argmax = utm_argmax[y][x]
             if np.any(curr_value):
-                angle, magn = zeroth_coeff_cm(curr_value, curr_max, curr_argmax)
-                #print(angle, magn)
+                if how == 'max':
+                    angle, magn = zeroth_coeff_cm(curr_value, curr_max, curr_argmax)
+                else:
+                    angle = curr_argmax
+                    magn = curr_max
+                    #print(angle, magn)
                 res[y][x] = circular_hue_revised(angle, magnitude=magn) 
     
     

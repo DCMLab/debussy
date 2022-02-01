@@ -2,6 +2,8 @@
 
 Delicious dataset
 
+Command for creating pitch class vectors: `python slices.py -q 1 -p pc --normalize -o pcvs`
+
 
 # Overview
 |         file_name          |measures|labels|standard|annotators|reviewers|

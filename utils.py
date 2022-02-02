@@ -106,18 +106,18 @@ def pitch_class_matrix_to_minor_major(pc_mat, rotated_kp, build_utm = True):
         
     return res
 
-def most_resonant(score, aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size)
-    utm = apply_dft_to_pitch_class_matrix(arr1)
+def most_resonant(utm):
     utm_magnitude = np.abs(utm)
     utm_max = np.max(utm_magnitude[:,:,1:], axis=2)
     utm_argmax = np.argmax(utm_magnitude[:,:,1:], axis=2)
     utm_entropy = 1 / entropy(utm_magnitude[:,:,1:], axis=2)
 
-    return (utm_max, utm_entropy, utm_argmax, utm)
+    return (utm_max, utm_entropy, utm_argmax)
 
 
 def stand(v):
+    """Convert value to hex"""
+    assert v <= 1, f"Value cannot exceed 1 but is {v}"
     return int(v*0xff)
 
 def two_pi_modulo(value):
@@ -201,6 +201,8 @@ def max_utm_to_ws_utm(utm_max, utm_argmax, utm, how):
                 if how == 'max':
                     angle, magn = zeroth_coeff_cm(curr_value, curr_max, curr_argmax)
                 else:
+                    if curr_max > 1:
+                        curr_max = 1
                     angle = curr_argmax
                     magn = curr_max
                     #print(angle, magn)

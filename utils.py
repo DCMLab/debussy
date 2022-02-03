@@ -5,6 +5,8 @@ import math
 from scipy import ndimage
 from scipy.stats import entropy
 from scipy.stats.stats import pearsonr
+from sklearn.preprocessing import MinMaxScaler
+
 
 MOZART_PROFILES = {
  'major': {0: 0.20033700035703508,
@@ -32,6 +34,112 @@ MOZART_PROFILES = {
   10: 0.020386372564054407,
   11: 0.07959216183789804}}
 
+
+def most_resonant(utm):
+    ''' Computes 3 NxNx1 matrices containing:
+        the inverse entropy of the 6 coefficients at each point of the matrix
+        the maximum value among the 6 coefficients
+        the max coefficient'''
+    utm_magnitude = np.abs(utm)
+    utm_max = np.max(utm_magnitude[:,:,1:], axis=2)
+    utm_argmax = np.argmax(utm_magnitude[:,:,1:], axis=2)
+
+    utm_entropy = 1 / (entropy(utm_magnitude[:,:,1:], axis=2) + 0.5) #the normalization is completely arbitrary and should be changed
+
+    return (utm_max, utm_entropy, utm_argmax)
+
+def custom_utm_to_ws_utm(utm_custom, utm_argmax, utm, how='max'):
+    """
+    Converts an upper triangle matrix filled with Fourier coefficients into 
+    an upper triangle matrix filled with color values that serves as the mathematical model
+    holding the color information needed to build the wavescapes plot.
+    
+    """    
+    shape_x, shape_y = np.shape(utm)[:2]
+    #RGB => 3 values, RGBA => RGB + 1 value, raw values => angle & magnitude => 2 values
+    channel_nbr = 4
+    default_value = 0.0
+    default_type = np.uint64 
+    #+1 to differentiate empty elements from white elements later down the line.
+    res = np.full((shape_x, shape_y, channel_nbr), default_value, default_type)
+    
+    for y in range(shape_y):
+        for x in range(shape_x):
+            if np.any(utm[y][x]):
+                angle = utm_argmax[y][x]
+                if how == 'max':
+                    magn = zeroth_coeff_norm(utm[y][x], utm_custom[y][x])
+                else:
+                    magn = utm_custom[y][x]
+                    if magn > 1:
+                        magn = 1
+                    
+                res[y][x] = circular_hue_revised(angle, magnitude=magn) 
+    return res
+
+def zeroth_coeff_norm(value, curr_max):
+    zero_c = value[0].real
+    if zero_c == 0.:
+        return (0.,0.)#([0xff]*3
+    magn = curr_max/zero_c
+    return magn
+
+    
+def center_of_mass(index, utm):
+    shape_x, shape_y = np.shape(utm)[:2]
+    for y in range(shape_y):
+        for x in range(shape_x):
+            if np.any(utm[y][x]):
+                utm[y][x] = zeroth_coeff_norm(utm[y][x], utm[y][x])
+    utm_interest = np.abs(utm[:,:,index])
+    vcom, hcom = ndimage.measurements.center_of_mass(utm_interest)
+    return (hcom/shape_x, vcom/shape_y)
+
+def pitch_class_matrix_to_tritone(pc_mat, build_utm = True):
+    """
+    This functions takes a list of N pitch class distributions,
+    modelised by a matrix of float numbers, and apply the 
+    DFT individually to all the pitch class distributions.
+    """
+    pcv_nmb, pc_nmb = np.shape(pc_mat)
+    #+1 to hold room for the 0th coefficient
+    coeff_nmb = int(pc_nmb/2)+1
+    res_dimensions = (pcv_nmb, coeff_nmb)
+    res = np.full(res_dimensions, (0.), np.float64)
+
+    for i in range(pcv_nmb):
+        res[i] = (pc_mat[i] * np.roll(pc_mat[i], 6))[:coeff_nmb] #coeff 7 to 11 are uninteresting (conjugates of coeff 6 to 1).
+    
+    if build_utm:
+        new_res = np.full((pcv_nmb, pcv_nmb, coeff_nmb), (0.), np.float64)
+        new_res[0] = res 
+        res = build_custom_utm_from_one_row(new_res)
+        
+    res = np.mean(res, axis=2)
+    #res[res != 0.] = 1 # for now boolean value
+    return res.reshape((pcv_nmb, pcv_nmb, 1))
+
+
+def pitch_class_matrix_to_minor_major(pc_mat, rotated_kp, build_utm = True):
+    """
+    This functions takes a list of N pitch class distributions,
+    modelised by a matrix of float numbers, and apply the 
+    DFT individually to all the pitch class distributions.
+    """
+    pcv_nmb, _ = np.shape(pc_mat)
+    res_dimensions = (pcv_nmb, 2)
+    res = np.full(res_dimensions, (0.), np.float64)
+
+    for i in range(pcv_nmb):
+        res[i] = np.array(max_correlation(pc_mat[i], rotated_kp))#coeff 7 to 11 are uninteresting (conjugates of coeff 6 to 1).
+    
+    if build_utm:
+        new_res = np.full((pcv_nmb, pcv_nmb, 2), (0.), np.float64)
+        new_res[0] = res 
+        res = build_custom_utm_from_one_row(new_res) #this does not make sense for major and minor
+        
+    return res
+
 def max_correlation(row, rotated_kp):
     coeffs_major = np.array([pearsonr(row, kp)[0] for kp in rotated_kp.values()])[:12]
     coeffs_minor = np.array([pearsonr(row, kp)[0] for kp in rotated_kp.values()])[12:]
@@ -52,76 +160,31 @@ def build_utm_from_one_row(res):
             res[i][i+j] = res[0][i+j] + res[i-1][i+j-1]
     return res
 
-def build_max_utm_from_one_row(res):
+def build_custom_utm_from_one_row(res, how='mean'):
     """
     """
     pcv_nmb = np.shape(res)[0]
     for i in range(1, pcv_nmb):
         for j in range(0, pcv_nmb-i):
-            res[i][i+j] = np.max(np.array([res[0][i+j],res[i-1][i+j-1]]), axis=0)
+            if how == 'mean':
+                res[i][i+j] = np.mean(np.array([res[0][i+j],res[i-1][i+j-1]]), axis=0)
+            else:
+                res[i][i+j] = np.max(np.array([res[0][i+j],res[i-1][i+j-1]]), axis=0)
     return res
 
 
-def pitch_class_matrix_to_tritone(pc_mat, build_utm = True):
-    """
-    This functions takes a list of N pitch class distributions,
-    modelised by a matrix of float numbers, and apply the 
-    DFT individually to all the pitch class distributions.
-    """
-    pcv_nmb, pc_nmb = np.shape(pc_mat)
-    #+1 to hold room for the 0th coefficient
-    coeff_nmb = int(pc_nmb/2)+1
-    res_dimensions = (pcv_nmb, coeff_nmb)
-    res = np.full(res_dimensions, (0.), np.float64)
 
-    for i in range(pcv_nmb):
-        res[i] = (pc_mat[i] * np.roll(pc_mat[i], 6))[:coeff_nmb] #coeff 7 to 11 are uninteresting (conjugates of coeff 6 to 1).
-    
-    if build_utm:
-        new_res = np.full((pcv_nmb, pcv_nmb, coeff_nmb), (0.), np.float64)
-        new_res[0] = res 
-        res = build_utm_from_one_row(new_res)
-        
-    res = np.sum(res, axis=2)
-    res[res != 0.] = 1
-    return res.reshape((pcv_nmb, pcv_nmb, 1))
 
-def pitch_class_matrix_to_minor_major(pc_mat, rotated_kp, build_utm = True):
-    """
-    This functions takes a list of N pitch class distributions,
-    modelised by a matrix of float numbers, and apply the 
-    DFT individually to all the pitch class distributions.
-    """
-    pcv_nmb, _ = np.shape(pc_mat)
-    res_dimensions = (pcv_nmb, 2)
-    res = np.full(res_dimensions, (0.), np.float64)
-
-    for i in range(pcv_nmb):
-        res[i] = np.array(max_correlation(pc_mat[i], rotated_kp))#coeff 7 to 11 are uninteresting (conjugates of coeff 6 to 1).
-    
-    if build_utm:
-        new_res = np.full((pcv_nmb, pcv_nmb, 2), (0.), np.float64)
-        new_res[0] = res 
-        res = build_max_utm_from_one_row(new_res) #this does not make sense for major and minor
-        
-    return res
-
-def most_resonant(utm):
-    utm_magnitude = np.abs(utm)
-    utm_max = np.max(utm_magnitude[:,:,1:], axis=2)
-    utm_argmax = np.argmax(utm_magnitude[:,:,1:], axis=2)
-    utm_entropy = 1 / entropy(utm_magnitude[:,:,1:], axis=2)
-
-    return (utm_max, utm_entropy, utm_argmax)
-
+## functions as they are in Cedrics code
 
 def stand(v):
     """Convert value to hex"""
+    v = np.round(v, 5) # to remove
     assert v <= 1, f"Value cannot exceed 1 but is {v}"
     return int(v*0xff)
 
 def two_pi_modulo(value):
-    value = value*2*math.pi/6
+    value = value*2*math.pi/6 #addition to work with 6 coefficients colouring
     return np.mod(value, 2*math.pi)
     
 def step_function_quarter_pi_activation(lo_bound, hi_bound, value):
@@ -153,63 +216,6 @@ def circular_hue_revised(angle, magnitude=1.):
     
     return value
 
-def zeroth_coeff_cm(value, curr_max, curr_argmax):
-    zero_c = value[0].real
-    if zero_c == 0.:
-        #empty pitch class vector, thus returns white color value.
-        #this avoid a nasty divide by 0 error two lines later.
-        return (0.,0.)#([0xff]*3
-    magn = curr_max/zero_c
-    angle = curr_argmax
-    return (angle, magn)
-    
-def center_of_mass_v(utm_interest, utm):
-    shape_x, shape_y = np.shape(utm)[:2]
-    for y in range(shape_y):
-        for x in range(shape_x):
-            curr_value = utm[y][x]
-            curr_max = utm_interest[y][x]
-            if np.any(curr_value):
-                utm_interest[y][x] = zeroth_coeff_cm(curr_value, curr_max, 0)[1]
-    
-    
-    vcom, hcom = ndimage.measurements.center_of_mass(utm_interest)
-
-    return (hcom/shape_x, vcom/shape_y)
-
-def max_utm_to_ws_utm(utm_max, utm_argmax, utm, how):
-    """
-    Converts an upper triangle matrix filled with Fourier coefficients into 
-    an upper triangle matrix filled with color values that serves as the mathematical model
-    holding the color information needed to build the wavescapes plot.
-    
-    """    
-    shape_x, shape_y = np.shape(utm)[:2]
-    #RGB => 3 values, RGBA => RGB + 1 value, raw values => angle & magnitude => 2 values
-    channel_nbr = 4
-    default_value = 0.0
-    default_type = np.uint64 
-    #+1 to differentiate empty elements from white elements later down the line.
-    res = np.full((shape_x, shape_y, channel_nbr), default_value, default_type)
-    
-    for y in range(shape_y):
-        for x in range(shape_x):
-            curr_value = utm[y][x]
-            curr_max = utm_max[y][x]
-            curr_argmax = utm_argmax[y][x]
-            if np.any(curr_value):
-                if how == 'max':
-                    angle, magn = zeroth_coeff_cm(curr_value, curr_max, curr_argmax)
-                else:
-                    if curr_max > 1:
-                        curr_max = 1
-                    angle = curr_argmax
-                    magn = curr_max
-                    #print(angle, magn)
-                res[y][x] = circular_hue_revised(angle, magnitude=magn) 
-    
-    
-    return res
 
 
 # still to adjust from Digital Musicology project

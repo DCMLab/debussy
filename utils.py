@@ -5,7 +5,7 @@ import math
 from scipy import ndimage
 from scipy.stats import entropy
 from scipy.stats.stats import pearsonr
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
 
 
 MOZART_PROFILES = {
@@ -44,7 +44,7 @@ def most_resonant(utm):
     utm_max = np.max(utm_magnitude[:,:,1:], axis=2)
     utm_argmax = np.argmax(utm_magnitude[:,:,1:], axis=2)
 
-    utm_entropy = 1 / (entropy(utm_magnitude[:,:,1:], axis=2) + 0.5) #the normalization is completely arbitrary and should be changed
+    utm_entropy = MinMaxScaler().fit_transform(1 - (entropy(utm_magnitude[:,:,1:], axis=2) / entropy(np.array([1,1,1,1,1,1]))))  #the normalization is completely arbitrary and should be changed
 
     return (utm_max, utm_entropy, utm_argmax)
 
@@ -107,13 +107,13 @@ def pitch_class_matrix_to_tritone(pc_mat, build_utm = True):
     res_dimensions = (pcv_nmb, coeff_nmb)
     res = np.full(res_dimensions, (0.), np.float64)
 
-    for i in range(pcv_nmb):
+    for i in range(pcv_nmb): 
         res[i] = (pc_mat[i] * np.roll(pc_mat[i], 6))[:coeff_nmb] #coeff 7 to 11 are uninteresting (conjugates of coeff 6 to 1).
     
     if build_utm:
         new_res = np.full((pcv_nmb, pcv_nmb, coeff_nmb), (0.), np.float64)
         new_res[0] = res 
-        res = build_custom_utm_from_one_row(new_res)
+        res = build_custom_utm_from_one_row(new_res) #have to recompute from zero but normalizing norm2 of the vector
         
     res = np.mean(res, axis=2)
     #res[res != 0.] = 1 # for now boolean value
@@ -136,7 +136,7 @@ def pitch_class_matrix_to_minor_major(pc_mat, rotated_kp, build_utm = True):
     if build_utm:
         new_res = np.full((pcv_nmb, pcv_nmb, 2), (0.), np.float64)
         new_res[0] = res 
-        res = build_custom_utm_from_one_row(new_res) #this does not make sense for major and minor
+        res = build_custom_utm_from_one_row(new_res) #this does not make sense for major and minor: keep all rotations
         
     return res
 

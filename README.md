@@ -9,7 +9,6 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 # Overview
 |         file_name          |measures|labels|standard|annotators|reviewers|
 |----------------------------|-------:|-----:|--------|----------|---------|
-|MIDIl087-03_images_quelques |     186|     0|        |          |         |
 |l000_etude                  |      71|     0|        |          |         |
 |l000_soirs                  |      23|     0|        |          |         |
 |l009_danse                  |      92|     0|        |          |         |

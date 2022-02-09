@@ -2,8 +2,7 @@
 
 Delicious dataset
 
-Command for creating pitch class vectors: `python slices.py -q 1 -p pc -w 0.5 -o pcvs
-` where `-q 1` means slices of length 1 quarter, `-p pc` using pitch classes 0..11, `-w 0.5`
+Command for creating pitch class vectors: `python slices.py -q 1 -p pc -w 0.5 -o pcvs` where `-q 1` means slices of length 1 quarter, `-p pc` using pitch classes 0..11, `-w 0.5`
 weighting grace notes by half of their durations, and `-o pcvs` the output directory.
 
 
@@ -15,6 +14,7 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 |l000_soirs                  |      23|     0|        |          |         |
 |l009_danse                  |      92|     0|        |          |         |
 |l066-01_arabesques-premiere |     107|     0|        |          |         |
+|l066-02_arabesques-deuxieme |     110|     0|        |          |         |
 |l067_mazurka                |     138|     0|        |          |         |
 |l068_reverie                |     101|     0|        |          |         |
 |l069_tarentelle             |     333|     0|        |          |         |

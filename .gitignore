@@ -5,3 +5,4 @@
 .mscbackup
 .ipynb_checkpoints
 .idea
+__pycache

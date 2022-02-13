@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="3.02">
   <programVersion>3.6.2</programVersion>
-  <programRevision></programRevision>
+  <programRevision/>
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
@@ -119,11 +119,11 @@
         <renderRoot>:n m:0:-1 :a m:0.5:1</renderRoot>
         <renderBase>m:-0.2:1 / m:0.2:1 :n :a m:0:-2</renderBase>
         <chord id="1">
-          <name></name>
-          <name></name>
+          <name/>
+          <name/>
           <xml>major</xml>
           <voicing>C E G</voicing>
-          <render></render>
+          <render/>
           </chord>
         <chord id="2">
           <name>Maj</name>
@@ -1486,7 +1486,7 @@
     <metaTag name="arranger"></metaTag>
     <metaTag name="composed_end">1908</metaTag>
     <metaTag name="composed_start">1906</metaTag>
-    <metaTag name="composer"></metaTag>
+    <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-01-26</metaTag>
     <metaTag name="lyricist"></metaTag>
@@ -1513,7 +1513,9 @@
         </Staff>
       <trackName>Piano</trackName>
       <Instrument>
-        <longName><font face="Times New Roman"/>Piano</longName>
+        <longName>
+          <font face="Times New Roman"/>
+          </longName>
         <trackName>Piano</trackName>
         <minPitchP>21</minPitchP>
         <maxPitchP>108</maxPitchP>
@@ -1555,12 +1557,12 @@
         <Text>
           <style>Title</style>
           <family>FreeSerif</family>
-          <text><font face="Times New Roman"/>The Little Shepherd</text>
+          <text><font face="Times New Roman"></font>The Little Shepherd</text>
           </Text>
         <Text>
           <style>Composer</style>
           <family>FreeSerif</family>
-          <text><font face="Times New Roman"/>Claude Debussy</text>
+          <text><font face="Times New Roman"></font>Claude Debussy</text>
           </Text>
         </VBox>
       <Measure>
@@ -1585,13 +1587,13 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>très doux et délicatement expressif</i></text>
+            <text><font face="Times New Roman"></font><i>très doux et délicatement expressif</i></text>
             </StaffText>
           <Tempo>
             <tempo>0.66666700000000001</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Très modéré</b></text>
+            <text><font face="Times New Roman"></font><b>Très modéré</b></text>
             </Tempo>
           <Chord>
             <durationType>quarter</durationType>
@@ -2098,7 +2100,7 @@
             <tempo>0.83333299999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Plus mouvementé</b></text>
+            <text><font face="Times New Roman"></font><b>Plus mouvementé</b></text>
             </Tempo>
           <Spanner type="HairPin">
             <prev>
@@ -2676,7 +2678,7 @@
             <tempo>0.66666700000000001</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Au Mouv</b><b>t</b></text>
+            <text><font face="Times New Roman"></font><b>Au Mouv</b><b>t</b></text>
             </Tempo>
           <Spanner type="HairPin">
             <HairPin>
@@ -2834,7 +2836,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>piú</i></text>
+            <text><font face="Times New Roman"></font><i>piú</i></text>
             </StaffText>
           <Spanner type="HairPin">
             <prev>
@@ -2893,7 +2895,7 @@
             <tempo>0.5</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Cédez   -          -</b></text>
+            <text><font face="Times New Roman"></font><b>Cédez   -          -</b></text>
             </Tempo>
           <Chord>
             <dots>1</dots>
@@ -3111,7 +3113,7 @@
             <tempo>0.66666700000000001</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Au Mouv</b><b>t</b></text>
+            <text><font face="Times New Roman"></font><b>Au Mouv</b><b>t</b></text>
             </Tempo>
           <Beam>
             </Beam>
@@ -3777,13 +3779,13 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>piú</i></text>
+            <text><font face="Times New Roman"></font><i>piú</i></text>
             </StaffText>
           <Tempo>
             <tempo>0.5</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Cédez   -          -          -          -          -          -         -</b></text>
+            <text><font face="Times New Roman"></font><b>Cédez   -          -          -          -          -          -         -</b></text>
             </Tempo>
           <Chord>
             <dots>1</dots>
@@ -4009,7 +4011,7 @@
             <tempo>0.66666700000000001</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Au Mouv</b><b>t</b></text>
+            <text><font face="Times New Roman"></font><b>Au Mouv</b><b>t</b></text>
             </Tempo>
           <Rest>
             <durationType>eighth</durationType>
@@ -4017,7 +4019,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>in poco piú forte</i></text>
+            <text><font face="Times New Roman"></font><i>in poco piú forte</i></text>
             </StaffText>
           <Tuplet>
             <offset x="0.59266" y="1.10065"/>
@@ -4325,7 +4327,7 @@
             <tempo>0.83333299999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Plus mouvementé</b></text>
+            <text><font face="Times New Roman"></font><b>Plus mouvementé</b></text>
             </Tempo>
           <Spanner type="HairPin">
             <prev>
@@ -4656,13 +4658,13 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>cre   -       -        -     scen    -</i></text>
+            <text><font face="Times New Roman"></font><i>cre   -       -        -     scen    -</i></text>
             </StaffText>
           <Tempo>
             <tempo>1</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Poco animato</b></text>
+            <text><font face="Times New Roman"></font><b>Poco animato</b></text>
             </Tempo>
           <Beam>
             <Fragment>
@@ -4815,7 +4817,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>-    do</i></text>
+            <text><font face="Times New Roman"></font><i>-    do</i></text>
             </StaffText>
           <Beam>
             <Fragment>
@@ -5821,7 +5823,7 @@
             <tempo>0.83333299999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Un peu retenu</b>
+            <text><font face="Times New Roman"></font><b>Un peu retenu</b>
 (en conservant le rythme)</text>
             </Tempo>
           <Beam>
@@ -6330,7 +6332,7 @@
             <tempo>0.5</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Cédez   -          -          -</b></text>
+            <text><font face="Times New Roman"></font><b>Cédez   -          -          -</b></text>
             </Tempo>
           <Chord>
             <dots>1</dots>

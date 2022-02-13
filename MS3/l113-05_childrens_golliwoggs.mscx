@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="3.02">
   <programVersion>3.6.2</programVersion>
-  <programRevision></programRevision>
+  <programRevision/>
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
@@ -120,11 +120,11 @@
         <renderRoot>:n m:0:-1 :a m:0.5:1</renderRoot>
         <renderBase>m:-0.2:1 / m:0.2:1 :n :a m:0:-2</renderBase>
         <chord id="1">
-          <name></name>
-          <name></name>
+          <name/>
+          <name/>
           <xml>major</xml>
           <voicing>C E G</voicing>
-          <render></render>
+          <render/>
           </chord>
         <chord id="2">
           <name>Maj</name>
@@ -1487,7 +1487,7 @@
     <metaTag name="arranger"></metaTag>
     <metaTag name="composed_end">1908</metaTag>
     <metaTag name="composed_start">1906</metaTag>
-    <metaTag name="composer"></metaTag>
+    <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-01-26</metaTag>
     <metaTag name="lyricist"></metaTag>
@@ -1514,7 +1514,9 @@
         </Staff>
       <trackName>Piano</trackName>
       <Instrument>
-        <longName><font face="Times New Roman"/>PIANO</longName>
+        <longName>
+          <font face="Times New Roman"/>
+          </longName>
         <trackName>Piano</trackName>
         <instrumentId>keyboard.piano</instrumentId>
         <Articulation>
@@ -1552,12 +1554,12 @@
         <Text>
           <style>Title</style>
           <family>FreeSerif</family>
-          <text><font face="Times New Roman"/>Golliwogg's cakewalk</text>
+          <text><font face="Times New Roman"></font>Golliwogg's cakewalk</text>
           </Text>
         <Text>
           <style>Composer</style>
           <family>FreeSerif</family>
-          <text><font face="Times New Roman"/>Claude Debussy</text>
+          <text><font face="Times New Roman"></font>Claude Debussy</text>
           </Text>
         </VBox>
       <Measure>
@@ -1577,7 +1579,7 @@
             <tempo>2</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>Allegro giusto</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>Allegro giusto</b></text>
             </Tempo>
           <Dynamic>
             <subtype>f</subtype>
@@ -2236,7 +2238,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="10.1763"/><font face="Times New Roman"/><i>très net et très sec</i></text>
+            <text><font size="10.1763"></font><font face="Times New Roman"></font><i>très net et très sec</i></text>
             </StaffText>
           <Beam>
             </Beam>
@@ -3402,7 +3404,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="10.1763"/><font face="Times New Roman"/><i>cre     -          scen  -     do</i></text>
+            <text><font size="10.1763"></font><font face="Times New Roman"></font><i>cre     -          scen  -     do</i></text>
             </StaffText>
           <Chord>
             <durationType>eighth</durationType>
@@ -5447,7 +5449,7 @@
             <tempo>2</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>Un peu moins vite</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>Un peu moins vite</b></text>
             </Tempo>
           <Chord>
             <durationType>eighth</durationType>
@@ -6574,12 +6576,12 @@
             <tempo>1.3333299999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>Cédez</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>Cédez</b></text>
             </Tempo>
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="11.307"/><font face="Times New Roman"/><i>avec une grande émotion</i></text>
+            <text><font size="11.307"></font><font face="Times New Roman"></font><i>avec une grande émotion</i></text>
             </StaffText>
           <Dynamic>
             <subtype>p</subtype>
@@ -6731,7 +6733,7 @@
           <Tempo>
             <tempo>2</tempo>
             <family>FreeSerif</family>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>a Tempo</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>a Tempo</b></text>
             </Tempo>
           <Rest>
             <offset x="0.0832482" y="-1"/>
@@ -7121,7 +7123,7 @@
           <Tempo>
             <tempo>1.3333299999999999</tempo>
             <family>FreeSerif</family>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>Cédez</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>Cédez</b></text>
             </Tempo>
           <Chord>
             <durationType>quarter</durationType>
@@ -7269,7 +7271,7 @@
           <Tempo>
             <tempo>2</tempo>
             <family>FreeSerif</family>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>a Tempo</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>a Tempo</b></text>
             </Tempo>
           <Spanner type="HairPin">
             <prev>
@@ -7634,7 +7636,7 @@
           <Tempo>
             <tempo>1.3333299999999999</tempo>
             <family>FreeSerif</family>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>Cédez</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>Cédez</b></text>
             </Tempo>
           <Spanner type="HairPin">
             <HairPin>
@@ -7740,7 +7742,7 @@
             <tempo>2</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>a Tempo</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>a Tempo</b></text>
             </Tempo>
           <Beam>
             </Beam>
@@ -7935,7 +7937,7 @@
           <Tempo>
             <tempo>1.3333299999999999</tempo>
             <family>FreeSerif</family>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>Cédez</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>Cédez</b></text>
             </Tempo>
           <Chord>
             <durationType>eighth</durationType>
@@ -8099,7 +8101,7 @@
             <tempo>2</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>a Tempo</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>a Tempo</b></text>
             </Tempo>
           <Spanner type="HairPin">
             <prev>
@@ -8301,7 +8303,7 @@
             <tempo>1.3333299999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>Cédez</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>Cédez</b></text>
             </Tempo>
           <Rest>
             <durationType>quarter</durationType>
@@ -8428,7 +8430,7 @@
             <tempo>2</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>a Tempo</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>a Tempo</b></text>
             </Tempo>
           <Dynamic>
             <subtype>p</subtype>
@@ -9331,7 +9333,7 @@
             <tempo>1</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>Retenu</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>Retenu</b></text>
             </Tempo>
           <Dynamic>
             <subtype>other-dynamics</subtype>
@@ -9674,7 +9676,7 @@
             <tempo>1</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>Tojours retenu        -        -        -        -        -        -        -  //</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>Tojours retenu        -        -        -        -        -        -        -  //</b></text>
             </Tempo>
           <Beam>
             </Beam>
@@ -9840,7 +9842,7 @@
             <tempo>2</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="12.4377"/><font face="Times New Roman"/><b>1</b><b>o </b><b>Tempo</b></text>
+            <text><font size="12.4377"></font><font face="Times New Roman"></font><b>1</b><b>o </b><b>Tempo</b></text>
             </Tempo>
           <Beam>
             </Beam>
@@ -10610,7 +10612,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>cre    -       scen     -    do</i></text>
+            <text><font face="Times New Roman"></font><i>cre    -       scen     -    do</i></text>
             </StaffText>
           <Chord>
             <durationType>eighth</durationType>
@@ -18244,7 +18246,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>dim.</i></text>
+            <text><font face="Times New Roman"></font><i>dim.</i></text>
             </StaffText>
           <Chord>
             <durationType>16th</durationType>

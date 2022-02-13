@@ -21,16 +21,20 @@
     <showFrames>1</showFrames>
     <showMargins>0</showMargins>
     <metaTag name="arranger"></metaTag>
-    <metaTag name="composer"></metaTag>
+    <metaTag name="composed_end">1907</metaTag>
+    <metaTag name="composed_start">1907</metaTag>
+    <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-02-07</metaTag>
     <metaTag name="lyricist"></metaTag>
     <metaTag name="movementNumber"></metaTag>
     <metaTag name="movementTitle"></metaTag>
+    <metaTag name="pdf">https://imslp.org/wiki/Special:ReverseLookup/256280</metaTag>
     <metaTag name="platform">Microsoft Windows</metaTag>
     <metaTag name="poet"></metaTag>
     <metaTag name="source"></metaTag>
     <metaTag name="translator"></metaTag>
+    <metaTag name="typesetter">tunescribers.com</metaTag>
     <metaTag name="workNumber"></metaTag>
     <metaTag name="workTitle"></metaTag>
     <Order id="orchestral" customized="1">
@@ -173,7 +177,7 @@
             <sigD>4</sigD>
             </TimeSig>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="-6.8355" y="-3.953"/>
             <text>Cloches à travers les feuilles </text>
@@ -1474,7 +1478,7 @@
               </Note>
             </Chord>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="0" y="-6.18754"/>
             <text><b></b><font size="10"></font>Cédez</text>
@@ -1702,7 +1706,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <minDistance>0.235742</minDistance>
             <offset x="-2.37485" y="-5.95157"/>
@@ -2185,7 +2189,7 @@
               </Arpeggio>
             </Chord>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="0" y="-4.36074"/>
             <text><b></b><font size="10"></font>Cédez</text>
@@ -2480,7 +2484,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <minDistance>-2.76426</minDistance>
             <offset x="-2.37485" y="-6.09003"/>
@@ -2570,7 +2574,7 @@
             <size>11</size>
             <textLineSpacing>0.5</textLineSpacing>
             <offset x="-1.35847" y="-3.49561"/>
-            <text><font size="10"/><font face="ScoreText"/>
+            <text><font size="10"></font><font face="ScoreText"></font>
 </text>
             </StaffText>
           <StaffText>
@@ -2631,7 +2635,7 @@
             <size>19</size>
             <textLineSpacing>0.5</textLineSpacing>
             <offset x="-1.35847" y="-3.49561"/>
-            <text><font size="11"/><font face="ScoreText"/>
+            <text><font size="11"></font><font face="ScoreText"></font>
 </text>
             </StaffText>
           <RehearsalMark>
@@ -2897,7 +2901,7 @@
               </Note>
             </Chord>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="-20.3001" y="-3.54053"/>
             <text><b></b><font size="10"></font>Cédez</text>
@@ -2917,7 +2921,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="-6.22007" y="-6.44696"/>
             <text><b></b>au Mouvt</text>
@@ -4404,7 +4408,7 @@
             <sigD>8</sigD>
             </TimeSig>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="-6.22007" y="-5.55184"/>
             <text><b></b>Un peu animé et plus clair</text>
@@ -10102,7 +10106,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="0" y="-2.63295"/>
             <text><b></b>Retenu</text>
@@ -10476,7 +10480,7 @@
             <sigD>4</sigD>
             </TimeSig>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="-6.78981" y="-8.33989"/>
             <text>Tempo I</text>
@@ -12035,7 +12039,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="-1.38098" y="-7.24662"/>
             <text><b></b><font size="10"></font>Plus lent jusqu'à la fin</text>

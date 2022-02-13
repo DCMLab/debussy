@@ -1,5 +1,6 @@
 import os, re
 import pandas as pd
+import json
 from wavescapes import apply_dft_to_pitch_class_matrix
 
 def apply_dft_to_all(d):
@@ -27,3 +28,20 @@ def get_pcvs(path, pandas=False):
     if not pandas:
         pcv_dfs = {k: v.to_numpy() for k, v in pcv_dfs.items()}
     return pcv_dfs
+
+def compute_median_from_tracks_list(filename):
+    
+    # reading from file 
+    pieces_data = json.loads(open(filename, "r").read())
+
+    # obtaining medians 
+    median_durations = {}
+    for piece in pieces_data:
+        durations = [t['duration_ms'] for t in  pieces_data[piece]] 
+        if not durations: 
+            print(piece + " duration missing")
+            median_dur = -1
+        else: 
+            median_dur = pd.DataFrame(durations).median().values[0]
+        median_durations[piece] = median_dur
+    return median_durations

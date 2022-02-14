@@ -19,16 +19,20 @@
     <showFrames>0</showFrames>
     <showMargins>0</showMargins>
     <metaTag name="arranger"></metaTag>
-    <metaTag name="composer"></metaTag>
+    <metaTag name="composed_end">1894</metaTag>
+    <metaTag name="composed_start">1894</metaTag>
+    <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-02-06</metaTag>
     <metaTag name="lyricist"></metaTag>
     <metaTag name="movementNumber"></metaTag>
     <metaTag name="movementTitle"></metaTag>
+    <metaTag name="pdf">https://imslp.org/wiki/Special:ReverseLookup/276950</metaTag>
     <metaTag name="platform">Microsoft Windows</metaTag>
     <metaTag name="poet"></metaTag>
     <metaTag name="source"></metaTag>
     <metaTag name="translator"></metaTag>
+    <metaTag name="typesetter">tunescribers.com</metaTag>
     <metaTag name="workNumber"></metaTag>
     <metaTag name="workTitle">3</metaTag>
     <Order id="orchestral" customized="1">
@@ -11432,7 +11436,7 @@
             <offset x="0" y="2.9567"/>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="-4.3731" y="-3.31904"/>
             <text><font size="9"></font>1er Mouvṭ (Vif et joyeux)</text>
@@ -15484,7 +15488,7 @@
             <velocity>112</velocity>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <minDistance>-0.0799743</minDistance>
             <offset x="0" y="-4.58357"/>
@@ -15852,7 +15856,7 @@
         <Image>
           <offset x="24.3518" y="-0.888753"/>
           <path>f36db29426ffe9f34c692d09b79c6e8e.</path>
-          <linkPath></linkPath>
+          <linkPath/>
           <size w="9.17376" h="6.41499"/>
           </Image>
         <LayoutBreak>
@@ -19002,7 +19006,7 @@
       <Measure>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="0" y="-4.09738"/>
             <text><font size="10"></font>(assez la Cloche!)</text>

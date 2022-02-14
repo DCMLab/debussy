@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="3.02">
   <programVersion>3.6.2</programVersion>
-  <programRevision></programRevision>
+  <programRevision/>
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
@@ -115,11 +115,11 @@
         <renderRoot>:n m:0:-1 :a m:0.5:1</renderRoot>
         <renderBase>m:-0.2:1 / m:0.2:1 :n :a m:0:-2</renderBase>
         <chord id="1">
-          <name></name>
-          <name></name>
+          <name/>
+          <name/>
           <xml>major</xml>
           <voicing>C E G</voicing>
-          <render></render>
+          <render/>
           </chord>
         <chord id="2">
           <name>Maj</name>
@@ -1482,7 +1482,7 @@
     <metaTag name="arranger"></metaTag>
     <metaTag name="composed_end">1890</metaTag>
     <metaTag name="composed_start">1890</metaTag>
-    <metaTag name="composer"></metaTag>
+    <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright">Domaine Public J. Jobert 1923 (J.J. 209)</metaTag>
     <metaTag name="creationDate">2022-01-26</metaTag>
     <metaTag name="lyricist"></metaTag>
@@ -1509,8 +1509,12 @@
         </Staff>
       <trackName>Piano</trackName>
       <Instrument>
-        <longName><font face="Times New Roman"/>Piano</longName>
-        <shortName><font face="Times New Roman"/>Pno.</shortName>
+        <longName>
+          <font face="Times New Roman"/>
+          </longName>
+        <shortName>
+          <font face="Times New Roman"/>
+          </shortName>
         <trackName>Piano</trackName>
         <minPitchP>21</minPitchP>
         <maxPitchP>108</maxPitchP>
@@ -1553,18 +1557,18 @@
         <Text>
           <style>Title</style>
           <family>FreeSerif</family>
-          <text><font face="Times New Roman"/>Danse</text>
+          <text><font face="Times New Roman"></font>Danse</text>
           </Text>
         <Text>
           <style>Subtitle</style>
           <family>FreeSerif</family>
           <offset x="-1.51075" y="-7.21804"/>
-          <text><font face="Times New Roman"/>Tarentelle Styrienne</text>
+          <text><font face="Times New Roman"></font>Tarentelle Styrienne</text>
           </Text>
         <Text>
           <style>Composer</style>
           <family>FreeSerif</family>
-          <text><font face="Times New Roman"/>Claude Debussy 1890. Edition revue par Maurice Ravel</text>
+          <text><font face="Times New Roman"></font>Claude Debussy 1890. Edition revue par Maurice Ravel</text>
           </Text>
         </VBox>
       <Measure>
@@ -1597,7 +1601,7 @@
             <tempo>1.6666700000000001</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>(</b><font face="MScore1"/><b><sym>metNoteQuarterUp</sym> <sym>metAugmentationDot</sym> </b><font face="Times New Roman"/><b>= 144)</b>
+            <text><font face="Times New Roman"></font><b>(</b><font face="MScore1"></font><b><sym>metNoteQuarterUp</sym> <sym>metAugmentationDot</sym> </b><font face="Times New Roman"></font><b>= 144)</b>
 <b>Allegretto</b></text>
             </Tempo>
           <Chord>
@@ -1642,7 +1646,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>très léger</i></text>
+            <text><font face="Times New Roman"></font><i>très léger</i></text>
             </StaffText>
           <Chord>
             <durationType>eighth</durationType>
@@ -7783,7 +7787,7 @@
         <voice>
           <StaffText>
             <family>FreeSerif</family>
-            <text><font size="11.9992"/><font face="Times New Roman"/><i>dim.       -           -                -</i></text>
+            <text><font size="11.9992"></font><font face="Times New Roman"></font><i>dim.       -           -                -</i></text>
             </StaffText>
           <Beam>
             </Beam>
@@ -11076,7 +11080,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="11.9992"/><font face="Times New Roman"/><i>poco a poco cresc.</i></text>
+            <text><font size="11.9992"></font><font face="Times New Roman"></font><i>poco a poco cresc.</i></text>
             </StaffText>
           <Chord>
             <dots>1</dots>
@@ -11533,7 +11537,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="11.9992"/><font face="Times New Roman"/><i>più cresc.</i></text>
+            <text><font size="11.9992"></font><font face="Times New Roman"></font><i>più cresc.</i></text>
             </StaffText>
           <Chord>
             <durationType>quarter</durationType>
@@ -11788,7 +11792,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="11.9992"/><font face="Times New Roman"/><i>molto cresc.- - - -</i></text>
+            <text><font size="11.9992"></font><font face="Times New Roman"></font><i>molto cresc.- - - -</i></text>
             </StaffText>
           <Rest>
             <durationType>quarter</durationType>
@@ -11846,7 +11850,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/> -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -   -    -    -    -    -    -     -    -    -    -    -   -    -</text>
+            <text><font face="Times New Roman"></font> -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -    -   -    -    -    -    -    -     -    -    -    -    -   -    -</text>
             </StaffText>
           <Rest>
             <durationType>quarter</durationType>
@@ -12118,7 +12122,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/>-   -   -   -   -   -   -   -</text>
+            <text><font face="Times New Roman"></font>-   -   -   -   -   -   -   -</text>
             </StaffText>
           <Beam>
             </Beam>
@@ -13390,7 +13394,7 @@
             <family>FreeSerif</family>
             <color r="255" g="0" b="0" a="255"/>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/>à voir sur l'original</text>
+            <text><font face="Times New Roman"></font>à voir sur l'original</text>
             </StaffText>
           <Chord>
             <dots>1</dots>
@@ -13581,7 +13585,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/> -      -      -      -      -</text>
+            <text><font face="Times New Roman"></font> -      -      -      -      -</text>
             </StaffText>
           <Beam>
             <StemDirection>up</StemDirection>
@@ -20915,7 +20919,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="11.9992"/><font face="Gentium"/><b>1° Tempo</b></text>
+            <text><font size="11.9992"></font><font face="Gentium"></font><b>1° Tempo</b></text>
             </StaffText>
           <Rest>
             <durationType>eighth</durationType>
@@ -27170,7 +27174,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font size="11.9992"/><font face="Gentium"/><b>Poco allargando</b></text>
+            <text><font size="11.9992"></font><font face="Gentium"></font><b>Poco allargando</b></text>
             </StaffText>
           <Beam>
             </Beam>
@@ -27405,7 +27409,7 @@
             </TimeSig>
           <StaffText>
             <family>FreeSerif</family>
-            <text><font size="12.9992"/><font face="Gentium"/><b>Vivo</b></text>
+            <text><font size="12.9992"></font><font face="Gentium"></font><b>Vivo</b></text>
             </StaffText>
           <Rest>
             <durationType>measure</durationType>
@@ -35379,7 +35383,7 @@
             <family>FreeSerif</family>
             <color r="255" g="0" b="0" a="255"/>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/>à voir</text>
+            <text><font face="Times New Roman"></font>à voir</text>
             </StaffText>
           <Rest>
             <durationType>eighth</durationType>
@@ -46267,7 +46271,7 @@
             <family>FreeSerif</family>
             <color r="255" g="0" b="0" a="255"/>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/>manque le bécarre invisible sur  l'original</text>
+            <text><font face="Times New Roman"></font>manque le bécarre invisible sur  l'original</text>
             </StaffText>
           <Chord>
             <durationType>eighth</durationType>

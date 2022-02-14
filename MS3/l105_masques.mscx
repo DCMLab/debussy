@@ -21,16 +21,20 @@
     <showFrames>1</showFrames>
     <showMargins>0</showMargins>
     <metaTag name="arranger"></metaTag>
-    <metaTag name="composer"></metaTag>
+    <metaTag name="composed_end">1904</metaTag>
+    <metaTag name="composed_start">1904</metaTag>
+    <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright">D. &amp; F. 6443</metaTag>
     <metaTag name="creationDate">2022-02-03</metaTag>
     <metaTag name="lyricist"></metaTag>
     <metaTag name="movementNumber"></metaTag>
     <metaTag name="movementTitle"></metaTag>
+    <metaTag name="pdf">https://imslp.org/wiki/Special:ReverseLookup/102814</metaTag>
     <metaTag name="platform">Microsoft Windows</metaTag>
     <metaTag name="poet"></metaTag>
     <metaTag name="source"></metaTag>
     <metaTag name="translator"></metaTag>
+    <metaTag name="typesetter">tunescribers.com</metaTag>
     <metaTag name="workNumber"></metaTag>
     <metaTag name="workTitle">Masques</metaTag>
     <Order id="orchestral" customized="1">
@@ -18819,7 +18823,7 @@
             <accidental>0</accidental>
             </KeySig>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text>1° Tempo</text>
             </SystemText>
@@ -28096,7 +28100,7 @@
       <Measure>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="0" y="-2.98925"/>
             <text>Sans retenir</text>

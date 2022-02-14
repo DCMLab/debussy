@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="3.02">
   <programVersion>3.6.2</programVersion>
-  <programRevision></programRevision>
+  <programRevision/>
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
@@ -120,11 +120,11 @@
         <renderRoot>:n m:0:-1 :a m:0.5:1</renderRoot>
         <renderBase>m:-0.2:1 / m:0.2:1 :n :a m:0:-2</renderBase>
         <chord id="1">
-          <name></name>
-          <name></name>
+          <name/>
+          <name/>
           <xml>major</xml>
           <voicing>C E G</voicing>
-          <render></render>
+          <render/>
           </chord>
         <chord id="2">
           <name>Maj</name>
@@ -1487,7 +1487,7 @@
     <metaTag name="arranger"></metaTag>
     <metaTag name="composed_end">1908</metaTag>
     <metaTag name="composed_start">1906</metaTag>
-    <metaTag name="composer"></metaTag>
+    <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-01-26</metaTag>
     <metaTag name="lyricist"></metaTag>
@@ -1514,7 +1514,9 @@
         </Staff>
       <trackName>Piano</trackName>
       <Instrument>
-        <longName><font face="Times New Roman"/>PIANO</longName>
+        <longName>
+          <font face="Times New Roman"/>
+          </longName>
         <trackName>Piano</trackName>
         <minPitchP>21</minPitchP>
         <maxPitchP>108</maxPitchP>
@@ -1556,12 +1558,12 @@
         <Text>
           <style>Composer</style>
           <family>FreeSerif</family>
-          <text><font face="Times New Roman"/>Claude Debussy</text>
+          <text><font face="Times New Roman"></font>Claude Debussy</text>
           </Text>
         <Text>
           <style>Title</style>
           <family>FreeSerif</family>
-          <text><font face="Times New Roman"/>Doctor Gradus ad Parnassum</text>
+          <text><font face="Times New Roman"></font>Doctor Gradus ad Parnassum</text>
           </Text>
         </VBox>
       <Measure>
@@ -1588,7 +1590,7 @@
             <tempo>1.8666700000000001</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Modérément animé</b></text>
+            <text><font face="Times New Roman"></font><b>Modérément animé</b></text>
             </Tempo>
           <Rest>
             <durationType>16th</durationType>
@@ -1596,7 +1598,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>égal et sans sécheresse</i></text>
+            <text><font face="Times New Roman"></font><i>égal et sans sécheresse</i></text>
             </StaffText>
           <Beam>
             <Fragment>
@@ -3614,7 +3616,7 @@
             </Chord>
           <StaffText>
             <family>FreeSerif</family>
-            <text><font face="Times New Roman"/><i>cresc.</i></text>
+            <text><font face="Times New Roman"></font><i>cresc.</i></text>
             </StaffText>
           <Chord>
             <durationType>16th</durationType>
@@ -5305,7 +5307,7 @@
           <Tempo>
             <tempo>1.6000000000000001</tempo>
             <family>FreeSerif</family>
-            <text><font face="Times New Roman"/><b>Un peu retenu</b></text>
+            <text><font face="Times New Roman"></font><b>Un peu retenu</b></text>
             </Tempo>
           <Beam>
             <Fragment>
@@ -5487,7 +5489,7 @@
             <tempo>1.8666700000000001</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>a Tempo</b></text>
+            <text><font face="Times New Roman"></font><b>a Tempo</b></text>
             </Tempo>
           <Rest>
             <durationType>16th</durationType>
@@ -5943,7 +5945,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>m.g.</i></text>
+            <text><font face="Times New Roman"></font><i>m.g.</i></text>
             </StaffText>
           <Beam>
             </Beam>
@@ -6470,7 +6472,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>m.g. expressif</i></text>
+            <text><font face="Times New Roman"></font><i>m.g. expressif</i></text>
             </StaffText>
           <Chord>
             <durationType>quarter</durationType>
@@ -7370,7 +7372,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>dim.</i></text>
+            <text><font face="Times New Roman"></font><i>dim.</i></text>
             </StaffText>
           <Beam>
             </Beam>
@@ -7556,7 +7558,7 @@
             <tempo>1.3333299999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Retenu</b></text>
+            <text><font face="Times New Roman"></font><b>Retenu</b></text>
             </Tempo>
           <Rest>
             <durationType>quarter</durationType>
@@ -7712,7 +7714,7 @@
             <tempo>1.8666700000000001</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>1° Tempo</b></text>
+            <text><font face="Times New Roman"></font><b>1° Tempo</b></text>
             </Tempo>
           <Dynamic>
             <subtype>p</subtype>
@@ -7803,7 +7805,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>expressif</i></text>
+            <text><font face="Times New Roman"></font><i>expressif</i></text>
             </StaffText>
           <Beam>
             </Beam>
@@ -8013,7 +8015,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>piú</i></text>
+            <text><font face="Times New Roman"></font><i>piú</i></text>
             </StaffText>
           <Dynamic>
             <subtype>p</subtype>
@@ -8220,7 +8222,7 @@
             <tempo>2.1666699999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Animez un peu</b></text>
+            <text><font face="Times New Roman"></font><b>Animez un peu</b></text>
             </Tempo>
           <Spanner type="HairPin">
             <prev>
@@ -8738,7 +8740,7 @@
             <tempo>1.3333299999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Retenu</b></text>
+            <text><font face="Times New Roman"></font><b>Retenu</b></text>
             </Tempo>
           <Beam>
             <Fragment>
@@ -8938,7 +8940,7 @@
             <tempo>1.8666700000000001</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>1° Tempo</b></text>
+            <text><font face="Times New Roman"></font><b>1° Tempo</b></text>
             </Tempo>
           <Rest>
             <durationType>16th</durationType>
@@ -10999,7 +11001,7 @@
             </Chord>
           <StaffText>
             <family>FreeSerif</family>
-            <text><font face="Times New Roman"/><i>cre    -                -      scen    -             -      do </i></text>
+            <text><font face="Times New Roman"></font><i>cre    -                -      scen    -             -      do </i></text>
             </StaffText>
           <Chord>
             <durationType>16th</durationType>
@@ -11284,7 +11286,7 @@
             <tempo>2.1666699999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>En   animant   peu   à peu</b></text>
+            <text><font face="Times New Roman"></font><b>En   animant   peu   à peu</b></text>
             </Tempo>
           <Dynamic>
             <subtype>f</subtype>
@@ -13800,7 +13802,7 @@
             <tempo>2.1666699999999999</tempo>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><b>Très animé</b></text>
+            <text><font face="Times New Roman"></font><b>Très animé</b></text>
             </Tempo>
           <Spanner type="HairPin">
             <HairPin>
@@ -14665,7 +14667,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>piú</i></text>
+            <text><font face="Times New Roman"></font><i>piú</i></text>
             </StaffText>
           <Rest>
             <durationType>16th</durationType>
@@ -15985,7 +15987,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>piú</i></text>
+            <text><font face="Times New Roman"></font><i>piú</i></text>
             </StaffText>
           <Chord>
             <durationType>eighth</durationType>
@@ -16747,7 +16749,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>expressif</i></text>
+            <text><font face="Times New Roman"></font><i>expressif</i></text>
             </StaffText>
           <Spanner type="HairPin">
             <HairPin>
@@ -16895,7 +16897,7 @@
           <StaffText>
             <family>FreeSerif</family>
             <offset x="0" y="0"/>
-            <text><font face="Times New Roman"/><i>expressif</i></text>
+            <text><font face="Times New Roman"></font><i>expressif</i></text>
             </StaffText>
           <location>
             <fractions>3/4</fractions>

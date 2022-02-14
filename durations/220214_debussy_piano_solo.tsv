@@ -1,7 +1,7 @@
 L	year	title	availability	comments	pdf	source
 L 9	1880	Danse bohémienne	TRUE	to check		https://musescore.com/yazen23434/danse-boh-mienne-claude-debussy-danse-boh-mienne-claude-debussy
 ---	1880	Intermède	FALSE			
-L66/1	1888	Arabesque I	TRUE		https://imslp.org/wiki/Special:ReverseLookup/2821	https://musescore.com/hmscomp/debussy-premiere-arabesque-l-66-no-1 premium: https://musescore.com/official_scores/deux-arabesques-no-1-claude-debussy
+L66/1	1888	Arabesque I: Andantino con moto in E Major	TRUE		https://imslp.org/wiki/Special:ReverseLookup/2821	https://musescore.com/hmscomp/debussy-premiere-arabesque-l-66-no-1 premium: https://musescore.com/official_scores/deux-arabesques-no-1-claude-debussy
 L67	1890	Mazurka	TRUE	several errors		https://musescore.com/user/4887176/scores/5699433
 L68	1890	Rêverie	TRUE			https://musescore.com/hmscomp/r-verie-claude-debussy-debussy-r-verie-piano-solo# premium: https://musescore.com/official_scores/scores/6945718
 L69	1890	Tarentelle styrienne	TRUE			https://musescore.com/user/56409/scores/263276#comments
@@ -11,21 +11,21 @@ L75/1	1890-1905	Prélude	TRUE			https://musescore.com/user/85337/scores/6150261#
 L75/2	1890-1905	Menuet	TRUE	few notes to fix(free version)		https://musescore.com/user/85337/scores/6148173#comments - premium: https://musescore.com/official_scores/scores/6977487
 L75/3	1890-1905	Clair de lune	TRUE			https://musescore.com/classicman/clairdelune# - premium https://musescore.com/official_author/scores/6920289
 L75/4	1890-1905	Passepied	TRUE			https://musescore.com/user/85337/scores/140330
-L66/2	1891	Arabesque II	TRUE		https://imslp.org/wiki/Special:ReverseLookup/2821	https://musescore.com/user/56409/scores/74141
+L66/2	1891	Arabesque II: Allegretto scherzando in G Major	TRUE		https://imslp.org/wiki/Special:ReverseLookup/2821	https://musescore.com/user/56409/scores/74141
 L82	1892	Nocturne	TRUE			https://musescore.com/justisb/nocturne-l-82-claude-debussy#
 L87/1	1894	Lent, doux et mélancolique	TRUE	to check		https://musescore.com/user/27291303/scores/6630747
-L87/2	1894	Souvenir du Louvre	TRUE	4 pages		https://www.kunstderfuge.com/debussy.htm
-L87/3	1894	Quelques aspects de 'Nous n'irons plus au bois"	TRUE	12 pages		https://www.kunstderfuge.com/debussy.htm
+L87/2	1894	Souvenir du Louvre	TRUE	4 pages done	https://imslp.org/wiki/Special:ReverseLookup/276950	tunescribers.com
+L87/3	1894	Quelques aspects de 'Nous n'irons plus au bois"	TRUE	12 pages done	https://imslp.org/wiki/Special:ReverseLookup/276950	tunescribers.com
 L95/2	1894	Sarabande	TRUE	to check		https://musescore.com/user/3797871/scores/5451653#comments
 L95/1	1901	Prélude	TRUE	to check		https://musescore.com/user/2410551/scores/5066906#comments
 L95/3	1901	Toccata	TRUE	to check		https://musescore.com/mil_not_sniw/pour-le-piano-claude-debussy-debussy-pour-le-piano-l-95-iii-toccata#
 L 99	1903	D'un cahier d'esquisses	TRUE	4 pages		https://www.kunstderfuge.com/debussy.htm
 L100/1	1903	Pagode	TRUE	to check		https://musescore.com/user/2749876/scores/7325573
-L100/2	1903	La soirée dans Grenade	TRUE			https://musescore.com/user/4887176/scores/6540482
+L100/2	1903	La soirée dans Grenade	TRUE	left hand muted?		https://musescore.com/user/4887176/scores/6540482
 L100/3	1903	Jardins sous la pluie	TRUE			https://musescore.com/user/202809/scores/6875432
-L105	1904	Masques	TRUE	12 pages		https://www.classicalarchives.com/midi/composer/2405.html
+L105	1904	Masques	TRUE	12 pages done	https://imslp.org/wiki/Special:ReverseLookup/102814	tunescribers.com
 L106	1904	L'isle joyeuse	TRUE	to check		https://musescore.com/user/31759/scores/5835997
-L108	1904	Morceau de concours	TRUE	1 page		https://www.classicalarchives.com/midi/composer/2405.html
+L108	1904	Morceau de concours	TRUE	1 page done	https://imslp.org/wiki/Special:ReverseLookup/4564	tunescribers.com
 L110/1	1904	Reflets dans l'eau	TRUE			https://musescore.com/sheetmusiclibrary/images-1ere-s-rie-claude-debussy-images-i-l-110-1-reflets-dans-l-eau-claude-debussy
 L110/2	1904	Hommage à Rameau	TRUE	few notes to fix		https://musescore.com/user/4887176/scores/5715607
 L110/3	1905	Mouvement	TRUE			https://musescore.com/user/4887176/scores/5835723
@@ -35,9 +35,9 @@ L113/3	1908	Serenade for the Doll	TRUE			https://musescore.com/user/29737597/sco
 L113/4	1906-1908	The Snow Is Dancing	TRUE	to check		https://www.kunstderfuge.com/debussy.htm
 L113/5	1906-1908	The Little Shepherd	TRUE			https://musescore.com/nicolas/the-little-shepherd - premium: https://musescore.com/official_scores/scores/6940696
 L113/6	1906-1908	Golliwogg's Cakewalk	TRUE	few notes to fix(free version)		https://musescore.com/nicolas/golliwoggs-cakewalk# - premium: https://musescore.com/official_scores/scores/6940697
-L111/1	1907	Cloches à travers les feuilles	TRUE	10 pages		https://www.kunstderfuge.com/debussy.htm
-L111/2	1907	Et la lune descend sur le temps qui fût	TRUE	notes to fix		https://musescore.com/user/4887176/scores/6207140#comments
-L111/3	1907	Poissons d'or	TRUE	14 pages		https://www.kunstderfuge.com/debussy.htm
+L111/1	1907	Cloches à travers les feuilles	TRUE	10 pages done	https://imslp.org/wiki/Special:ReverseLookup/256280	tunescribers.com
+L111/2	1907	Et la lune descend sur le temple qui fût	TRUE	notes to fix		https://musescore.com/user/4887176/scores/6207140#comments
+L111/3	1907	Poissons d'or	TRUE	14 pages	https://imslp.org/wiki/Special:ReverseLookup/256280	https://www.kunstderfuge.com/debussy.htm
 L114	1909	Le petit nègre	TRUE			https://musescore.com/user/19496546/scores/5815359 - premium: https://musescore.com/official_scores/le-petit-negre-claude-debussy
 L115	1909	Hommage à Joseph Haydn	TRUE	to check		https://musescore.com/user/27291303/scores/6845062
 L117/1	1909	Danseuses de Delphes	TRUE	few notes to fix 	https://imslp.org/wiki/Special:ReverseLookup/521885	https://musescore.com/nicolas/scores/101607 - premium: https://musescore.com/official_author/scores/6920327
@@ -53,18 +53,18 @@ L117/12	1910	Minstrels	TRUE		https://imslp.org/wiki/Special:ReverseLookup/521885
 L117/4	1910	Les sons et les parfums tournent dans l'air du soir	TRUE	to check	https://imslp.org/wiki/Special:ReverseLookup/521885	https://musescore.com/nicolas/scores/86980
 L117/8	1910	La fille aux cheveux de lin	TRUE		https://imslp.org/wiki/Special:ReverseLookup/521885	https://musescore.com/r_d/scores/5449385 - premium: https://musescore.com/official_author/scores/6920734
 L121	1910	La plus que lente	TRUE	to check		https://musescore.com/user/4887176/scores/5663924#comments - premium: https://musescore.com/official_author/scores/6920736
-L123/1	1910-1912	Brouillards	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-1-brouillards
-L123/2	1910-1912	Feuilles mortes	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-2-feuilles-mortes
-L123/3	1910-1912	La Puerta del Vino	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-predule-bk-2-no-3-la-puerta-del-vino
-L123/4	1910-1912	Les fées sont d'exquises danseuses	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-4-les-fees-sont-d-exquises-danseuses
-L123/5	1910-1912	Bruyères	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-5-bruy-res
-L123/6	1910-1912	Général Lavine, eccentric	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-6-general-lavine-excentric
-L123/7	1910-1912	La terrasse des audiences du clair de lune	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-7-la-terrasse-des-audiences-du-clair-de-lune
-L123/8	1910-1912	Ondine	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-8-ondine
-L123/9	1910-1912	Hommage à Samuel Pickwick Esq. PPMPC	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk2-no-9-hommage-a-s-pickwick-esq-p-p-m-p-c
-L123/10	1910-1912	Canope	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-10-canope
-L123/11	1910-1912	Les tierces alternées	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-11-les-tierces-alterne-s
-L123/12	1910-1912	Feux d'artifice	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-12-feux-d-artifice
+L123/1	1910-1913	Brouillards	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-1-brouillards
+L123/2	1910-1913	Feuilles mortes	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-2-feuilles-mortes
+L123/3	1910-1913	La Puerta del Vino	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-predule-bk-2-no-3-la-puerta-del-vino
+L123/4	1910-1913	Les fées sont d'exquises danseuses	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-4-les-fees-sont-d-exquises-danseuses
+L123/5	1910-1913	Bruyères	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-5-bruy-res
+L123/6	1910-1913	Général Lavine, eccentric	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-6-general-lavine-excentric
+L123/7	1910-1913	La terrasse des audiences du clair de lune	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-7-la-terrasse-des-audiences-du-clair-de-lune
+L123/8	1910-1913	Ondine	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-8-ondine
+L123/9	1910-1913	Hommage à Samuel Pickwick	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk2-no-9-hommage-a-s-pickwick-esq-p-p-m-p-c
+L123/10	1910-1913	Canope	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-10-canope
+L123/11	1910-1913	Les tierces alternées	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-11-les-tierces-alterne-s
+L123/12	1910-1913	Feux d'artifice	TRUE		https://imslp.org/wiki/Special:ReverseLookup/510	https://musescore.com/derek_john_benton/debussy-prelude-bk-2-no-12-feux-d-artifice
 ---	1913	La boîte à joujoux	FALSE	48 pages (not A4); not piano music		score: https://imslp.org/wiki/La_bo%C3%AEte_%C3%A0_joujoux_(Debussy%2C_Claude)
 L131/1	1915	Pour invoquer Pan, dieu du vent d'été	TRUE	4-hands: leave out?		https://www.classicalarchives.com/midi/composer/2405.html#tv=music
 L131/2	1915	Pour un tombeau sans nom	TRUE	4-hands: leave out?		https://www.classicalarchives.com/midi/composer/2405.html#tv=music

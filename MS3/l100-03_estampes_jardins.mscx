@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="3.02">
   <programVersion>3.6.2</programVersion>
-  <programRevision></programRevision>
+  <programRevision/>
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
@@ -18,7 +18,7 @@
     <metaTag name="arranger"></metaTag>
     <metaTag name="composed_end">1903</metaTag>
     <metaTag name="composed_start">1903</metaTag>
-    <metaTag name="composer">Claude debussy  (1862 - 1918)</metaTag>
+    <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright">Creative Commons copyright waiver (CC0 1.0 Universal)
 </metaTag>
     <metaTag name="creationDate">2021-10-15</metaTag>
@@ -50,7 +50,9 @@
         </Staff>
       <trackName>Piano</trackName>
       <Instrument id="piano">
-        <longName><i>PIANO</i></longName>
+        <longName>
+          <i>PIANO</i>
+          </longName>
         <trackName>Piano</trackName>
         <minPitchP>21</minPitchP>
         <maxPitchP>108</maxPitchP>

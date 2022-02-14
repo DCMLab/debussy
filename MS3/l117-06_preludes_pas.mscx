@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="3.02">
   <programVersion>3.6.2</programVersion>
-  <programRevision></programRevision>
+  <programRevision/>
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
@@ -25,7 +25,7 @@
     <metaTag name="arranger"></metaTag>
     <metaTag name="composed_end">1909</metaTag>
     <metaTag name="composed_start">1909</metaTag>
-    <metaTag name="composer"></metaTag>
+    <metaTag name="composer">Claude Debussy</metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-01-26</metaTag>
     <metaTag name="lyricist"></metaTag>
@@ -115,18 +115,18 @@
         <Text>
           <style>Title</style>
           <offset x="0" y="-0.015875"/>
-          <text><font size="24"/>Préludes - Book I - VI</text>
+          <text><font size="24"></font>Préludes - Book I - VI</text>
           </Text>
         <Text>
           <style>Subtitle</style>
           <offset x="0" y="9.98538"/>
-          <text><font size="14"/>... Des pas sur la neige</text>
+          <text><font size="14"></font>... Des pas sur la neige</text>
           </Text>
         <Text>
           <style>Composer</style>
           <align>right,top</align>
           <offset x="0" y="12.289"/>
-          <text><font size="12"/>Claude Debussy</text>
+          <text><font size="12"></font>Claude Debussy</text>
           </Text>
         </VBox>
       <Measure>

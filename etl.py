@@ -1,13 +1,33 @@
-import os, re, gzip
+from functools import lru_cache
+import os, re, gzip, json
 import pandas as pd
 import numpy as np
-from wavescapes import apply_dft_to_pitch_class_matrix
+from wavescapes import apply_dft_to_pitch_class_matrix, build_utm_from_one_row
 
-def apply_dft_to_all(d):
-    return {k: apply_dft_to_pitch_class_matrix(v) for k, v in d.items()}
+from utils import most_resonant, pitch_class_matrix_to_minor_major,  pitch_class_matrix_to_tritone
+
+def get_dfts(debussy_repo='.'):
+    pcvs = get_pcvs(debussy_repo)
+    return {fname: apply_dft_to_pitch_class_matrix(pcv) for fname, pcv in pcvs.items()}
 
 
 def get_mag_phase_mx(data_folder, normalization='0c', indulge_prototypes=False):
+    """_summary_
+
+    Parameters
+    ----------
+    data_folder : _type_
+        _description_
+    normalization : str, optional
+        _description_, by default '0c'
+    indulge_prototypes : bool, optional
+        _description_, by default False
+
+    Returns
+    -------
+    dict
+        {fname -> np.array} (NxNx6x2) magnitude-phase matrices with selected normalization applied.
+    """
     how = ('0c', 'post_norm', 'max_weighted', 'max')
     assert normalization in how, f"normalization needs to be one of {how}, not {normalization}"
     data_folder = os.path.expanduser(data_folder)
@@ -32,10 +52,52 @@ def get_mag_phase_mx(data_folder, normalization='0c', indulge_prototypes=False):
         print(f"No pickled numpy matrices with correct file names found in {data_folder}.")
     return result
 
+def get_maj_min_coeffs(debussy_repo='.'):
+    pcms = get_pcms(debussy_repo)
+    return {fname: pitch_class_matrix_to_minor_major(pcm) for fname, pcm in pcms.items()}
 
-def get_pcvs(path, pandas=False):
-    _, _, pcv_files = next(os.walk(path))
-    pcv_dfs = {get_standard_filename(fname): pd.read_csv(os.path.join(path, fname), sep='\t', index_col=0) for fname in sorted(pcv_files)}
+
+def get_metadata(debussy_repo='.'):
+    md_path = os.path.join(debussy_repo, 'metadata.tsv')
+    dur_path = os.path.join(debussy_repo, 'durations/spotify_median_durations.json')
+    metadata = pd.read_csv(md_path, sep='\t', index_col=1)
+    print(f"Metadata for {metadata.shape[0]} files.")
+    with open('durations/spotify_median_durations.json', 'r', encoding='utf-8') as f:
+        durations = json.load(f)
+    idx2key = pd.Series(metadata.index.str.split('_').map(lambda l: l[0][1:] if l[0] != 'l000' else l[1]), index=metadata.index)
+    fname2duration = idx2key.map(durations).rename('median_recording')
+    fname2year = ((metadata.composed_end + metadata.composed_start) / 2).rename('year')
+    qb_per_minute = (60 * metadata.length_qb_unfolded / fname2duration).rename('qb_per_minute')
+    sounding_notes_per_minute = (60 * metadata.all_notes_qb / fname2duration).rename('sounding_notes_per_minute')
+    sounding_notes_per_qb = (metadata.all_notes_qb / metadata.length_qb_unfolded).rename('sounding_notes_per_qb')
+    return pd.concat([
+        metadata,
+        fname2year,
+        fname2duration,
+        qb_per_minute,
+        sounding_notes_per_qb,
+        sounding_notes_per_minute
+    ], axis=1)
+
+def get_most_resonant(mag_phase_mx_dict):
+    max_coeff, max_mag, inv_entropy = zip(*(most_resonant(mag_phase_mx[...,0]) 
+                                            for mag_phase_mx in mag_phase_mx_dict.values()))
+    return (
+        dict(zip(mag_phase_mx_dict.keys(), max_coeff)),
+        dict(zip(mag_phase_mx_dict.keys(), max_mag)),
+        dict(zip(mag_phase_mx_dict.keys(), inv_entropy))
+    )
+
+@lru_cache
+def get_pcms(debussy_repo='.'):
+    pcvs = get_pcvs(debussy_repo, pandas=False)
+    return {fname: build_utm_from_one_row(pcv) for fname, pcv in pcvs.items()} 
+
+@lru_cache
+def get_pcvs(debussy_repo, pandas=False):
+    pcv_path = os.path.join(debussy_repo, 'pcvs')
+    pcv_files = [f for f in os.listdir(pcv_path) if f.endswith('pcvs.tsv')]
+    pcv_dfs = {get_standard_filename(fname): pd.read_csv(os.path.join(pcv_path, fname), sep='\t', index_col=0) for fname in sorted(pcv_files)}
     pcv_dfs = {k: parse_interval_index(v).fillna(0.0) for k, v in pcv_dfs.items()}
     if not pandas:
         pcv_dfs = {k: v.to_numpy() for k, v in pcv_dfs.items()}
@@ -49,6 +111,10 @@ def get_standard_filename(fname):
         return
     return m.groups(0)[0]
 
+def get_ttms(debussy_repo='.'):
+    pcms = get_pcms(debussy_repo)
+    return {fname: pitch_class_matrix_to_tritone(pcm) for fname, pcm in pcms.items()}
+
 
 def parse_interval_index(df, name='iv'):
     iv_regex = r"\[([0-9]*\.[0-9]+), ([0-9]*\.[0-9]+)\)"
@@ -57,3 +123,10 @@ def parse_interval_index(df, name='iv'):
     iix = pd.IntervalIndex.from_arrays(values[0], values[1], closed='left', name=name)
     df.index = iix
     return df
+
+def test_dict_keys(dict_keys, metadata):
+    found_fnames = metadata.index.isin(dict_keys)
+    if found_fnames.all():
+        print("Found matrices for all files listed in metadata.tsv.")
+    else:
+        print(f"Couldn't find matrices for the following files:\n{metadata.index[~found_fnames].to_list()}.")

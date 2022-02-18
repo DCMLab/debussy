@@ -125,10 +125,6 @@ def most_resonant2color(max_coeff, opacity, **kwargs):
     
 def center_of_mass(index, utm):
     shape_x, shape_y = np.shape(utm)[:2]
-    for y in range(shape_y):
-        for x in range(shape_x):
-            if np.any(utm[y][x]):
-                utm[y][x] = zeroth_coeff_norm(utm[y][x], utm[y][x])
     utm_interest = np.abs(utm[:,:,index])
     vcom, hcom = ndimage.measurements.center_of_mass(utm_interest)
     return (hcom/shape_x, vcom/shape_y)
@@ -140,10 +136,8 @@ def pitch_class_matrix_to_tritone(pc_mat):
     DFT individually to all the pitch class distributions.
     """
     coeff_nmb = 6
-    
-    res = np.linalg.norm(np.multiply(pc_mat, np.roll(pc_mat, coeff_nmb, axis=2))[:coeff_nmb], axis=2)
-    #res[res != 0.] = 1 # for now boolean value
-    return res
+    res = np.linalg.norm(np.multiply(pc_mat, np.roll(pc_mat, coeff_nmb, axis=2))[...,:coeff_nmb], axis=2)
+    return res.reshape((res.shape[0], res.shape[1], 1))
 
 
 def pitch_class_matrix_to_minor_major(pc_mat, rotated_kp=rotated_kp):
@@ -152,13 +146,14 @@ def pitch_class_matrix_to_minor_major(pc_mat, rotated_kp=rotated_kp):
     modelised by a matrix of float numbers, and apply the 
     DFT individually to all the pitch class distributions.
     """
-    res = np.linalg.norm(np.apply_along_axis(max_correlation, 2, pc_mat, rotated_kp ), axis=2)
+    #res = np.linalg.norm(np.apply_along_axis(max_correlation, 2, pc_mat, rotated_kp ), axis=2)
+    res = max_correlation(pc_mat, rotated_kp)
     
     return res
 
 def max_correlation(pc_mat, rotated_kp):
-    coeffs_major_minor = np.array([pearsonr(pc_mat, kp)[0] for kp in rotated_kp.values()])
-    return coeffs_major_minor[:12].max(), coeffs_major_minor[12:].max()
+    coeffs_major_minor = np.array([[[pearsonr(pc_mat[i,j,:], kp)[0] for kp in rotated_kp.values()] for j in range(pc_mat.shape[1])] for i in range(pc_mat.shape[0])])
+    return np.stack((coeffs_major_minor[...,:12].max(axis=2), coeffs_major_minor[...,12:].max(axis=2)), axis=2)
 
 
 def build_custom_utm_from_one_row(res, how='mean'):

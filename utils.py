@@ -6,7 +6,9 @@ import math
 from scipy import ndimage
 from scipy.stats import entropy
 from scipy.stats.stats import pearsonr
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+import networkx as nx
+from networkx.algorithms.components import connected_components
 
 
 MOZART_PROFILES = {
@@ -123,11 +125,13 @@ def most_resonant2color(max_coeff, opacity, **kwargs):
 
 
     
-def center_of_mass(index, utm):
-    shape_x, shape_y = np.shape(utm)[:2]
-    utm_interest = np.abs(utm[:,:,index])
-    vcom, hcom = ndimage.measurements.center_of_mass(utm_interest)
-    return (hcom/shape_x, vcom/shape_y)
+def center_of_mass(utm):
+    vcoms = []
+    shape_y, shape_z = np.shape(utm)[1:3]
+    for i in range(shape_z):
+        utm_interest = utm[:,:,i]
+        vcoms.append(ndimage.measurements.center_of_mass(utm_interest)[0]/shape_y)
+    return vcoms
 
 def pitch_class_matrix_to_tritone(pc_mat):
     """
@@ -156,59 +160,28 @@ def max_correlation(pc_mat, rotated_kp):
     return np.stack((coeffs_major_minor[...,:12].max(axis=2), coeffs_major_minor[...,12:].max(axis=2)), axis=2)
 
 
-def build_custom_utm_from_one_row(res, how='mean'):
-    """
-    """
-    pcv_nmb = np.shape(res)[0]
-    for i in range(1, pcv_nmb):
-        for j in range(0, pcv_nmb-i):
-            if how == 'mean':
-                res[i][i+j] = np.mean(np.array([res[0][i+j],res[i-1][i+j-1]]), axis=0)
-            else:
-                res[i][i+j] = np.max(np.array([res[0][i+j],res[i-1][i+j-1]]), axis=0)
-    return res
+def add_to_adj_list(adj_list, a, b):
+    adj_list.setdefault(a, []).append(b)
+    adj_list.setdefault(b, []).append(a)
 
+def make_adj_list(max_coeff):
+    adj_list = {}
+        
+    utm_index = np.arange(0, max_coeff.shape[0]*max_coeff.shape[1]).reshape(max_coeff.shape[0], max_coeff.shape[1])
+    for i in range(len(max_coeff)):
+        for j in range(len(max_coeff)):
+            if (j < len(max_coeff[i]) - 1) and (max_coeff[i][j] == max_coeff[i][j+1]):
+                add_to_adj_list(adj_list, utm_index[i][j], utm_index[i][j+1])
+            if i < len(max_coeff[i]) - 1:
+                for x in range(max(0, j - 1), min(len(max_coeff[i+1]), j+2)):
+                    if (max_coeff[i][j] == max_coeff[i+1][x]):
+                        add_to_adj_list(adj_list, utm_index[i][j], utm_index[i+1][x])
+    return adj_list
 
-
-
-
-# still to adjust from Digital Musicology project
-
-def compute_magnitude_entropy(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
-    vec = []
-    for i in range(7):
-        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
-    sel = np.array([ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec])
-    entr = ent.spectral_entropy(sel, 1, method='fft')
-    return entr[1:]
-
-def compute_magnitudes(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
-    vec = []
-    for i in range(7):
-        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
-    sel = np.array([ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec])
-    return sel[4]
-
-def compute_peaks(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
-    vec = []
-    for i in range(7):
-        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
-    sel = [ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec]
-    return [len(find_peaks(list(magnitudes))[0]) for magnitudes in sel]
-
-def compute_entropy_phase(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.round(np.angle(apply_dft_to_pitch_class_matrix(arr1)), 2)
-    vec = []
-    coeffs = []
-    height = int(utm.shape[0] * ver_ratio)-1
-    sel = np.array(utm[height,:,:]).T
-    entr = ent.spectral_entropy(sel, 1, method='fft')
-    return entr[1:]
+def partititions_entropy(adj_list):
+    G = nx.Graph(adj_list)
+    components = connected_components(G)
+    lengths = [len(x)/G.size() for x in components]
+    ent = entropy(lengths) / entropy([1]*G.size())
+    return ent
 

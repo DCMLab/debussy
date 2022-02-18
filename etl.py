@@ -4,14 +4,15 @@ import pandas as pd
 import numpy as np
 from wavescapes import apply_dft_to_pitch_class_matrix, build_utm_from_one_row
 
-from utils import most_resonant, pitch_class_matrix_to_minor_major,  pitch_class_matrix_to_tritone
+from utils import most_resonant, pitch_class_matrix_to_tritone, utm2long, long2utm, max_pearsonr_by_rotation
 
-def get_dfts(debussy_repo='.'):
+
+def get_dfts(debussy_repo='.', long=True):
     pcvs = get_pcvs(debussy_repo)
-    return {fname: apply_dft_to_pitch_class_matrix(pcv) for fname, pcv in pcvs.items()}
+    return {fname: apply_dft_to_pitch_class_matrix(pcv, long=long) for fname, pcv in pcvs.items()}
 
 
-def get_mag_phase_mx(data_folder, normalization='0c', indulge_prototypes=False):
+def get_mag_phase_mx(data_folder, normalization='0c', indulge_prototypes=False, long=True):
     """_summary_
 
     Parameters
@@ -45,6 +46,10 @@ def get_mag_phase_mx(data_folder, normalization='0c', indulge_prototypes=False):
                 try:
                     with gzip.GzipFile(path, "r") as zip_file:
                         mag_phase_mx = np.load(zip_file, allow_pickle=True)
+                        if long:
+                            n, m = mag_phase_mx.shape[:2]
+                            if n == m:
+                                mag_phase_mx = utm2long(mag_phase_mx)
                         result[capture_groups['fname']] = mag_phase_mx
                 except Exception:
                     print(path)
@@ -52,9 +57,16 @@ def get_mag_phase_mx(data_folder, normalization='0c', indulge_prototypes=False):
         print(f"No pickled numpy matrices with correct file names found in {data_folder}.")
     return result
 
-def get_maj_min_coeffs(debussy_repo='.'):
-    pcms = get_pcms(debussy_repo)
-    return {fname: pitch_class_matrix_to_minor_major(pcm) for fname, pcm in pcms.items()}
+def get_maj_min_coeffs(debussy_repo='.', long=True):
+    pcms = get_pcms(debussy_repo, long=True)
+    result = {}
+    for fname, pcm in pcms.items():
+        maj_min = np.column_stack([
+            max_pearsonr_by_rotation(pcm, 'mozart_major'),
+            max_pearsonr_by_rotation(pcm, 'mozart_minor')
+        ])
+        result[fname] = maj_min if long else long2utm(maj_min)
+    return result
 
 
 def get_metadata(debussy_repo='.'):
@@ -89,9 +101,9 @@ def get_most_resonant(mag_phase_mx_dict):
     )
 
 @lru_cache
-def get_pcms(debussy_repo='.'):
+def get_pcms(debussy_repo='.', long=True):
     pcvs = get_pcvs(debussy_repo, pandas=False)
-    return {fname: build_utm_from_one_row(pcv) for fname, pcv in pcvs.items()} 
+    return {fname: build_utm_from_one_row(pcv, long=long) for fname, pcv in pcvs.items()}
 
 @lru_cache
 def get_pcvs(debussy_repo, pandas=False):
@@ -111,8 +123,8 @@ def get_standard_filename(fname):
         return
     return m.groups(0)[0]
 
-def get_ttms(debussy_repo='.'):
-    pcms = get_pcms(debussy_repo)
+def get_ttms(debussy_repo='.', long=True):
+    pcms = get_pcms(debussy_repo, long=long)
     return {fname: pitch_class_matrix_to_tritone(pcm) for fname, pcm in pcms.items()}
 
 

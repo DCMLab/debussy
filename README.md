@@ -26,6 +26,7 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 |l095-01_pour_prelude        |     163|     0|        |          |         |
 |l095-02_pour_sarabande      |      72|     0|        |          |         |
 |l095-03_pour_toccata        |     266|     0|        |          |         |
+|l099_cahier                 |      55|     0|        |          |         |
 |l100-01_estampes_pagode     |      98|     0|        |          |         |
 |l100-02_estampes_soiree     |     136|     0|        |          |         |
 |l100-03_estampes_jardins    |     157|     0|        |          |         |
@@ -37,6 +38,7 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 |l110-03_images_mouvement    |     177|     0|        |          |         |
 |l111-01_images_cloches      |      49|     0|        |          |         |
 |l111-02_images_lune         |      57|     0|        |          |         |
+|l111-03_images_poissons     |      97|     0|        |          |         |
 |l113-01_childrens_doctor    |      76|     0|        |          |         |
 |l113-02_childrens_jimbos    |      81|     0|        |          |         |
 |l113-03_childrens_serenade  |     124|     0|        |          |         |
@@ -53,6 +55,7 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 |l117-08_preludes_fille      |      39|     0|        |          |         |
 |l117-09_preludes_serenade   |     137|     0|        |          |         |
 |l117-10_preludes_cathedrale |      89|     0|        |          |         |
+|l117-11_preludes_danse      |      96|     0|        |          |         |
 |l117-12_preludes_minstrels  |      89|     0|        |          |         |
 |l121_plus                   |     148|     0|        |          |         |
 |l123-01_preludes_brouillards|      52|     0|        |          |         |
@@ -71,4 +74,5 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 |l133_page                   |      38|     0|        |          |         |
 |l136-01_etudes_cinq         |     116|     0|        |          |         |
 |l136-11_etudes_arpeges      |      67|     0|        |          |         |
+|l136-12_etudes_accords      |     181|     0|        |          |         |
 |l138_elegie                 |      21|     0|        |          |         |

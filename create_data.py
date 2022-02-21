@@ -6,18 +6,8 @@ from tqdm import tqdm
 import numpy as np
 from wavescapes import normalize_dft  # pip install https://github.com/DCMLab/wavescapes/archive/refs/heads/johannes.zip
 
-from etl import get_dfts
-
-
-
-def resolve_dir(d):
-    """ Resolves '~' to HOME directory and turns ``d`` into an absolute path.
-    """
-    if d is None:
-        return None
-    if '~' in d:
-        return os.path.expanduser(d)
-    return os.path.abspath(d)
+from etl import get_dfts, resolve_dir, get_pcms
+from utils import pitch_class_matrix_to_tritone, max_pearsonr_by_rotation
 
 
 def check_and_create(d):
@@ -54,13 +44,13 @@ def make_filename(fname, how, indulge_prototypes, coeff=None, ext=None):
 def make_filenames(fnames, norm_params, coeffs=None, ext=None):
     if coeffs is None:
         coeffs = [None]
-    ext = [None] if ext is None else [ext]
+    ext = [ext]
     return [make_filename(fname, how, indulge, coeff, e)
             for fname, (how, indulge), coeff, e
             in product(fnames, norm_params, coeffs, ext)]
 
 
-def store_mag_phase_mxs(debussy_repo, data_path, norm_params, overwrite=False, cores=0):
+def store_mag_phase_mxs(debussy_repo, data_path, norm_params, overwrite=False, cores=0, sort=False):
     print("Creating DFT matrices...", end=' ')
     dfts = get_dfts(debussy_repo, long=True)
     print('DONE')
@@ -84,7 +74,10 @@ def store_mag_phase_mxs(debussy_repo, data_path, norm_params, overwrite=False, c
     if n_runs == 0:
         print("No new magnitude-phase matrices to be computed.")
         return
-    params = [(path, dfts[key], how, indulge) for path, (key, how, indulge) in fpath2params.items()]
+    params = [(path, dfts[key], how, indulge)
+              for path, (key, how, indulge) in fpath2params.items()]
+    if sort:
+        params = sorted(params, key=lambda t: t[1].shape[0])
     print(f"Computing {n_runs} magnitude-phase matrices for {pieces} pieces...")
     _ = do_it(compute_mag_phase_mx, params, n=n_runs, cores=cores)
 
@@ -95,7 +88,7 @@ def compute_mag_phase_mx(file_path, dft, how, indulge_prototypes):
 
 def do_it(func, params, n=None, cores=0):
     if n is None:
-        n = len(params)
+        n = len(list(params))
     if cores == 0:
         return [func(*p) for p in tqdm(params, total=n)]
     pool = mp.Pool(cores)
@@ -105,17 +98,46 @@ def do_it(func, params, n=None, cores=0):
     return result
 
 
+def store_correlations(debussy_repo, data_path, overwrite=False, cores=0, sort=False):
+    print("Computing pitch-class-vector triangles...", end=' ')
+    pcms = get_pcms(debussy_repo, long=True)
+    print('DONE')
+    pcms = {os.path.join(data_path, fname + '-correlations.npy.gz'): pcm
+              for fname, pcm in pcms.items()}
+    if not overwrite:
+        pcms = {path: pcm for path, pcm in pcms.items() if not os.path.isfile(path)}
+    params = list(pcms.items())
+    if sort:
+        params = sorted(params, key=lambda t: t[1].shape[0])
+    n = len(params)
+    print(f"Computing correlation matrices for {n} pieces...")
+    _ = do_it(compute_correlations, params, n=n, cores=cores)
 
+
+def compute_correlations(file_path, pcm):
+    tritones = pitch_class_matrix_to_tritone(pcm)
+    maj = max_pearsonr_by_rotation(pcm, 'mozart_major')
+    min = max_pearsonr_by_rotation(pcm, 'mozart_minor')
+    stacked = np.column_stack([maj, min, tritones])
+    with gzip.GzipFile(file_path, "w") as zip_file:
+        np.save(file=zip_file, arr=stacked)
 
 
 def main(args):
-    if args.magphase:
-        store_mag_phase_mxs(args.repo,
+    store_mag_phase_mxs(args.repo,
                         data_path=args.output,
                         norm_params=args.normalization,
-                        overwrite=args.all,
+                        overwrite=args.magphase,
                         cores=args.cores,
+                        sort=args.sort,
                         )
+    store_correlations(args.repo,
+                       data_path=args.output,
+                       overwrite=args.correlations,
+                       cores=args.cores,
+                       sort=args.sort,
+                       )
+
 
 
 
@@ -130,9 +152,8 @@ if __name__ == "__main__":
         description="Create Debussy data."
     )
     parser.add_argument(
-        "-o",
-        "--output",
-        metavar="DIR",
+        "output",
+        metavar="OUTPUT_DIR",
         type=check_and_create,
         help="Directory where the data will be stored.",
     )
@@ -141,21 +162,9 @@ if __name__ == "__main__":
         "--normalization",
         nargs="+",
         metavar="METHOD",
+        type=int,
         help=f"By default, all {n_meth} normalization methods are being applied. Pass one or "
              f"several numbers to use only some of them: {int2norm}."
-    )
-    parser.add_argument(
-        "-m",
-        "--magphase",
-        action="store_true",
-        help="Set this flag to compute normalized magnitude-phase matrices. Use -n if you want "
-             "to select certain normalization methods only."
-    )
-    parser.add_argument(
-        "-a",
-        "--all",
-        action='store_true',
-        help="Set this flag to create all data rather than skipping existing files."
     )
     parser.add_argument(
         "-c",
@@ -166,6 +175,13 @@ if __name__ == "__main__":
              "number of cores, or a negative number to use all cores. Defaults to 0."
     )
     parser.add_argument(
+        "-s",
+        "--sort",
+        action='store_true',
+        help="This flag influences the processing order by sorting the data matrices from shortest "
+             "to longest"
+    )
+    parser.add_argument(
         "-r",
         "--repo",
         metavar="DIR",
@@ -173,16 +189,34 @@ if __name__ == "__main__":
         default=os.getcwd(),
         help="Local clone of the debussy repository. Defaults to current working directory.",
     )
+
+    overwriting_group = parser.add_argument_group(title='What kind of existing data to overwrite?')
+    overwriting_group.add_argument(
+        "--all",
+        action='store_true',
+        help="Set this flag to create all data from scratch. This amounts to all flags below."
+    )
+    overwriting_group.add_argument(
+        "--magphase",
+        action="store_true",
+        help="Set this flag to re-compute normalized magnitude-phase matrices even if they exist "
+             "already in the output directory."
+    )
+    overwriting_group.add_argument(
+        "--correlations",
+        action="store_true",
+        help="Set this flag to re-compute correlation matrices even if they exist "
+             "already in the output directory."
+    )
+
+
     args = parser.parse_args()
-    if sum((args.magphase, )) == 0:
-        raise ValueError("No action selected, pass at least -m.")
     if args.normalization is None:
         args.normalization = position2params
     else:
         params = []
-        for i_str in args.normalization:
-            i = int(i_str)
-            assert 0 <= i < n_meth, f"Arguments to -n need to be between 0 and {n_meth}, not {i_str}."
+        for i in args.normalization:
+            assert 0 <= i < n_meth, f"Arguments for -n need to be between 0 and {n_meth}, not {i}."
             params.append(position2params[i])
         args.normalization = params
     args.cores = int(args.cores)
@@ -192,6 +226,9 @@ if __name__ == "__main__":
     elif args.cores > available_cpus:
         print(f"{args.cores} CPUs not available, setting the number down to {available_cpus}.")
         args.cores = available_cpus
+    if args.all:
+        args.magphase = True
+        args.correlations = True
     main(args)
 
 

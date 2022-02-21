@@ -147,7 +147,7 @@ if __name__ == "__main__":
     NORM_METHODS = ['0c', 'post_norm', 'max_weighted', 'max']
     n_meth = 2 * len(NORM_METHODS)
     int2norm = dict(enumerate(NORM_METHODS + [norm + '+indulge' for norm in NORM_METHODS]))
-    position2params = list(product(NORM_METHODS, (False, True)))
+    position2params = [(how, indulge) for indulge, how in product((False, True), NORM_METHODS)]
     parser = argparse.ArgumentParser(
         description="Create Debussy data."
     )

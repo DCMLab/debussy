@@ -181,10 +181,11 @@ def get_pcms(debussy_repo='.', long=True):
 
 @lru_cache
 def get_pcvs(debussy_repo, pandas=False):
-    pcv_path = os.path.join(debussy_repo, 'pcvs')
-    pcv_files = [f for f in os.listdir(pcv_path) if f.endswith('pcvs.tsv')]
-    pcv_dfs = {get_standard_filename(fname): pd.read_csv(os.path.join(pcv_path, fname), sep='\t', index_col=0) for fname in sorted(pcv_files)}
-    pcv_dfs = {k: parse_interval_index(v).fillna(0.0) for k, v in pcv_dfs.items()}
+    pcvs_path = os.path.join(debussy_repo, 'pcvs', 'debussy-w0.5-piece-wise-pc-q1-slices-pcvs.tsv')
+    pcvs = pd.read_csv(pcvs_path, sep='\t', index_col=[0, 1, 2])
+    pcv_dfs = {fname: pcv_df.reset_index(level=[0,1], drop=True) for fname, pcv_df in pcvs.groupby(level=1)}
+    if pandas:
+        pcv_dfs = {k: parse_interval_index(v) for k, v in pcv_dfs.items()}
     if not pandas:
         pcv_dfs = {k: v.to_numpy() for k, v in pcv_dfs.items()}
     return pcv_dfs

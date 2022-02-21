@@ -73,6 +73,7 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 |l132_berceuse               |      68|     0|        |          |         |
 |l133_page                   |      38|     0|        |          |         |
 |l136-01_etudes_cinq         |     116|     0|        |          |         |
+|l136-06_etudes_huit         |      68|     0|        |          |         |
 |l136-11_etudes_arpeges      |      67|     0|        |          |         |
 |l136-12_etudes_accords      |     181|     0|        |          |         |
 |l138_elegie                 |      21|     0|        |          |         |

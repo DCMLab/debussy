@@ -12,8 +12,8 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 |l000_etude                  |      71|     0|        |          |         |
 |l000_soirs                  |      23|     0|        |          |         |
 |l009_danse                  |      92|     0|        |          |         |
-|l066-01_arabesques-premiere |     107|     0|        |          |         |
-|l066-02_arabesques-deuxieme |     110|     0|        |          |         |
+|l066-01_arabesques_premiere |     107|     0|        |          |         |
+|l066-02_arabesques_deuxieme |     110|     0|        |          |         |
 |l067_mazurka                |     138|     0|        |          |         |
 |l068_reverie                |     101|     0|        |          |         |
 |l069_tarentelle             |     333|     0|        |          |         |
@@ -73,6 +73,7 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 |l132_berceuse               |      68|     0|        |          |         |
 |l133_page                   |      38|     0|        |          |         |
 |l136-01_etudes_cinq         |     116|     0|        |          |         |
+|l136-06_etudes_huit         |      68|     0|        |          |         |
 |l136-11_etudes_arpeges      |      67|     0|        |          |         |
 |l136-12_etudes_accords      |     181|     0|        |          |         |
 |l138_elegie                 |      21|     0|        |          |         |

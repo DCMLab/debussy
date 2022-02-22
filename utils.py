@@ -10,6 +10,7 @@ from scipy.stats.stats import pearsonr
 from sklearn.preprocessing import MinMaxScaler
 import networkx as nx
 from networkx.algorithms.components import connected_components
+<<<<<<< HEAD
 
 
 ########################################
@@ -27,6 +28,8 @@ def longn2squaren(n):
     assert square_n % 1. == 0, f"Length {n} does not correspond to an upper triangular matrix in long format."
     return int(square_n)
 
+=======
+>>>>>>> f7cec747b6f402b921de90fb478ec178f65756de
 
 
 MOZART_PROFILES = {
@@ -253,7 +256,7 @@ def get_precomputed_rotations(key):
 
 def max_pearsonr_by_rotation(A, b, get_arg_max=False):
     """ For every row in A return the maximum person correlation from all transpositions of b
-
+    
     Parameters
     ----------
     A : np.array
@@ -304,9 +307,15 @@ def pitch_class_matrix_to_tritone(pc_mat):
     modelised by a matrix of float numbers, and apply the 
     DFT individually to all the pitch class distributions.
     """
-    coeff_nmb = 6
-    res = np.linalg.norm(np.multiply(pc_mat, np.roll(pc_mat, coeff_nmb, axis=-1))[...,:coeff_nmb], axis=-1)
+    #res = np.linalg.norm(np.apply_along_axis(max_correlation, 2, pc_mat, rotated_kp ), axis=2)
+    res = max_correlation(pc_mat, rotated_kp)
+    
     return res
+
+def max_correlation(pc_mat, rotated_kp):
+    coeffs_major_minor = np.array([[[pearsonr(pc_mat[i,j,:], kp)[0] for kp in rotated_kp.values()] for j in range(pc_mat.shape[1])] for i in range(pc_mat.shape[0])])
+    return np.stack((coeffs_major_minor[...,:12].max(axis=2), coeffs_major_minor[...,12:].max(axis=2)), axis=2)
+
 
 def add_to_adj_list(adj_list, a, b):
     adj_list.setdefault(a, []).append(b)

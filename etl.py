@@ -73,7 +73,7 @@ def check_norm_params(norm_params):
         assert t[0] in NORM_METHODS, f"how needs to be one of {NORM_METHODS}, not {t[0]}"
     return norm_params
 
-def find_pickles(data_folder, norm_params, coeff=None, ext='npy.gz'):
+def find_pickles(data_folder, norm_params, coeff=None, ext='npy.gz', return_dict=False):
     """ Generator function that scans data_folder for particular filenames
      and yields the paths.
 
@@ -96,22 +96,50 @@ def find_pickles(data_folder, norm_params, coeff=None, ext='npy.gz'):
     norm_params = check_norm_params(norm_params)
     data_folder = resolve_dir(data_folder)
     assert os.path.isdir(data_folder), data_folder + " is not an existing directory."
-    ext_reg = ext.lstrip('.').replace('.', r'\.') + ')$'
-    data_regex = r"^(?P<fname>.*)-"
     if coeff is not None:
-        data_regex += r"(?:c(?P<coeff>\d)-)?"
-    data_regex += r"(?P<how>0c|post_norm|max|max_weighted)(?P<indulge_prototype>\+indulge)?\.(?P<extension>" + ext_reg
+        coeff = str(coeff)
+        assert coeff in [str(i) for i in range(1, 7)], "Parameter coeff needs to be an integer within [1,6]."
+    ext_reg = ext.lstrip('.').replace('.', r'\.') + ')$'
+    data_regex = r"^(?P<fname>.*?)-(?:c(?P<coeff>\d)-)?(?P<how>0c|post_norm|max|max_weighted)(?P<indulge_prototype>\+indulge)?\.(?P<extension>" + ext_reg
     for f in sorted(os.listdir(data_folder)):
         m = re.search(data_regex, f)
         if m is None:
             continue
         capture_groups = m.groupdict()
-        if coeff is not None and str(coeff) != capture_groups['coeff']:
+        if coeff is not None and coeff != capture_groups['coeff']:
             continue
         does_indulge = capture_groups['indulge_prototype'] is not None
         params = (capture_groups['how'], does_indulge)
         if params in norm_params:
-            yield params, capture_groups['fname'], os.path.join(data_folder, f)
+            path = os.path.join(data_folder, f)
+            if return_dict:
+                capture_groups.update(dict(
+                    file = f,
+                    path = path,
+                    does_indulge = does_indulge,
+                ))
+                yield capture_groups
+            else:
+                yield params, capture_groups['fname'], path
+            
+            
+def find_wavescapes(wavescape_folder, norm_params, fname=None):
+    norm_params = check_norm_params(norm_params)
+    assert len(norm_params) == 1, "This function is meant to fetch images for one type of normalization only."
+    how, indulge = norm_params[0]
+    if indulge:
+        norm_params.append((how, False))
+        found = {(groups['fname'], int(groups['coeff'])): groups['file'] 
+                 for groups in find_pickles(wavescape_folder, norm_params, ext='png', return_dict=True)
+                 if groups['does_indulge'] or groups['coeff'] == '6'
+                }
+    else:
+        found = {(groups['fname'], int(groups['coeff'])): groups['file'] 
+                 for groups in find_pickles(wavescape_folder, norm_params, ext='png', return_dict=True)
+                }
+    if fname is None:
+        return found
+    return {coeff: file for (fn, coeff), file in found.items() if fn == fname}
 
 
 def get_correlations(data_folder, long=True):

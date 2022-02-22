@@ -162,8 +162,10 @@ def most_resonant(mag_mx, add_one=False):
         utm_entropy = long2utm(utm_entropy)
     return utm_argmax, utm_max, utm_entropy
 
-def most_resonant2color(max_coeff, opacity, **kwargs):
-    hue_segment = math.tau / max_coeff.max()
+def most_resonant2color(max_coeff, opacity, hue_segments=6, **kwargs):
+    if hue_segments is None:
+        hue_segments = max_coeff.max()
+    hue_segment = math.tau / hue_segments
     phase = max_coeff * hue_segment
     mag_dims, phase_dims = opacity.ndim, phase.ndim
     assert mag_dims == phase_dims, f"Both arrays should have the same dimensionality"

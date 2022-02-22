@@ -176,13 +176,9 @@ def make_wavescape(path, mag_phase_mx, fname, how, indulge, coeff=None, grey=Fal
         label += f"c{coeff}\n{how}{'+' if indulge else ''}"
         colors = circular_hue(mag_phase_mx[..., coeff - 1, :], output_rgba=True, ignore_phase=grey)
     colors = long2utm(colors)
-    try:
-        ws = Wavescape(colors, width=2286)
-    except ValueError as e:
-        print(path, mag_phase_mx, fname, how, indulge, coeff, grey, by_entropy)
-        print(colors.shape)
-        print(colors[:4,:4])
-        raise e
+    if colors.shape[-1] == 1:
+        colors = colors[...,0]
+    ws = Wavescape(colors, width=2286)
     ws.draw(label=label, aw_per_tick=10, tick_factor=10, label_size=20, indicator_size=1.0, tight_layout=False)
     plt.savefig(path)
     plt.close()
@@ -426,7 +422,6 @@ if __name__ == "__main__":
         args.cores = available_cpus
     elif args.cores < 0:
         args.cores = 0 # deactivates multiprocessing
-    print(args.cores)
     # coefficients param
     if args.coeffs is not None:
         for i in args.coeffs:

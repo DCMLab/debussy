@@ -1,6 +1,8 @@
 from functools import lru_cache
 from itertools import islice
 
+from matplotlib import pyplot as plt
+from wavescapes import legend_decomposition
 from wavescapes.color import circular_hue
 import numpy as np
 import math
@@ -174,6 +176,15 @@ def most_resonant2color(max_coeff, opacity, hue_segments=6, **kwargs):
     else:
         mag_phase_mx = np.column_stack([opacity, phase])
     return circular_hue(mag_phase_mx, **kwargs)
+
+def make_color_legend(file_path=None):
+    """Produce a circular legend for the most_resonant summary wavescapes."""
+    def make_pcv(position_of_one):
+        return [0] * position_of_one + [1] + [0] * (11 - position_of_one)
+    legend = {f'c{i + 1}': (make_pcv(6 - i), [2]) for i in range(0, 6)}
+    legend_decomposition(legend, width=5, single_img_coeff=2)
+    if file_path is not None:
+        plt.savefig(file_path)
 
 
 ########################################

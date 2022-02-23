@@ -2,7 +2,7 @@ import os, argparse
 import gzip
 from collections import defaultdict
 from itertools import product
-import multiprocessing as mp
+import pathos.multiprocessing as mp
 
 from matplotlib import pyplot as plt
 from tqdm import tqdm

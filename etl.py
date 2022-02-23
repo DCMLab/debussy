@@ -1,8 +1,10 @@
 from collections import defaultdict
 from functools import lru_cache
+from itertools import product
 import os, re, gzip, json
 import pandas as pd
 import numpy as np
+from IPython.display import display, HTML
 from wavescapes import apply_dft_to_pitch_class_matrix, build_utm_from_one_row
 
 from utils import most_resonant, pitch_class_matrix_to_tritone, utm2long, long2utm, max_pearsonr_by_rotation
@@ -66,14 +68,42 @@ def get_mag_phase_mx(data_folder, norm_params, long=True):
 def check_norm_params(norm_params):
     """If the argument is a tuple, turn it into a list of one tuple. Then check if
     the tuples correspond to valid normalization parameters."""
-    if isinstance(norm_params, tuple):
+    int2norm = {i: (how, indulge) for i, (indulge, how) in enumerate(product((False, True), ('0c', 'post_norm', 'max_weighted', 'max')))}
+    if isinstance(norm_params, tuple) or isinstance(norm_params, int):
         norm_params = [norm_params]
+    norm_params = [int2norm[p] if isinstance(p, int) else p for p in norm_params]
     for t in norm_params:
         assert len(t) == 2, f"norm_params need to be (how, indulge_prototypes) pairs, not {t}"
         assert t[0] in NORM_METHODS, f"how needs to be one of {NORM_METHODS}, not {t[0]}"
     return norm_params
 
-def find_pickles(data_folder, norm_params, coeff=None, ext='npy.gz', return_dict=False):
+
+def display_wavescapes(wavescape_folder, fname, norm_method, summaries=False, grey=False, rows=2):
+    coeff2path = get_wavescape_fnames(wavescape_folder, norm_method, fname, summaries=summaries, grey=grey)
+    if len(coeff2path) == 0:
+        print("No wavescapes found.")
+        return
+    if summaries:
+        coeff2path = {i: coeff2path[key] for i, key in enumerate(('mag', 'ent'), 1) if key in coeff2path}
+    total = 2 if summaries else 6
+    assert rows <= total, f"Cannot display {rows} rows for {total} requested elements."
+    cols_per_row = total // rows
+    rows_first_ix = range(1, total+1, cols_per_row)
+    html = "<table>"
+    for row in rows_first_ix:
+        html += "<tr>"
+        for col in range(cols_per_row):
+            i = row + col
+            html += "<td>"
+            if i in coeff2path:
+                html += f"<img src='{os.path.join(wavescape_folder, coeff2path[i])}' alt='coeff_{i}'/>"
+            html += "</td>"
+        html += "</tr>"
+    html += "</table>"
+    display(HTML(html))
+    
+
+def find_pickles(data_folder, norm_params, ext='npy.gz'):
     """ Generator function that scans data_folder for particular filenames
      and yields the paths.
 
@@ -96,50 +126,95 @@ def find_pickles(data_folder, norm_params, coeff=None, ext='npy.gz', return_dict
     norm_params = check_norm_params(norm_params)
     data_folder = resolve_dir(data_folder)
     assert os.path.isdir(data_folder), data_folder + " is not an existing directory."
-    if coeff is not None:
-        coeff = str(coeff)
-        assert coeff in [str(i) for i in range(1, 7)], "Parameter coeff needs to be an integer within [1,6]."
     ext_reg = ext.lstrip('.').replace('.', r'\.') + ')$'
-    data_regex = r"^(?P<fname>.*?)-(?:c(?P<coeff>\d)-)?(?P<how>0c|post_norm|max|max_weighted)(?P<indulge_prototype>\+indulge)?\.(?P<extension>" + ext_reg
+    data_regex = r"^(?P<fname>.*?)-(?P<how>0c|post_norm|max|max_weighted)(?P<indulge_prototype>\+indulge)?\.(?P<extension>" + ext_reg
     for f in sorted(os.listdir(data_folder)):
         m = re.search(data_regex, f)
         if m is None:
             continue
         capture_groups = m.groupdict()
-        if coeff is not None and coeff != capture_groups['coeff']:
-            continue
         does_indulge = capture_groups['indulge_prototype'] is not None
         params = (capture_groups['how'], does_indulge)
         if params in norm_params:
             path = os.path.join(data_folder, f)
-            if return_dict:
-                capture_groups.update(dict(
-                    file = f,
-                    path = path,
-                    does_indulge = does_indulge,
-                ))
-                yield capture_groups
-            else:
-                yield params, capture_groups['fname'], path
+            yield params, capture_groups['fname'], path
+                
+                
+def find_wavescapes(data_folder, norm_params, fname=None, summary_by_ent=None, grey=None, ext='png'):
+    """ Generator function that scans data_folder for particular filenames
+     and yields the paths.
+
+    Parameters
+    ----------
+    data_folder : str
+        Scan the file names in this directory.
+    norm_params : list of tuple
+        One or several (how, indulge_prototype) pairs.
+    coeff : str, optional
+        If the filenames include a 'c{N}-' component for coefficient N, select N.
+    ext : str, optional
+        The extension of the files to detect.
+
+    Yields
+    ------
+    (str, int), str, str
+        For each found file matching the critera, return norm_params, debussy_fname, pickled_filepath
+    """
+    norm_params = check_norm_params(norm_params)
+    data_folder = resolve_dir(data_folder)
+    assert os.path.isdir(data_folder), data_folder + " is not an existing directory."
+    regex = f"^(?P<fname>{fname if fname is not None else '.*?'})"
+    regex += r"-(?:c(?P<coeff>\d)-)?(?P<how>0c|post_norm|max|max_weighted)(?P<indulge_prototype>\+indulge)?"
+    if summary_by_ent is None:
+        regex += r"(?P<summary>-summary-by-(?P<by>ent|mag))?"
+    elif summary_by_ent:
+        regex += r"(?P<summary>-summary-by-ent)"
+    else:
+        regex += r"(?P<summary>-summary-by-mag)"
+    if grey is None:
+        regex += r"(?P<grey>-grey)?"
+    elif grey:
+        regex += r"(?P<grey>-grey)"
+    regex += r"\.(?P<extension>" + ext.lstrip('.').replace('.', r'\.') + ')$'
+    for f in sorted(os.listdir(data_folder)):
+        m = re.search(regex, f)
+        if m is None:
+            continue
+        capture_groups = m.groupdict()
+        does_indulge = capture_groups['indulge_prototype'] is not None
+        params = (capture_groups['how'], does_indulge)
+        if params in norm_params:
+            path = os.path.join(data_folder, f)
+            capture_groups.update(dict(
+                file = f,
+                path = path,
+                does_indulge = does_indulge,
+            ))
+            yield capture_groups
             
             
-def find_wavescapes(wavescape_folder, norm_params, fname=None):
+def get_wavescape_fnames(wavescape_folder, norm_params, fname, summaries=False, grey=False):
     norm_params = check_norm_params(norm_params)
     assert len(norm_params) == 1, "This function is meant to fetch images for one type of normalization only."
     how, indulge = norm_params[0]
     if indulge:
+        # then we need to get the 6th coefficients of indulge=False
         norm_params.append((how, False))
-        found = {(groups['fname'], int(groups['coeff'])): groups['file'] 
-                 for groups in find_pickles(wavescape_folder, norm_params, ext='png', return_dict=True)
-                 if groups['does_indulge'] or groups['coeff'] == '6'
-                }
-    else:
-        found = {(groups['fname'], int(groups['coeff'])): groups['file'] 
-                 for groups in find_pickles(wavescape_folder, norm_params, ext='png', return_dict=True)
-                }
-    if fname is None:
-        return found
-    return {coeff: file for (fn, coeff), file in found.items() if fn == fname}
+    found = {}
+    for groups in find_wavescapes(wavescape_folder, norm_params, fname, None, grey):
+        if summaries:
+            if groups['by'] is None:
+                continue
+            key = groups['by']
+        else:
+            if groups['coeff'] is None:
+                continue
+            if indulge and not (groups['does_indulge'] or groups['coeff'] == '6'):
+                # this lets the 6th coeff through if indulge is wanted (unindulged are identical)
+                continue
+            key = int(groups['coeff'])
+        found[key] = groups['file']
+    return found
 
 
 def get_correlations(data_folder, long=True):

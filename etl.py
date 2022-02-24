@@ -159,16 +159,20 @@ def get_percentage_resonance(max_coeffs, entropy_mat=False):
         return {fname: np.divide(np.array([(entropy_mat[fname] * (max_coeff == i)).sum() for i in range(6)]), max_coeff.shape[0]*max_coeff.shape[1]) for fname, max_coeff in max_coeffs.items()}
 
 def get_moment_of_inertia(max_coeffs, max_mags):
-    fname = 'l000_etude'
-
-    for fname, max_coeff in max_coeffs.items():
-        print(np.flip(np.square(np.indices(max_mags[fname].shape)[0]))[max_coeff == 1])
+    
+    
     return {fname: np.divide(np.array(
-        [(max_mags[fname][max_coeff == i] * 
-        (np.flip(np.square(np.divide(np.indices(max_mags[fname].shape)[0], max_coeff.shape[1]))))[max_coeff == i]).sum() 
-        for i in range(6)]
-        ), 
+        [
+            (
+                max_mags[fname][max_coeff == i] * 
+                (np.flip(np.square(np.divide(np.indices(max_mags[fname].shape)[0], max_coeff.shape[1]))))[max_coeff == i]
+            
+            ).sum() 
+        for i in range(6)
+        ]), 
         max_coeff.shape[0]*max_coeff.shape[1]) 
-        for fname, max_coeff in max_coeffs.items()}
+        for fname, max_coeff in max_coeffs.items()
+        
+        }
 
 

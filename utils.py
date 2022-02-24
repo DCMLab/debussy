@@ -10,7 +10,6 @@ from scipy.stats.stats import pearsonr
 from sklearn.preprocessing import MinMaxScaler
 import networkx as nx
 from networkx.algorithms.components import connected_components
-<<<<<<< HEAD
 
 
 ########################################
@@ -28,8 +27,6 @@ def longn2squaren(n):
     assert square_n % 1. == 0, f"Length {n} does not correspond to an upper triangular matrix in long format."
     return int(square_n)
 
-=======
->>>>>>> f7cec747b6f402b921de90fb478ec178f65756de
 
 
 MOZART_PROFILES = {

@@ -5,8 +5,7 @@ import pandas as pd
 import numpy as np
 from wavescapes import apply_dft_to_pitch_class_matrix, build_utm_from_one_row
 
-from utils import most_resonant, pitch_class_matrix_to_tritone, utm2long, long2utm, max_pearsonr_by_rotation
-from utils import most_resonant, pitch_class_matrix_to_minor_major,  pitch_class_matrix_to_tritone, center_of_mass, partititions_entropy, make_adj_list
+from utils import most_resonant, pitch_class_matrix_to_tritone, utm2long, long2utm, max_pearsonr_by_rotation, center_of_mass, partititions_entropy, make_adj_list
 
 NORM_METHODS = ['0c', 'post_norm', 'max_weighted', 'max']
 
@@ -288,9 +287,12 @@ def get_mean_resonance(mag_phase_mx_dict):
     return {fname: np.mean(mag_phase_mx[...,0], axis=(0,1)) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
 
 def add_to_metrics(metrics_df, dict_metric, name_metrics):
+    
     if type(name_metrics) == str:
         df_tmp = pd.Series(dict_metric, name=name_metrics)
     else:
+        if name_metrics[0] in metrics_df.columns:
+            metrics_df = metrics_df.drop(columns=name_metrics)
         df_tmp = pd.DataFrame(dict_metric).T
         df_tmp.columns = name_metrics
     metrics_df = metrics_df.merge(df_tmp, left_index=True, right_index=True)
@@ -299,6 +301,21 @@ def add_to_metrics(metrics_df, dict_metric, name_metrics):
 def get_partition_entropy(max_coeffs):
     return {fname: partititions_entropy(make_adj_list(max_coeff)) for fname, max_coeff in max_coeffs.items()}
     
-def get_percentage_resonance(max_coeffs):
-    return {fname: np.divide(np.array([(max_coeff == i).sum() for i in range(6)]), max_coeff.shape[0]*max_coeff.shape[1]) for fname, max_coeff in max_coeffs.items()}
-    
+def get_percentage_resonance(max_coeffs, entropy_mat=False):
+    if entropy_mat == False:
+        return {fname: np.divide(np.array([(max_coeff == i).sum() for i in range(6)]), max_coeff.shape[0]*max_coeff.shape[1]) for fname, max_coeff in max_coeffs.items()}
+    else:
+        return {fname: np.divide(np.array([(entropy_mat[fname] * (max_coeff == i)).sum() for i in range(6)]), max_coeff.shape[0]*max_coeff.shape[1]) for fname, max_coeff in max_coeffs.items()}
+
+def get_moment_of_inertia(max_coeffs, max_mags):
+    fname = 'l000_etude'
+
+    for fname, max_coeff in max_coeffs.items():
+        print(np.flip(np.square(np.indices(max_mags[fname].shape)[0]))[max_coeff == 1])
+    return {fname: np.divide(np.array(
+        [(max_mags[fname][max_coeff == i] * 
+        (np.flip(np.square(np.divide(np.indices(max_mags[fname].shape)[0], max_coeff.shape[1]))))[max_coeff == i]).sum() 
+        for i in range(6)]
+        ), 
+        max_coeff.shape[0]*max_coeff.shape[1]) 
+        for fname, max_coeff in max_coeffs.items()}

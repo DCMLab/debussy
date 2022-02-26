@@ -8,10 +8,14 @@ import numpy as np
 import math
 from scipy import ndimage
 from scipy.stats import entropy
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+import seaborn as sns
+import statsmodels.api as sm
+import pandas as pd
+
 import networkx as nx
 from networkx.algorithms.components import connected_components
-
+from etl import test_dict_keys
 
 ########################################
 # SQUARE <-> LONG matrix transformations
@@ -318,3 +322,80 @@ def partititions_entropy(adj_list):
     lengths = [len(x) / G.size() for x in components]
     ent = entropy(lengths) / entropy([1] * G.size())
     return ent
+
+def print_check_examples(metric_results, metadata, example_filename):
+    test_dict_keys(metric_results, metadata)
+    print(f"The example center of mass list has len {len(metric_results[example_filename])}.")
+    print('Example results', metric_results[example_filename])
+
+def make_plots(metadata_metrics, save_name, title, cols,
+               figsize=(20,25), unified=False, boxplot=False, ordinal=False, ordinal_col=False):
+    if unified:
+        fig, axs = plt.subplots(1,1, figsize=(15,10))
+    else:
+        fig, axs = plt.subplots(3,2, figsize=figsize)
+        axs = axs.flatten()
+
+    fig.suptitle(title)
+    if type(cols) == str:
+        len_cols = 2
+    else:
+        len_cols = len(cols) + 1
+    
+    for i in range(1, len_cols):
+        print(i)
+        if ordinal:
+            x_col = ordinal_col
+        else:
+            x_col = 'year'
+        if not unified:
+            axs[i-1].set_title(f"Coefficient {i}")
+            if boxplot:
+                sns.boxplot(x=x_col, y=cols[i-1], data=metadata_metrics, ax=axs[i-1])
+            else:
+                sns.regplot(x=x_col, y=cols[i-1], data=metadata_metrics, ax=axs[i-1])
+        else:
+            if type(cols) == str:
+                col = cols
+            else:
+                col = cols[i-1]
+            if boxplot:
+                sns.boxplot(x=x_col, y=col, data=metadata_metrics, scatter=False, label=f"Coefficient {i}")
+            else:
+                sns.regplot(x=x_col, y=col, data=metadata_metrics, scatter=False, label=f"Coefficient {i}")
+            plt.legend()
+    
+    plt.savefig(f'figures/{save_name}.png')
+
+def testing_ols(metadata_matrix, cols, 
+                ordinal=False, ordinal_col=False):
+    if type(cols) != str:
+        metadata_sm = metadata_matrix[metadata_matrix[cols[0]].notnull()]
+    else:
+        metadata_sm = metadata_matrix[metadata_matrix[cols].notnull()]
+    scaler = StandardScaler()
+    metadata_sm[cols] = scaler.fit_transform(metadata_sm[cols])
+    for col in cols:
+        y = metadata_sm[col]
+        if ordinal:
+            X = metadata_sm[[ordinal_col, 'last_mc']]
+        else:
+            X = metadata_sm[['year', 'last_mc']]
+        X = sm.add_constant(X)
+        results = sm.OLS(y, X).fit()
+        print('testing results')
+        print(results.summary())
+
+
+def add_to_metrics(metrics_df, dict_metric, name_metrics):
+    if type(name_metrics) == str:
+        if name_metrics in metrics_df.columns:
+            metrics_df = metrics_df.drop(columns=name_metrics)
+        df_tmp = pd.Series(dict_metric, name=name_metrics)
+    else:
+        if name_metrics[0] in metrics_df.columns:
+            metrics_df = metrics_df.drop(columns=name_metrics)
+        df_tmp = pd.DataFrame(dict_metric).T
+        df_tmp.columns = name_metrics
+    metrics_df = metrics_df.merge(df_tmp, left_index=True, right_index=True)
+    return metrics_df

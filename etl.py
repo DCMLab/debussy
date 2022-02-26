@@ -1,21 +1,27 @@
 from collections import defaultdict
 from functools import lru_cache
 from itertools import product
-import os, re, gzip, json
+import os
+import re
+import gzip
+import json
 import pandas as pd
 import numpy as np
 from IPython.display import display, HTML
 from wavescapes import apply_dft_to_pitch_class_matrix, build_utm_from_one_row
 
 from utils import most_resonant, utm2long, long2utm, max_pearsonr_by_rotation, center_of_mass, \
-    partititions_entropy, \
-    make_adj_list, pitch_class_matrix_to_tritone
+    partititions_entropy, make_plots, \
+    make_adj_list, pitch_class_matrix_to_tritone, print_check_examples, testing_ols, add_to_metrics
+
 
 NORM_METHODS = ['0c', 'post_norm', 'max_weighted', 'max']
+
 
 def get_dfts(debussy_repo='.', long=True):
     pcvs = get_pcvs(debussy_repo)
     return {fname: apply_dft_to_pitch_class_matrix(pcv, long=long) for fname, pcv in pcvs.items()}
+
 
 def load_pickled_file(path, long=True):
     """Unzips and loads the file and returns it in long or square format."""
@@ -31,6 +37,7 @@ def load_pickled_file(path, long=True):
     if not long and n != m:
         matrix = long2utm(matrix)
     return matrix
+
 
 def get_mag_phase_mx(data_folder, norm_params, long=True):
     """ Search data_folder for pickled magnitude_phase matrices corresponding to one
@@ -64,29 +71,36 @@ def get_mag_phase_mx(data_folder, norm_params, long=True):
         else:
             result[fname] = mag_phase_mx
     if len(result) == 0:
-        print(f"No pickled numpy matrices with correct file names found in {data_folder}.")
+        print(
+            f"No pickled numpy matrices with correct file names found in {data_folder}.")
     return dict(result)
+
 
 def check_norm_params(norm_params):
     """If the argument is a tuple, turn it into a list of one tuple. Then check if
     the tuples correspond to valid normalization parameters."""
-    int2norm = {i: (how, indulge) for i, (indulge, how) in enumerate(product((False, True), ('0c', 'post_norm', 'max_weighted', 'max')))}
+    int2norm = {i: (how, indulge) for i, (indulge, how) in enumerate(
+        product((False, True), ('0c', 'post_norm', 'max_weighted', 'max')))}
     if isinstance(norm_params, tuple) or isinstance(norm_params, int):
         norm_params = [norm_params]
-    norm_params = [int2norm[p] if isinstance(p, int) else p for p in norm_params]
+    norm_params = [int2norm[p] if isinstance(
+        p, int) else p for p in norm_params]
     for t in norm_params:
-        assert len(t) == 2, f"norm_params need to be (how, indulge_prototypes) pairs, not {t}"
+        assert len(
+            t) == 2, f"norm_params need to be (how, indulge_prototypes) pairs, not {t}"
         assert t[0] in NORM_METHODS, f"how needs to be one of {NORM_METHODS}, not {t[0]}"
     return norm_params
 
 
 def display_wavescapes(wavescape_folder, fname, norm_method, summaries=False, grey=False, rows=2):
-    coeff2path = get_wavescape_fnames(wavescape_folder, norm_method, fname, summaries=summaries, grey=grey)
+    coeff2path = get_wavescape_fnames(
+        wavescape_folder, norm_method, fname, summaries=summaries, grey=grey)
     if len(coeff2path) == 0:
         print("No wavescapes found.")
         return
     if summaries:
-        coeff2path = {i: coeff2path[key] for i, key in enumerate(('mag', 'ent'), 1) if key in coeff2path}
+        coeff2path = {i: coeff2path[key] for i, key in enumerate(
+            ('mag', 'ent'), 1) if key in coeff2path}
     total = 2 if summaries else 6
     assert rows <= total, f"Cannot display {rows} rows for {total} requested elements."
     cols_per_row = total // rows
@@ -103,7 +117,7 @@ def display_wavescapes(wavescape_folder, fname, norm_method, summaries=False, gr
         html += "</tr>"
     html += "</table>"
     display(HTML(html))
-    
+
 
 def find_pickles(data_folder, norm_params, ext='npy.gz'):
     """ Generator function that scans data_folder for particular filenames
@@ -125,7 +139,8 @@ def find_pickles(data_folder, norm_params, ext='npy.gz'):
     """
     norm_params = check_norm_params(norm_params)
     data_folder = resolve_dir(data_folder)
-    assert os.path.isdir(data_folder), data_folder + " is not an existing directory."
+    assert os.path.isdir(data_folder), data_folder + \
+        " is not an existing directory."
     ext_reg = ext.lstrip('.').replace('.', r'\.') + ')$'
     data_regex = r"^(?P<fname>.*?)-(?P<how>0c|post_norm|max|max_weighted)(?P<indulge_prototype>\+indulge)?\.(?P<extension>" + ext_reg
     for f in sorted(os.listdir(data_folder)):
@@ -138,8 +153,8 @@ def find_pickles(data_folder, norm_params, ext='npy.gz'):
         if params in norm_params:
             path = os.path.join(data_folder, f)
             yield params, capture_groups['fname'], path
-                
-                
+
+
 def find_wavescapes(data_folder, norm_params, fname=None, summary_by_ent=None, grey=None, ext='png'):
     """ Generator function that scans data_folder for particular filenames
      and yields the paths.
@@ -162,7 +177,8 @@ def find_wavescapes(data_folder, norm_params, fname=None, summary_by_ent=None, g
     """
     norm_params = check_norm_params(norm_params)
     data_folder = resolve_dir(data_folder)
-    assert os.path.isdir(data_folder), data_folder + " is not an existing directory."
+    assert os.path.isdir(data_folder), data_folder + \
+        " is not an existing directory."
     regex = f"^(?P<fname>{fname if fname is not None else '.*?'})"
     regex += r"-(?:c(?P<coeff>\d)-)?(?P<how>0c|post_norm|max|max_weighted)(?P<indulge_prototype>\+indulge)?"
     if summary_by_ent is None:
@@ -186,16 +202,17 @@ def find_wavescapes(data_folder, norm_params, fname=None, summary_by_ent=None, g
         if params in norm_params:
             path = os.path.join(data_folder, f)
             capture_groups.update(dict(
-                file = f,
-                path = path,
-                does_indulge = does_indulge,
+                file=f,
+                path=path,
+                does_indulge=does_indulge,
             ))
             yield capture_groups
-            
-            
+
+
 def get_wavescape_fnames(wavescape_folder, norm_params, fname, summaries=False, grey=False):
     norm_params = check_norm_params(norm_params)
-    assert len(norm_params) == 1, "This function is meant to fetch images for one type of normalization only."
+    assert len(
+        norm_params) == 1, "This function is meant to fetch images for one type of normalization only."
     how, indulge = norm_params[0]
     if indulge:
         # then we need to get the 6th coefficients of indulge=False
@@ -228,7 +245,8 @@ def get_correlations(data_folder, long=True):
             if corr is not None:
                 result[fname] = corr
     if len(result) == 0:
-        print(f"No pickled numpy matrices with correct file names found in {data_folder}.")
+        print(
+            f"No pickled numpy matrices with correct file names found in {data_folder}.")
     return result
 
 
@@ -239,8 +257,10 @@ def get_maj_min_coeffs(debussy_repo='.', long=True, get_arg_max=False):
     result = {}
     for fname, pcm in pcms.items():
         maj_min = np.column_stack([
-            max_pearsonr_by_rotation(pcm, 'mozart_major', get_arg_max=get_arg_max),
-            max_pearsonr_by_rotation(pcm, 'mozart_minor', get_arg_max=get_arg_max)
+            max_pearsonr_by_rotation(
+                pcm, 'mozart_major', get_arg_max=get_arg_max),
+            max_pearsonr_by_rotation(
+                pcm, 'mozart_minor', get_arg_max=get_arg_max)
         ])
         result[fname] = maj_min if long else long2utm(maj_min)
     return result
@@ -248,17 +268,23 @@ def get_maj_min_coeffs(debussy_repo='.', long=True, get_arg_max=False):
 
 def get_metadata(debussy_repo='.'):
     md_path = os.path.join(debussy_repo, 'metadata.tsv')
-    dur_path = os.path.join(debussy_repo, 'durations/spotify_median_durations.json')
+    dur_path = os.path.join(
+        debussy_repo, 'durations/spotify_median_durations.json')
     metadata = pd.read_csv(md_path, sep='\t', index_col=1)
     print(f"Metadata for {metadata.shape[0]} files.")
     with open('durations/spotify_median_durations.json', 'r', encoding='utf-8') as f:
         durations = json.load(f)
-    idx2key = pd.Series(metadata.index.str.split('_').map(lambda l: l[0][1:] if l[0] != 'l000' else l[1]), index=metadata.index)
+    idx2key = pd.Series(metadata.index.str.split('_').map(
+        lambda l: l[0][1:] if l[0] != 'l000' else l[1]), index=metadata.index)
     fname2duration = idx2key.map(durations).rename('median_recording')
-    fname2year = ((metadata.composed_end + metadata.composed_start) / 2).rename('year')
-    qb_per_minute = (60 * metadata.length_qb_unfolded / fname2duration).rename('qb_per_minute')
-    sounding_notes_per_minute = (60 * metadata.all_notes_qb / fname2duration).rename('sounding_notes_per_minute')
-    sounding_notes_per_qb = (metadata.all_notes_qb / metadata.length_qb_unfolded).rename('sounding_notes_per_qb')
+    fname2year = (
+        (metadata.composed_end + metadata.composed_start) / 2).rename('year')
+    qb_per_minute = (60 * metadata.length_qb_unfolded /
+                     fname2duration).rename('qb_per_minute')
+    sounding_notes_per_minute = (
+        60 * metadata.all_notes_qb / fname2duration).rename('sounding_notes_per_minute')
+    sounding_notes_per_qb = (
+        metadata.all_notes_qb / metadata.length_qb_unfolded).rename('sounding_notes_per_qb')
     return pd.concat([
         metadata,
         fname2year,
@@ -268,8 +294,9 @@ def get_metadata(debussy_repo='.'):
         sounding_notes_per_minute
     ], axis=1)
 
+
 def get_most_resonant(mag_phase_mx_dict):
-    max_coeff, max_mag, inv_entropy = zip(*(most_resonant(mag_phase_mx[...,0]) 
+    max_coeff, max_mag, inv_entropy = zip(*(most_resonant(mag_phase_mx[..., 0])
                                             for mag_phase_mx in mag_phase_mx_dict.values()))
     return (
         dict(zip(mag_phase_mx_dict.keys(), max_coeff)),
@@ -277,16 +304,20 @@ def get_most_resonant(mag_phase_mx_dict):
         dict(zip(mag_phase_mx_dict.keys(), inv_entropy))
     )
 
+
 @lru_cache
 def get_pcms(debussy_repo='.', long=True):
     pcvs = get_pcvs(debussy_repo, pandas=False)
     return {fname: build_utm_from_one_row(pcv, long=long) for fname, pcv in pcvs.items()}
 
+
 @lru_cache
 def get_pcvs(debussy_repo, pandas=False):
-    pcvs_path = os.path.join(debussy_repo, 'pcvs', 'debussy-w0.5-piece-wise-pc-q1-slices-pcvs.tsv')
+    pcvs_path = os.path.join(debussy_repo, 'pcvs',
+                             'debussy-w0.5-piece-wise-pc-q1-slices-pcvs.tsv')
     pcvs = pd.read_csv(pcvs_path, sep='\t', index_col=[0, 1, 2])
-    pcv_dfs = {fname: pcv_df.reset_index(level=[0,1], drop=True) for fname, pcv_df in pcvs.groupby(level=1)}
+    pcv_dfs = {fname: pcv_df.reset_index(
+        level=[0, 1], drop=True) for fname, pcv_df in pcvs.groupby(level=1)}
     if pandas:
         pcv_dfs = {k: parse_interval_index(v) for k, v in pcv_dfs.items()}
     if not pandas:
@@ -300,6 +331,7 @@ def get_standard_filename(fname):
     if m is None:
         return
     return m.groups(0)[0]
+
 
 def get_ttms(debussy_repo='.', long=True):
     """Returns a dictionary with the results of the tritone detector run on all pitch-class matrices."""
@@ -335,9 +367,11 @@ def make_feature_vectors(data_folder, norm_params, long=True):
     m_keys, c_keys = set(mag_phase_mx_dict.keys()), set(correl_dict.keys())
     m_not_c, c_not_m = m_keys.difference(c_keys), c_keys.difference(m_keys)
     if len(m_not_c) > 0:
-        print(f"No pickled correlations found for the following magnitude-phase matrices: {m_not_c}.")
+        print(
+            f"No pickled correlations found for the following magnitude-phase matrices: {m_not_c}.")
     if len(c_not_m) > 0:
-        print(f"No pickled magnitude-phase matrices found for the following correlations: {c_not_m}.")
+        print(
+            f"No pickled magnitude-phase matrices found for the following correlations: {c_not_m}.")
     key_intersection = m_keys.intersection(c_keys)
     for fname in key_intersection:
         corr = correl_dict[fname]
@@ -361,16 +395,19 @@ def parse_interval_index(df, name='iv'):
     iv_regex = r"\[([0-9]*\.[0-9]+), ([0-9]*\.[0-9]+)\)"
     df = df.copy()
     values = df.index.str.extract(iv_regex).astype(float)
-    iix = pd.IntervalIndex.from_arrays(values[0], values[1], closed='left', name=name)
+    iix = pd.IntervalIndex.from_arrays(
+        values[0], values[1], closed='left', name=name)
     df.index = iix
     return df
+
 
 def test_dict_keys(dict_keys, metadata):
     found_fnames = metadata.index.isin(dict_keys)
     if found_fnames.all():
         print("Found matrices for all files listed in metadata.tsv.")
     else:
-        print(f"Couldn't find matrices for the following files:\n{metadata.index[~found_fnames].to_list()}.")
+        print(
+            f"Couldn't find matrices for the following files:\n{metadata.index[~found_fnames].to_list()}.")
 
 
 def resolve_dir(d):
@@ -383,31 +420,110 @@ def resolve_dir(d):
     return os.path.abspath(d)
 
 
-def get_center_of_mass(mag_phase_mx_dict):
-    return {fname: center_of_mass(mag_phase_mx[..., 0]) for fname, mag_phase_mx in
-            mag_phase_mx_dict.items()}
+def get_center_of_mass_mean_resonance(mag_phase_mx_dict, metadata_matrix,
+                                      metric_type='center_of_mass',
+                                      store_matrix=False, cols=[],
+                                      testing=False,
+                                      show_plot=False, save_name=False, title=False, figsize=(20, 25),
+                                      unified=False, boxplot=False, ordinal=False, ordinal_col=False
+                                      ):
+    if metric_type == 'center_of_mass':
+        metric = {fname: center_of_mass(
+            mag_phase_mx[..., 0]) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
+    elif metric_type == 'mean_resonance':
+        metric = {fname: np.mean(mag_phase_mx[..., 0], axis=(
+            0, 1)) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
 
+    print_check_examples(metric, metadata_matrix, 'l000_etude')
 
-def get_mean_resonance(mag_phase_mx_dict):
-    return {fname: np.mean(mag_phase_mx[..., 0], axis=(0, 1)) for fname, mag_phase_mx in
-            mag_phase_mx_dict.items()}
-
-
-def add_to_metrics(metrics_df, dict_metric, name_metrics):
-    if type(name_metrics) == str:
-        df_tmp = pd.Series(dict_metric, name=name_metrics)
+    if store_matrix:
+        metadata_matrix = add_to_metrics(metadata_matrix, metric, cols)
+        if show_plot:
+            make_plots(metadata_matrix, save_name, title, cols,
+                       figsize, unified, boxplot, ordinal, ordinal_col)
+        if testing:
+            testing_ols(metadata_matrix, cols, ordinal=ordinal,
+                        ordinal_col=ordinal_col)
+        return metadata_matrix
     else:
-        if name_metrics[0] in metrics_df.columns:
-            metrics_df = metrics_df.drop(columns=name_metrics)
-        df_tmp = pd.DataFrame(dict_metric).T
-        df_tmp.columns = name_metrics
-    metrics_df = metrics_df.merge(df_tmp, left_index=True, right_index=True)
-    return metrics_df
+        return metric
+
+
+def get_metric(metric_type, metadata_matrix,
+               mag_phase_mx_dict=False,
+               max_mags=False,
+               max_coeffs=False,
+               inv_entropies=False,
+               store_matrix=False, cols=[],
+               testing=False,
+               show_plot=False, save_name=False, title=False, figsize=(20, 25),
+               unified=False, boxplot=False, ordinal=False, ordinal_col=False
+               ):
+    if metric_type == 'center_of_mass':
+        metric = {fname: center_of_mass(
+            mag_phase_mx[..., 0]) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
+    elif metric_type == 'mean_resonance':
+        metric = {fname: np.mean(mag_phase_mx[..., 0], axis=(
+            0, 1)) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
+    elif metric_type == 'moment_of_inertia':
+        metric = {fname: np.divide(np.array(
+            [
+                (
+                    max_mags[fname][max_coeff == i] *
+                    (np.flip(np.square(
+                        np.divide(np.indices(max_mags[fname].shape)[0], max_coeff.shape[1]))))[
+                        max_coeff == i]
+
+                ).sum()
+                for i in range(6)
+            ]),
+            max_coeff.shape[0] * max_coeff.shape[1])
+            for fname, max_coeff in max_coeffs.items()
+
+        }
+    elif metric_type == 'percentage_resonance':
+        metric = {fname: np.divide(np.array([(max_coeff == i).sum() for i in range(6)]),
+                                   max_coeff.shape[0] * max_coeff.shape[1]) for fname, max_coeff in
+                  max_coeffs.items()}
+
+    elif metric_type == 'percentage_resonance_entropy':
+        metric = {fname: np.divide(
+            np.array([(inv_entropies[fname] * (max_coeff == i)).sum()
+                     for i in range(6)]),
+            max_coeff.shape[0] * max_coeff.shape[1]) for fname, max_coeff in max_coeffs.items()}
+    elif metric_type == 'partition_entropy':
+        metric = {fname: partititions_entropy(make_adj_list(max_coeff)) for fname, max_coeff in
+                  max_coeffs.items()}
+    elif metric_type == 'inverse_coherence':
+        metric = {fname: np.polyfit(np.arange(max_mag.shape[1]), np.mean(max_mag, axis=0), 1)[1] for fname, max_mag in
+                  max_mags.items()}
+    else:
+        return 'Metric not implemented, choose among: center_of_mass, mean_resonance, moment_of_inertia, percentage_resonance, percentage_resonance_entropy, partition_entropy, inverse_coherence'
+    
+    if type(cols) != str:
+        print_check_examples(metric, metadata_matrix, 'l000_etude')
+
+    if store_matrix:
+        metadata_matrix = add_to_metrics(metadata_matrix, metric, cols)
+        if show_plot:
+            make_plots(metadata_matrix, save_name, title, cols,
+                       figsize, unified, boxplot, ordinal, ordinal_col)
+        if testing:
+            testing_ols(metadata_matrix, cols, ordinal=ordinal,
+                        ordinal_col=ordinal_col)
+        return metadata_matrix
+    else:
+        return metric
 
 
 def get_partition_entropy(max_coeffs):
     return {fname: partititions_entropy(make_adj_list(max_coeff)) for fname, max_coeff in
             max_coeffs.items()}
+
+
+def get_non_coherence(max_mags):
+    return {fname: np.polyfit(np.arange(max_mag.shape[1]), np.mean(max_mag, axis=0), 1)[1] for fname, max_mag in
+            max_mags.items()}
 
 
 def get_percentage_resonance(max_coeffs, entropy_mat=False):
@@ -417,7 +533,8 @@ def get_percentage_resonance(max_coeffs, entropy_mat=False):
                 max_coeffs.items()}
     else:
         return {fname: np.divide(
-            np.array([(entropy_mat[fname] * (max_coeff == i)).sum() for i in range(6)]),
+            np.array([(entropy_mat[fname] * (max_coeff == i)).sum()
+                     for i in range(6)]),
             max_coeff.shape[0] * max_coeff.shape[1]) for fname, max_coeff in max_coeffs.items()}
 
 
@@ -425,10 +542,10 @@ def get_moment_of_inertia(max_coeffs, max_mags):
     return {fname: np.divide(np.array(
         [
             (
-                    max_mags[fname][max_coeff == i] *
-                    (np.flip(np.square(
-                        np.divide(np.indices(max_mags[fname].shape)[0], max_coeff.shape[1]))))[
-                        max_coeff == i]
+                max_mags[fname][max_coeff == i] *
+                (np.flip(np.square(
+                    np.divide(np.indices(max_mags[fname].shape)[0], max_coeff.shape[1]))))[
+                    max_coeff == i]
 
             ).sum()
             for i in range(6)

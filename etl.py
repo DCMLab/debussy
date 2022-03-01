@@ -12,7 +12,7 @@ from wavescapes import apply_dft_to_pitch_class_matrix, build_utm_from_one_row
 
 from utils import most_resonant, utm2long, long2utm, max_pearsonr_by_rotation, center_of_mass, \
     partititions_entropy, make_plots, \
-    make_adj_list, pitch_class_matrix_to_tritone, print_check_examples, testing_ols, add_to_metrics
+    make_adj_list, pitch_class_matrix_to_tritone, testing_ols, add_to_metrics
 
 
 NORM_METHODS = ['0c', 'post_norm', 'max_weighted', 'max']
@@ -410,6 +410,19 @@ def test_dict_keys(dict_keys, metadata):
             f"Couldn't find matrices for the following files:\n{metadata.index[~found_fnames].to_list()}.")
 
 
+def print_check_examples(metric_results, metadata, example_filename):
+    """Wrapper around test_dict_keys that shows some info about the metrics computed.
+
+    Args:
+        metric_results (dict): name:metric dictionary
+        metadata (pd.DataFrame): df containing the metadata
+        example_filename (str): name of an example file
+    """
+    test_dict_keys(metric_results, metadata)
+    print(f"The example center of mass list has len {len(metric_results[example_filename])}.")
+    print('Example results', metric_results[example_filename])
+
+
 def resolve_dir(d):
     """ Resolves '~' to HOME directory and turns ``d`` into an absolute path.
     """
@@ -420,34 +433,6 @@ def resolve_dir(d):
     return os.path.abspath(d)
 
 
-def get_center_of_mass_mean_resonance(mag_phase_mx_dict, metadata_matrix,
-                                      metric_type='center_of_mass',
-                                      store_matrix=False, cols=[],
-                                      testing=False,
-                                      show_plot=False, save_name=False, title=False, figsize=(20, 25),
-                                      unified=False, boxplot=False, ordinal=False, ordinal_col=False
-                                      ):
-    if metric_type == 'center_of_mass':
-        metric = {fname: center_of_mass(
-            mag_phase_mx[..., 0]) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
-    elif metric_type == 'mean_resonance':
-        metric = {fname: np.mean(mag_phase_mx[..., 0], axis=(
-            0, 1)) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
-
-    print_check_examples(metric, metadata_matrix, 'l000_etude')
-
-    if store_matrix:
-        metadata_matrix = add_to_metrics(metadata_matrix, metric, cols)
-        if show_plot:
-            make_plots(metadata_matrix, save_name, title, cols,
-                       figsize, unified, boxplot, ordinal, ordinal_col)
-        if testing:
-            testing_ols(metadata_matrix, cols, ordinal=ordinal,
-                        ordinal_col=ordinal_col)
-        return metadata_matrix
-    else:
-        return metric
-
 
 def get_metric(metric_type, metadata_matrix,
                mag_phase_mx_dict=False,
@@ -456,9 +441,38 @@ def get_metric(metric_type, metadata_matrix,
                inv_entropies=False,
                store_matrix=False, cols=[],
                testing=False,
-               show_plot=False, save_name=False, title=False, figsize=(20, 25),
+               show_plot=False, save_name=False, title=False, figsize=(20, 25), scatter=False,
                unified=False, boxplot=False, ordinal=False, ordinal_col=False
                ):
+    """Wrapper that allows to compute the desired metric on the whole data, store it in a 
+       dataframe, produce the desired visualization and print the desired test.
+
+    Args:
+        metric_type (str): name of the metric. Should be one of:
+                                                                center_of_mass, mean_resonance, moment_of_inertia,
+                                                                percentage_resonance, percentage_resonance_entropy, 
+                                                                partition_entropy, inverse_coherence 
+        metadata_matrix (pd.DataFrame): df in which to store the computed metric
+        mag_phase_mx_dict (np.array, optional): _description_. Defaults to False.
+        max_mags (np.array, optional): _description_. Defaults to False.
+        max_coeffs (np.array, optional): _description_. Defaults to False.
+        inv_entropies (np.array, optional): _description_. Defaults to False.
+        store_matrix (bool, optional): Whether to store the metrics in the df. Defaults to False.
+        cols (list): list of column names
+        testing (bool, optional): Whether to print the test. Defaults to False.
+        show_plot (bool, optional): Whether to plot. Defaults to False.
+        save_name (str): name used for saving the visualization
+        title (str): title of the visualization
+        figsize (tuple, optional): size of the plot. Defaults to (20,25).
+        scatter (bool, optional): whether to scatter the points in the unified plot. Defaults to False.
+        unified (bool, optional): whether the metrics for each coefficient should be plotted in only one axis. Defaults to False.
+        boxplot (bool, optional): to use boxplots instead of regplots (suggested for ordinal plots). Defaults to False.
+        ordinal (bool, optional): whether to show the time evolution as an ordinal number. Defaults to False.
+        ordinal_col (str, optional): the column that should be used as ordinal values. Defaults to 'years_ordinal'.
+        
+    Returns:
+        dict/pd.DataFrame: either the dictionary name:metric or the dataframe (if store_matrix=True)
+    """
     if metric_type == 'center_of_mass':
         metric = {fname: center_of_mass(
             mag_phase_mx[..., 0]) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
@@ -507,13 +521,20 @@ def get_metric(metric_type, metadata_matrix,
         metadata_matrix = add_to_metrics(metadata_matrix, metric, cols)
         if show_plot:
             make_plots(metadata_matrix, save_name, title, cols,
-                       figsize, unified, boxplot, ordinal, ordinal_col)
+                       figsize, unified, scatter, boxplot, ordinal, ordinal_col)
         if testing:
             testing_ols(metadata_matrix, cols, ordinal=ordinal,
                         ordinal_col=ordinal_col)
         return metadata_matrix
     else:
         return metric
+
+
+
+
+########################################
+# deprecated
+########################################
 
 
 def get_partition_entropy(max_coeffs):

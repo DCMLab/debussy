@@ -15,7 +15,6 @@ import pandas as pd
 
 import networkx as nx
 from networkx.algorithms.components import connected_components
-from etl import test_dict_keys
 
 ########################################
 # SQUARE <-> LONG matrix transformations
@@ -272,19 +271,18 @@ def max_pearsonr_by_rotation(A, b, get_arg_max=False):
     return all_correlations.max(axis=1)
 
 
-def center_of_mass(utm):
-    vcoms = []
-    shape_y, shape_z = np.shape(utm)[1:3]
-    for i in range(shape_z):
-        utm_interest = utm[:, :, i]
-        vcoms.append(ndimage.measurements.center_of_mass(utm_interest)[0] / shape_y)
-    return vcoms
 
 def pitch_class_matrix_to_tritone(pc_mat):
     """
     This functions takes a list of N pitch class distributions,
     modelised by a matrix of float numbers, and apply the 
     DFT individually to all the pitch class distributions.
+    
+    Args:
+        pc_mat (np.array): pitch class matrix
+
+    Returns:
+        np.array: matrix of tritone presence
     """
     coeff_nmb = 6
     res = np.linalg.norm(np.multiply(pc_mat, np.roll(pc_mat, coeff_nmb, axis=-1))[...,:coeff_nmb], axis=-1)
@@ -295,12 +293,45 @@ def pitch_class_matrix_to_tritone(pc_mat):
 # metrics
 ########################################
 
+def center_of_mass(utm):
+    """Computes the vertical center of mass for each coefficient in the wavescape
+
+    Args:
+        utm (np.array): array containing the 6 wavescapes
+
+    Returns:
+        list: 6 vertical centers of mass (normalized by the height of the wavescape)
+    """
+    vcoms = []
+    shape_y, shape_z = np.shape(utm)[1:3]
+    for i in range(shape_z):
+        utm_interest = utm[:, :, i]
+        vcoms.append(ndimage.measurements.center_of_mass(utm_interest)[0] / shape_y)
+    return vcoms
+
+
 def add_to_adj_list(adj_list, a, b):
+    """Util function to compute the partition entropy
+
+    Args:
+        adj_list (list): list containing the pair of adjacent nodes
+        a (int): node 1
+        b (int): node 2
+    """
     adj_list.setdefault(a, []).append(b)
     adj_list.setdefault(b, []).append(a)
 
 
 def make_adj_list(max_coeff):
+    """Creates an adjacency list from the matrix of most resonant coefficients
+       in order to convert the matrix to a network.
+
+    Args:
+        max_coeff (np.array): matrix of most resonant coefficients
+
+    Returns:
+        list: adjacency list
+    """
     adj_list = {}
 
     utm_index = np.arange(0, max_coeff.shape[0] * max_coeff.shape[1]).reshape(max_coeff.shape[0],
@@ -317,19 +348,45 @@ def make_adj_list(max_coeff):
 
 
 def partititions_entropy(adj_list):
+    """Computes the entropy of the different connected components
+       of the network obtained from the adjacency list.
+
+    Args:
+        adj_list (list): adjacency list
+
+    Returns:
+        int: normalized entropy of the partitions
+    """
     G = nx.Graph(adj_list)
     components = connected_components(G)
     lengths = [len(x) / G.size() for x in components]
     ent = entropy(lengths) / entropy([1] * G.size())
     return ent
 
-def print_check_examples(metric_results, metadata, example_filename):
-    test_dict_keys(metric_results, metadata)
-    print(f"The example center of mass list has len {len(metric_results[example_filename])}.")
-    print('Example results', metric_results[example_filename])
+
+########################################
+# utils for metrics
+########################################
+
 
 def make_plots(metadata_metrics, save_name, title, cols,
-               figsize=(20,25), unified=False, boxplot=False, ordinal=False, ordinal_col=False):
+               figsize=(20,25), unified=False, 
+               scatter=False, boxplot=False, ordinal=False, ordinal_col='years_ordinal'):
+    """Creates custom plots to show the evolution of the metrics.
+
+    Args:
+        metadata_metrics (pd.DataFrame): df containing the already computed metrics
+        save_name (str): name used for saving the visualization
+        title (str): title of the visualization
+        cols (list): list of columns plotted
+        figsize (tuple, optional): size of the plot. Defaults to (20,25).
+        unified (bool, optional): whether the metrics for each coefficient should be plotted in only one axis. Defaults to False.
+        scatter (bool, optional): whether to scatter the points in the unified plot. Defaults to False.
+        boxplot (bool, optional): to use boxplots instead of regplots (suggested for ordinal plots). Defaults to False.
+        ordinal (bool, optional): whether to show the time evolution as an ordinal number. Defaults to False.
+        ordinal_col (str, optional): the column that should be used as ordinal values. Defaults to 'years_ordinal'.
+    """
+    
     if unified:
         fig, axs = plt.subplots(1,1, figsize=(15,10))
     else:
@@ -344,37 +401,52 @@ def make_plots(metadata_metrics, save_name, title, cols,
     
     for i in range(1, len_cols):
         print(i)
+        if type(cols) == str:
+            col = cols
+        else:
+            col = cols[i-1]
+            
         if ordinal:
             x_col = ordinal_col
         else:
             x_col = 'year'
+        
         if not unified:
             axs[i-1].set_title(f"Coefficient {i}")
             if boxplot:
-                sns.boxplot(x=x_col, y=cols[i-1], data=metadata_metrics, ax=axs[i-1])
+                sns.boxplot(x=x_col, y=col, data=metadata_metrics, ax=axs[i-1])
             else:
-                sns.regplot(x=x_col, y=cols[i-1], data=metadata_metrics, ax=axs[i-1])
+                sns.regplot(x=x_col, y=col, data=metadata_metrics, ax=axs[i-1])
         else:
-            if type(cols) == str:
-                col = cols
-            else:
-                col = cols[i-1]
             if boxplot:
-                sns.boxplot(x=x_col, y=col, data=metadata_metrics, scatter=False, label=f"Coefficient {i}")
+                sns.boxplot(x=x_col, y=col, data=metadata_metrics)
             else:
-                sns.regplot(x=x_col, y=col, data=metadata_metrics, scatter=False, label=f"Coefficient {i}")
+                sns.regplot(x=x_col, y=col, data=metadata_metrics, scatter=scatter, label=f"Coefficient {i}")
             plt.legend()
     
     plt.savefig(f'figures/{save_name}.png')
 
-def testing_ols(metadata_matrix, cols, 
-                ordinal=False, ordinal_col=False):
+def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal'):
+    """Function used to test the predictiveness of each measure with respect to 
+       the time period.
+
+    Args:
+        metadata_matrix (pd.DataFrame): df containing all the metrics
+        cols (list): list of columns to be tested
+        ordinal (bool, optional): whether to show the time evolution as an ordinal number. Defaults to False.
+        ordinal_col (str, optional): the column that should be used as ordinal values. Defaults to 'years_ordinal'.
+    """
+        
+    scaler = StandardScaler()
+      
     if type(cols) != str:
         metadata_sm = metadata_matrix[metadata_matrix[cols[0]].notnull()]
+        metadata_sm[cols] = scaler.fit_transform(metadata_sm[cols])
     else:
         metadata_sm = metadata_matrix[metadata_matrix[cols].notnull()]
-    scaler = StandardScaler()
-    metadata_sm[cols] = scaler.fit_transform(metadata_sm[cols])
+        metadata_sm[cols] = scaler.fit_transform(np.array(metadata_sm[cols]).reshape(-1, 1))
+        cols = [cols]
+    
     for col in cols:
         y = metadata_sm[col]
         if ordinal:
@@ -388,6 +460,16 @@ def testing_ols(metadata_matrix, cols,
 
 
 def add_to_metrics(metrics_df, dict_metric, name_metrics):
+    """Function to add the newly computed metrics to the dataframe.
+
+    Args:
+        metrics_df (pd.DataFrame): df containing already computed metrics
+        dict_metric (dict): name:metric dictionary
+        name_metrics (list/str): list of columns names (str if only one column) 
+
+    Returns:
+        _type_: _description_
+    """
     if type(name_metrics) == str:
         if name_metrics in metrics_df.columns:
             metrics_df = metrics_df.drop(columns=name_metrics)

@@ -400,7 +400,6 @@ def make_plots(metadata_metrics, save_name, title, cols,
         len_cols = len(cols) + 1
     
     for i in range(1, len_cols):
-        print(i)
         if type(cols) == str:
             col = cols
         else:

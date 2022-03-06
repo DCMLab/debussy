@@ -42,7 +42,7 @@ weighting grace notes by half of their durations, and `-o pcvs` the output direc
 |l113-01_childrens_doctor    |      76|     0|        |          |         |
 |l113-02_childrens_jimbos    |      81|     0|        |          |         |
 |l113-03_childrens_serenade  |     124|     0|        |          |         |
-|l113-05_childrens_golliwoggs|     128|     0|        |          |         |
+|l113-06_childrens_golliwoggs|     128|     0|        |          |         |
 |l113-05_childrens_little    |      31|     0|        |          |         |
 |l114_petit                  |      87|     0|        |          |         |
 |l115_hommage                |     118|     0|        |          |         |

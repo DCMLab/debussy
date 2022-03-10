@@ -8,9 +8,13 @@ import numpy as np
 import math
 from scipy import ndimage
 from scipy.stats import entropy
-from scipy.stats.stats import pearsonr
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+import seaborn as sns
+import statsmodels.api as sm
+import pandas as pd
 
+import networkx as nx
+from networkx.algorithms.components import connected_components
 
 ########################################
 # SQUARE <-> LONG matrix transformations
@@ -266,76 +270,213 @@ def max_pearsonr_by_rotation(A, b, get_arg_max=False):
         return np.stack([all_correlations.max(axis=1), all_correlations.argmax(axis=1)]).T
     return all_correlations.max(axis=1)
 
-    
-def center_of_mass(index, utm):
-    shape_x, shape_y = np.shape(utm)[:2]
-    utm_interest = np.abs(utm[:,:,index])
-    vcom, hcom = ndimage.measurements.center_of_mass(utm_interest)
-    return (hcom/shape_x, vcom/shape_y)
+
 
 def pitch_class_matrix_to_tritone(pc_mat):
     """
     This functions takes a list of N pitch class distributions,
     modelised by a matrix of float numbers, and apply the 
     DFT individually to all the pitch class distributions.
+    
+    Args:
+        pc_mat (np.array): pitch class matrix
+
+    Returns:
+        np.array: matrix of tritone presence
     """
     coeff_nmb = 6
     res = np.linalg.norm(np.multiply(pc_mat, np.roll(pc_mat, coeff_nmb, axis=-1))[...,:coeff_nmb], axis=-1)
     return res
 
 
-def build_custom_utm_from_one_row(res, how='mean'):
+########################################
+# metrics
+########################################
+
+def center_of_mass(utm):
+    """Computes the vertical center of mass for each coefficient in the wavescape
+
+    Args:
+        utm (np.array): array containing the 6 wavescapes
+
+    Returns:
+        list: 6 vertical centers of mass (normalized by the height of the wavescape)
     """
+    vcoms = []
+    shape_y, shape_z = np.shape(utm)[1:3]
+    for i in range(shape_z):
+        utm_interest = utm[:, :, i]
+        vcoms.append(ndimage.measurements.center_of_mass(utm_interest)[0] / shape_y)
+    return vcoms
+
+
+def add_to_adj_list(adj_list, a, b):
+    """Util function to compute the partition entropy
+
+    Args:
+        adj_list (list): list containing the pair of adjacent nodes
+        a (int): node 1
+        b (int): node 2
     """
-    pcv_nmb = np.shape(res)[0]
-    for i in range(1, pcv_nmb):
-        for j in range(0, pcv_nmb-i):
-            if how == 'mean':
-                res[i][i+j] = np.mean(np.array([res[0][i+j],res[i-1][i+j-1]]), axis=0)
+    adj_list.setdefault(a, []).append(b)
+    adj_list.setdefault(b, []).append(a)
+
+
+def make_adj_list(max_coeff):
+    """Creates an adjacency list from the matrix of most resonant coefficients
+       in order to convert the matrix to a network.
+
+    Args:
+        max_coeff (np.array): matrix of most resonant coefficients
+
+    Returns:
+        list: adjacency list
+    """
+    adj_list = {}
+
+    utm_index = np.arange(0, max_coeff.shape[0] * max_coeff.shape[1]).reshape(max_coeff.shape[0],
+                                                                              max_coeff.shape[1])
+    for i in range(len(max_coeff)):
+        for j in range(len(max_coeff)):
+            if (j < len(max_coeff[i]) - 1) and (max_coeff[i][j] == max_coeff[i][j + 1]):
+                add_to_adj_list(adj_list, utm_index[i][j], utm_index[i][j + 1])
+            if i < len(max_coeff[i]) - 1:
+                for x in range(max(0, j - 1), min(len(max_coeff[i + 1]), j + 2)):
+                    if (max_coeff[i][j] == max_coeff[i + 1][x]):
+                        add_to_adj_list(adj_list, utm_index[i][j], utm_index[i + 1][x])
+    return adj_list
+
+
+def partititions_entropy(adj_list):
+    """Computes the entropy of the different connected components
+       of the network obtained from the adjacency list.
+
+    Args:
+        adj_list (list): adjacency list
+
+    Returns:
+        int: normalized entropy of the partitions
+    """
+    G = nx.Graph(adj_list)
+    components = connected_components(G)
+    lengths = [len(x) / G.size() for x in components]
+    ent = entropy(lengths) / entropy([1] * G.size())
+    return ent
+
+
+########################################
+# utils for metrics
+########################################
+
+
+def make_plots(metadata_metrics, save_name, title, cols,
+               figsize=(20,25), unified=False, 
+               scatter=False, boxplot=False, ordinal=False, ordinal_col='years_ordinal'):
+    """Creates custom plots to show the evolution of the metrics.
+
+    Args:
+        metadata_metrics (pd.DataFrame): df containing the already computed metrics
+        save_name (str): name used for saving the visualization
+        title (str): title of the visualization
+        cols (list): list of columns plotted
+        figsize (tuple, optional): size of the plot. Defaults to (20,25).
+        unified (bool, optional): whether the metrics for each coefficient should be plotted in only one axis. Defaults to False.
+        scatter (bool, optional): whether to scatter the points in the unified plot. Defaults to False.
+        boxplot (bool, optional): to use boxplots instead of regplots (suggested for ordinal plots). Defaults to False.
+        ordinal (bool, optional): whether to show the time evolution as an ordinal number. Defaults to False.
+        ordinal_col (str, optional): the column that should be used as ordinal values. Defaults to 'years_ordinal'.
+    """
+    
+    if unified:
+        fig, axs = plt.subplots(1,1, figsize=(15,10))
+    else:
+        fig, axs = plt.subplots(3,2, figsize=figsize)
+        axs = axs.flatten()
+
+    fig.suptitle(title)
+    if type(cols) == str:
+        len_cols = 2
+    else:
+        len_cols = len(cols) + 1
+    
+    for i in range(1, len_cols):
+        if type(cols) == str:
+            col = cols
+        else:
+            col = cols[i-1]
+            
+        if ordinal:
+            x_col = ordinal_col
+        else:
+            x_col = 'year'
+        
+        if not unified:
+            axs[i-1].set_title(f"Coefficient {i}")
+            if boxplot:
+                sns.boxplot(x=x_col, y=col, data=metadata_metrics, ax=axs[i-1])
             else:
-                res[i][i+j] = np.max(np.array([res[0][i+j],res[i-1][i+j-1]]), axis=0)
-    return res
+                sns.regplot(x=x_col, y=col, data=metadata_metrics, ax=axs[i-1])
+        else:
+            if boxplot:
+                sns.boxplot(x=x_col, y=col, data=metadata_metrics)
+            else:
+                sns.regplot(x=x_col, y=col, data=metadata_metrics, scatter=scatter, label=f"Coefficient {i}")
+            plt.legend()
+    
+    plt.savefig(f'figures/{save_name}.png')
+
+def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal'):
+    """Function used to test the predictiveness of each measure with respect to 
+       the time period.
+
+    Args:
+        metadata_matrix (pd.DataFrame): df containing all the metrics
+        cols (list): list of columns to be tested
+        ordinal (bool, optional): whether to show the time evolution as an ordinal number. Defaults to False.
+        ordinal_col (str, optional): the column that should be used as ordinal values. Defaults to 'years_ordinal'.
+    """
+        
+    scaler = StandardScaler()
+      
+    if type(cols) != str:
+        metadata_sm = metadata_matrix[metadata_matrix[cols[0]].notnull()]
+        metadata_sm[cols] = scaler.fit_transform(metadata_sm[cols])
+    else:
+        metadata_sm = metadata_matrix[metadata_matrix[cols].notnull()]
+        metadata_sm[cols] = scaler.fit_transform(np.array(metadata_sm[cols]).reshape(-1, 1))
+        cols = [cols]
+    
+    for col in cols:
+        y = metadata_sm[col]
+        if ordinal:
+            X = metadata_sm[[ordinal_col, 'last_mc']]
+        else:
+            X = metadata_sm[['year', 'last_mc']]
+        X = sm.add_constant(X)
+        results = sm.OLS(y, X).fit()
+        print('testing results')
+        print(results.summary())
 
 
-########################################
-# still to adjust from Digital Musicology project
-########################################
+def add_to_metrics(metrics_df, dict_metric, name_metrics):
+    """Function to add the newly computed metrics to the dataframe.
 
-def compute_magnitude_entropy(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
-    vec = []
-    for i in range(7):
-        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
-    sel = np.array([ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec])
-    entr = ent.spectral_entropy(sel, 1, method='fft')
-    return entr[1:]
+    Args:
+        metrics_df (pd.DataFrame): df containing already computed metrics
+        dict_metric (dict): name:metric dictionary
+        name_metrics (list/str): list of columns names (str if only one column) 
 
-def compute_magnitudes(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
-    vec = []
-    for i in range(7):
-        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
-    sel = np.array([ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec])
-    return sel[4]
-
-def compute_peaks(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.abs(apply_dft_to_pitch_class_matrix(arr1))
-    vec = []
-    for i in range(7):
-        vec.append(utm[int(utm.shape[0] * ver_ratio)-1,:,i][utm[int(utm.shape[0] * ver_ratio)-1,:,i] != 0])
-    sel = [ve[int(utm.shape[1] * hor_ratio[0]):int(utm.shape[1] * hor_ratio[1])] for ve in vec]
-    return [len(find_peaks(list(magnitudes))[0]) for magnitudes in sel]
-
-def compute_entropy_phase(score, ver_ratio=0.2, hor_ratio=(0,1), aw_size=4):
-    arr1 = produce_pitch_class_matrix_from_filename(score, aw_size=aw_size)
-    utm = np.round(np.angle(apply_dft_to_pitch_class_matrix(arr1)), 2)
-    vec = []
-    coeffs = []
-    height = int(utm.shape[0] * ver_ratio)-1
-    sel = np.array(utm[height,:,:]).T
-    entr = ent.spectral_entropy(sel, 1, method='fft')
-    return entr[1:]
-
+    Returns:
+        _type_: _description_
+    """
+    if type(name_metrics) == str:
+        if name_metrics in metrics_df.columns:
+            metrics_df = metrics_df.drop(columns=name_metrics)
+        df_tmp = pd.Series(dict_metric, name=name_metrics)
+    else:
+        if name_metrics[0] in metrics_df.columns:
+            metrics_df = metrics_df.drop(columns=name_metrics)
+        df_tmp = pd.DataFrame(dict_metric).T
+        df_tmp.columns = name_metrics
+    metrics_df = metrics_df.merge(df_tmp, left_index=True, right_index=True)
+    return metrics_df

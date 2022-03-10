@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="3.02">
   <programVersion>3.6.2</programVersion>
-  <programRevision/>
+  <programRevision></programRevision>
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
@@ -315,15 +315,15 @@
             </Segment>
           </voice>
         </Measure>
-      <Measure len="2/4">
-        <stretch>0.8</stretch>
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Rest>
             <durationType>eighth</durationType>
             </Rest>
-          <Segment>
-            <leadingSpace>-0.6</leadingSpace>
-            </Segment>
           <Chord>
             <durationType>eighth</durationType>
             <Articulation>
@@ -337,15 +337,9 @@
               <tpc>10</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Rest>
             <durationType>eighth</durationType>
             </Rest>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Chord>
             <durationType>eighth</durationType>
             <Articulation>
@@ -356,17 +350,17 @@
               <tpc>10</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <BarLine>
-            <subtype>double</subtype>
-            </BarLine>
           </voice>
         </Measure>
-      <Measure len="6/16">
-        <stretch>0.8</stretch>
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>16</sigD>
+            <Groups>
+              <Node pos="6" action="272"/>
+              </Groups>
+            </TimeSig>
           <Tempo>
             <tempo>2.1000000000000001</tempo>
             <followText>1</followText>
@@ -378,8 +372,7 @@
             <Spanner type="Slur">
               <Slur>
                 <SlurSegment no="0">
-                  <o3 x="-1.80378" y="-5.6046"/>
-                  <o4 x="0.820383" y="-5.60528"/>
+                  <o4 x="-0.959329" y="0"/>
                   </SlurSegment>
                 </Slur>
               <next>
@@ -400,43 +393,17 @@
               <tpc>10</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.6</leadingSpace>
-            </Segment>
           <Rest>
-            <durationType>16th</durationType>
+            <durationType>quarter</durationType>
             </Rest>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <Rest>
-            <dots>1</dots>
-            <durationType>eighth</durationType>
-            </Rest>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <BarLine>
-            </BarLine>
-          <Segment>
-            <leadingSpace>-0.5</leadingSpace>
-            </Segment>
           </voice>
         </Measure>
-      <Measure len="6/16">
-        <stretch>0.8</stretch>
+      <Measure>
         <voice>
           <Chord>
             <durationType>eighth</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o1 x="0.102261" y="0.71583"/>
-                  <o2 x="-2.27776" y="-0.222068"/>
-                  <o3 x="0.976182" y="-6.40456"/>
-                  <o4 x="0.34037" y="-4.16765"/>
-                  <offset x="0.457607" y="-0.815522"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -453,40 +420,17 @@
               <tpc>15</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Rest>
-            <durationType>16th</durationType>
+            <durationType>quarter</durationType>
             </Rest>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <Rest>
-            <dots>1</dots>
-            <durationType>eighth</durationType>
-            </Rest>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <BarLine>
-            </BarLine>
-          <Segment>
-            <leadingSpace>-0.4</leadingSpace>
-            </Segment>
           </voice>
         </Measure>
-      <Measure len="6/16">
-        <stretch>0.8</stretch>
+      <Measure>
         <voice>
           <Chord>
             <durationType>eighth</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o3 x="0.361549" y="-6.39942"/>
-                  <o4 x="0.686943" y="-5.31477"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -506,43 +450,17 @@
               <tpc>8</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Rest>
-            <durationType>16th</durationType>
+            <durationType>quarter</durationType>
             </Rest>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <Rest>
-            <dots>1</dots>
-            <durationType>eighth</durationType>
-            </Rest>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <BarLine>
-            </BarLine>
-          <Segment>
-            <leadingSpace>-0.4</leadingSpace>
-            </Segment>
           </voice>
         </Measure>
-      <Measure len="6/16">
-        <stretch>0.8</stretch>
-        <LayoutBreak>
-          <subtype>line</subtype>
-          </LayoutBreak>
+      <Measure>
         <voice>
           <Chord>
             <durationType>eighth</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o3 x="0.361549" y="-5.89325"/>
-                  <o4 x="0.795408" y="-5.56785"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -559,22 +477,9 @@
               <tpc>13</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Rest>
-            <durationType>16th</durationType>
+            <durationType>quarter</durationType>
             </Rest>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <Rest>
-            <dots>1</dots>
-            <durationType>eighth</durationType>
-            </Rest>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <BarLine>
             <subtype>double</subtype>
             </BarLine>
@@ -582,6 +487,10 @@
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Tempo>
             <tempo>1.3999999999999999</tempo>
             <text><b></b>Tempo I</text>
@@ -1225,9 +1134,15 @@
             </BarLine>
           </voice>
         </Measure>
-      <Measure len="3/8">
-        <vspacerFixed>7</vspacerFixed>
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>16</sigD>
+            <Groups>
+              <Node pos="6" action="272"/>
+              </Groups>
+            </TimeSig>
           <Tempo>
             <tempo>2.1000000000000001</tempo>
             <followText>1</followText>
@@ -1238,10 +1153,6 @@
             <durationType>eighth</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o3 x="-1.80378" y="-5.6046"/>
-                  <o4 x="0.820383" y="-5.60528"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -1262,27 +1173,16 @@
               </Note>
             </Chord>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <dots>1</dots>
-            <durationType>eighth</durationType>
+            <durationType>quarter</durationType>
             </Rest>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
           <Chord>
             <durationType>eighth</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o1 x="0.102261" y="0.71583"/>
-                  <o2 x="-2.27776" y="-0.222068"/>
-                  <o3 x="0.976182" y="-6.40456"/>
-                  <o4 x="0.34037" y="-4.16765"/>
-                  <offset x="0.457607" y="-0.815522"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -1300,24 +1200,16 @@
               </Note>
             </Chord>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <dots>1</dots>
-            <durationType>eighth</durationType>
+            <durationType>quarter</durationType>
             </Rest>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
           <Chord>
             <durationType>eighth</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o3 x="0.361549" y="-6.39942"/>
-                  <o4 x="0.686943" y="-5.31477"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -1338,24 +1230,16 @@
               </Note>
             </Chord>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <dots>1</dots>
-            <durationType>eighth</durationType>
+            <durationType>quarter</durationType>
             </Rest>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
           <Chord>
             <durationType>eighth</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o3 x="0.361549" y="-5.89325"/>
-                  <o4 x="0.795408" y="-5.56785"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -1373,11 +1257,7 @@
               </Note>
             </Chord>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <dots>1</dots>
-            <durationType>eighth</durationType>
+            <durationType>quarter</durationType>
             </Rest>
           </voice>
         </Measure>
@@ -13164,8 +13044,12 @@
             </Segment>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Chord>
             <durationType>16th</durationType>
             <Spanner type="Slur">
@@ -13189,9 +13073,6 @@
               <tpc>13</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Chord>
             <durationType>16th</durationType>
             <Note>
@@ -13213,9 +13094,6 @@
               <tpc>16</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Chord>
             <durationType>16th</durationType>
             <Spanner type="Slur">
@@ -13239,9 +13117,6 @@
               <tpc>13</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Chord>
             <durationType>16th</durationType>
             <Note>
@@ -13263,28 +13138,23 @@
               <tpc>16</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Clef>
             <concertClefType>F</concertClefType>
             <transposingClefType>F</transposingClefType>
             </Clef>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <BarLine>
-            <subtype>double</subtype>
-            </BarLine>
           </voice>
         </Measure>
-      <Measure len="6/16">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>16</sigD>
+            <Groups>
+              <Node pos="6" action="272"/>
+              </Groups>
+            </TimeSig>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <durationType>16th</durationType>
+            <durationType>eighth</durationType>
             </Rest>
           <Chord>
             <durationType>16th</durationType>
@@ -13309,9 +13179,6 @@
               <tpc>16</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Chord>
             <durationType>16th</durationType>
             <Spanner type="Slur">
@@ -13327,20 +13194,12 @@
               <tpc>19</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <BarLine>
-            </BarLine>
           </voice>
         </Measure>
-      <Measure len="6/16">
+      <Measure>
         <voice>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <durationType>16th</durationType>
+            <durationType>eighth</durationType>
             </Rest>
           <Chord>
             <durationType>16th</durationType>
@@ -13371,9 +13230,6 @@
               <tpc>21</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Chord>
             <durationType>16th</durationType>
             <Spanner type="Slur">
@@ -13392,20 +13248,12 @@
               <tpc>12</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <BarLine>
-            </BarLine>
           </voice>
         </Measure>
-      <Measure len="6/16">
+      <Measure>
         <voice>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <durationType>16th</durationType>
+            <durationType>eighth</durationType>
             </Rest>
           <Chord>
             <durationType>16th</durationType>
@@ -13433,9 +13281,6 @@
               <tpc>14</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Chord>
             <durationType>16th</durationType>
             <Spanner type="Slur">
@@ -13451,20 +13296,12 @@
               <tpc>17</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
-          <BarLine>
-            </BarLine>
           </voice>
         </Measure>
-      <Measure len="6/16">
+      <Measure>
         <voice>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <durationType>16th</durationType>
+            <durationType>eighth</durationType>
             </Rest>
           <Chord>
             <durationType>16th</durationType>
@@ -13492,9 +13329,6 @@
               <tpc>19</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <Chord>
             <durationType>16th</durationType>
             <Spanner type="Slur">
@@ -13510,9 +13344,6 @@
               <tpc>15</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>-0.3</leadingSpace>
-            </Segment>
           <BarLine>
             <subtype>double</subtype>
             </BarLine>
@@ -13520,6 +13351,10 @@
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Rest>
             <durationType>measure</durationType>
             <duration>4/4</duration>
@@ -14029,13 +13864,17 @@
             </BarLine>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>16</sigD>
+            <Groups>
+              <Node pos="6" action="272"/>
+              </Groups>
+            </TimeSig>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <durationType>16th</durationType>
+            <durationType>eighth</durationType>
             </Rest>
           <Chord>
             <durationType>16th</durationType>
@@ -14077,13 +13916,10 @@
             </Chord>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <durationType>16th</durationType>
+            <durationType>eighth</durationType>
             </Rest>
           <Chord>
             <durationType>16th</durationType>
@@ -14134,13 +13970,10 @@
             </Chord>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <durationType>16th</durationType>
+            <durationType>eighth</durationType>
             </Rest>
           <Chord>
             <durationType>16th</durationType>
@@ -14185,13 +14018,10 @@
             </Chord>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
           <Rest>
-            <durationType>16th</durationType>
-            </Rest>
-          <Rest>
-            <durationType>16th</durationType>
+            <durationType>eighth</durationType>
             </Rest>
           <Chord>
             <durationType>16th</durationType>

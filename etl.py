@@ -264,7 +264,7 @@ def get_human_analyses(debussy_repo='.'):
     mc_qb_path = os.path.join(analyses_dir, 'mc_qb.tsv')
     analyses = pd.read_csv(analyses_path, sep='\t')
     mc_qb = pd.read_csv(mc_qb_path, sep='\t', dtype=dtypes, converters=conv)
-    mc_qb = parse_interval_index(mc_qb.set_index('iv')).set_index('fnames', append=True).swaplevel()
+    mc_qb = parse_interval_index(mc_qb.set_index('qb_interval')).set_index('fnames', append=True).swaplevel()
 
     @lru_cache
     def lesure2measures(L):
@@ -281,7 +281,9 @@ def get_human_analyses(debussy_repo='.'):
         try:
             row = df.set_index('mc').loc[mc]
         except KeyError:
-            print(f"L={L} Does not contain MC {mc}.")
+            last_mc = df.mc.max()
+            if mc > last_mc + 1:
+                print(f"L={L} Does not contain MC {mc}.")
             return pd.NA
         qb = row['quarterbeats']
         return qb + mc_offset

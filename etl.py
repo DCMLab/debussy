@@ -251,6 +251,15 @@ def get_correlations(data_folder, long=True):
     return result
 
 
+def get_mc_qb(debussy_repo='.'):
+    """Loads a DataFrame that allows for conversion between score positions (mc, mc_onset) and
+    quarterbeats. It corresponds to the output of
+    ``ms3.Parse.measures(interval_index=True).reset_index(level=0, drop=True)``."""
+    mc_qb_path = os.path.join(debussy_repo, 'analyses', 'mc_qb.tsv')
+    mc_qb = pd.read_csv(mc_qb_path, sep='\t', dtype=dtypes, converters=conv)
+    mc_qb = parse_interval_index(mc_qb.set_index('qb_interval')).set_index('fnames', append=True).swaplevel()
+    return mc_qb
+
 def get_human_analyses(debussy_repo='.'):
     dtypes = {
         'mc': 'Int64',
@@ -259,12 +268,9 @@ def get_human_analyses(debussy_repo='.'):
     conv = {
         'quarterbeats': frac,
     }
-    analyses_dir = os.path.join(debussy_repo, 'analyses')
-    analyses_path = os.path.join(analyses_dir, 'analyses.tsv')
-    mc_qb_path = os.path.join(analyses_dir, 'mc_qb.tsv')
+    analyses_path = os.path.join(debussy_repo, 'analyses', 'analyses.tsv')
     analyses = pd.read_csv(analyses_path, sep='\t')
-    mc_qb = pd.read_csv(mc_qb_path, sep='\t', dtype=dtypes, converters=conv)
-    mc_qb = parse_interval_index(mc_qb.set_index('qb_interval')).set_index('fnames', append=True).swaplevel()
+    mc_qb = get_mc_qb(debussy_repo)
 
     @lru_cache
     def lesure2measures(L):

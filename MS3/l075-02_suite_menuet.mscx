@@ -156,8 +156,9 @@
     <metaTag name="mscVersion">3.02</metaTag>
     <metaTag name="platform">Microsoft Windows</metaTag>
     <metaTag name="poet"></metaTag>
-    <metaTag name="source">http://musescore.com/score/890041</metaTag>
+    <metaTag name="source">https://musescore.com/user/2585196/scores/890041</metaTag>
     <metaTag name="translator"></metaTag>
+    <metaTag name="typesetter">https://musescore.com/user/2585196</metaTag>
     <metaTag name="workNumber"></metaTag>
     <metaTag name="workTitle">Suite Bergamasque</metaTag>
     <Part>

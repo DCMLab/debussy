@@ -22,16 +22,20 @@
     <showFrames>1</showFrames>
     <showMargins>0</showMargins>
     <metaTag name="arranger"></metaTag>
+    <metaTag name="composed_end">1915</metaTag>
+    <metaTag name="composed_start">1915</metaTag>
     <metaTag name="composer"></metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-03-02</metaTag>
     <metaTag name="lyricist"></metaTag>
     <metaTag name="movementNumber"></metaTag>
     <metaTag name="movementTitle"></metaTag>
+    <metaTag name="pdf">https://imslp.org/wiki/Special:ReverseLookup/246285</metaTag>
     <metaTag name="platform">Microsoft Windows</metaTag>
     <metaTag name="poet"></metaTag>
     <metaTag name="source"></metaTag>
     <metaTag name="translator"></metaTag>
+    <metaTag name="typesetter">tunescribers.com</metaTag>
     <metaTag name="workNumber"></metaTag>
     <metaTag name="workTitle">Pour les Octaves</metaTag>
     <Order id="orchestral" customized="1">
@@ -171,7 +175,7 @@
             <sigD>8</sigD>
             </TimeSig>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Joyeux et emporté, librement rythmé</text>
             </SystemText>
@@ -1098,7 +1102,7 @@
         <stretch>0.5</stretch>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Mouvt</text>
             </SystemText>
@@ -2315,7 +2319,7 @@
             <velocity>112</velocity>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Mouvt</text>
             </SystemText>
@@ -2766,7 +2770,7 @@
             <velocity>112</velocity>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Cédez</text>
             </SystemText>
@@ -2861,7 +2865,7 @@
             <velocity>49</velocity>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <minDistance>-6.89467</minDistance>
             <offset x="0" y="-3.68984"/>
@@ -2988,7 +2992,7 @@
       <Measure>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Cédez</text>
             </SystemText>
@@ -3095,7 +3099,7 @@
               </Note>
             </Chord>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <minDistance>-6.89467</minDistance>
             <offset x="0" y="-3.68984"/>
@@ -4071,7 +4075,7 @@
             <accidental>-3</accidental>
             </KeySig>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Cédez</text>
             </SystemText>
@@ -4180,7 +4184,7 @@
               </Note>
             </Chord>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <minDistance>-6.07261</minDistance>
             <offset x="0" y="-4.55223"/>
@@ -4328,7 +4332,7 @@
             <offset x="-1.01496" y="5.755"/>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Cédez</text>
             </SystemText>
@@ -4422,7 +4426,7 @@
               </Note>
             </Chord>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <minDistance>-6.07261</minDistance>
             <offset x="0" y="-4.55223"/>
@@ -5386,7 +5390,7 @@
         <stretch>0.2</stretch>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="0" y="-3.97682"/>
             <text><b></b>Rubato  -         -            -            -           -               -</text>
@@ -5886,7 +5890,7 @@
         <stretch>0.2</stretch>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="0" y="-3.97682"/>
             <text><b></b>Mouvt</text>
@@ -6624,7 +6628,7 @@
             <accidental>-5</accidental>
             </KeySig>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="0" y="-3.97682"/>
             <text><b></b>au Mouvt
@@ -9346,7 +9350,7 @@ très également rythmé, sans presser</text>
             <offset x="-1.91814" y="5.60557"/>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Sourdement tumultueux</text>
             </SystemText>
@@ -9934,7 +9938,7 @@ très également rythmé, sans presser</text>
       <Measure>
         <voice>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Accel. poco a poco</text>
             </SystemText>
@@ -10574,7 +10578,7 @@ très également rythmé, sans presser</text>
             <velocity>112</velocity>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Strepitoso</text>
             </SystemText>
@@ -12478,7 +12482,7 @@ très également rythmé, sans presser</text>
             <durationType>eighth</durationType>
             </Rest>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="0" y="-4.89955"/>
             <text><b></b>Mouvt</text>
@@ -12702,7 +12706,7 @@ très également rythmé, sans presser</text>
             <text><i></i><font face="ScoreText"></font><i><font face="Edwin"></font> sub.</i></text>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Poco meno mosso</text>
             </SystemText>
@@ -14785,7 +14789,7 @@ très également rythmé, sans presser</text>
             <accidental>4</accidental>
             </KeySig>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <offset x="-6.51135" y="-4.96433"/>
             <text><b></b>1er Mouvt</text>
@@ -15763,7 +15767,7 @@ très également rythmé, sans presser</text>
             <durationType>16th</durationType>
             </Rest>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Accel.</text>
             </SystemText>
@@ -16198,7 +16202,7 @@ très également rythmé, sans presser</text>
             <accidental>4</accidental>
             </KeySig>
           <SystemText>
-            <swing unit="" ratio= "60"/>
+            <swing unit="" ratio="60"/>
             <style>Tempo</style>
             <text><b></b>Mouvt</text>
             </SystemText>
@@ -21559,7 +21563,7 @@ la pédale forte sur chaque temps</text>
           <StaffText>
             <style>Expression</style>
             <placement>below</placement>
-            <text><i>les 2 </i><font face="ScoreText"/></text>
+            <text><i>les 2 </i><font face="ScoreText"></font></text>
             </StaffText>
           <Chord>
             <BeamMode>begin</BeamMode>

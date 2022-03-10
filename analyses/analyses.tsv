@@ -1,0 +1,168 @@
+L	mc_start	mc_start_offset	mc_end	mc_end_offset	structure	transposition	comments	source
+70	4	0	6	0	octa	1,2		Forte
+70	35	0	37	0	octa	1,2	Eb odd note	Forte
+106	7	0	10	0	acoustic	A acoustic		Tymoczko
+106	15	0	21	0	acoustic	A acoustic		Tymoczko
+106	64	0	67	0	acoustic	A acoustic		Tymoczko
+106	66	0	66	2/4	acoustic	A acoustic		Tymoczko
+106	105	0	109	0	acoustic	G# acoustic		Tymoczko
+106	145	0	148	0	acoustic	C acoustic		Tymoczko
+106	156	0	158	0	acoustic	C acoustic		Tymoczko
+106	200	0	214	0	acoustic	Eb acoustic		Tymoczko
+106	208	0	220	0	acoustic	F acoustic	overlapping with section above, common tones	Tymoczko
+106	160	0	164	0	acoustic	A acoustic		Tymoczko
+106	12	2/4	13	0	majmin	A maj	chromaticized	Tymoczko
+106	71	0	83	0	majmin	A maj		Tymoczko
+106	87	0	95	0	majmin	A maj		Tymoczko
+106	141	0	145	0	majmin	C maj	C triad	Tymoczko
+106	220	0	236	0	majmin	A maj		Tymoczko
+106	10	0	11	0	modal	A lydian	(E diatonic)	Tymoczko
+106	67	0	71	0	modal	A lydian	(E diatonic)	Tymoczko
+106	83	0	86	0	modal	A lydian	(E diatonic)	Tymoczko
+106	95	0	99	0	modal	A lydian	(E diatonic)	Tymoczko
+106	238	0	240	0	modal	Bb mixolydian	(Eb diatonic)	Tymoczko
+106	242	0	244	0	modal	Bb mixolydian	(Eb diatonic)	Tymoczko
+106	236	0	238	0	modal	F lydian	(C diatonic)	Tymoczko
+106	240	0	242	0	modal	F lydian	(C diatonic)	Tymoczko
+106	164	0	166	0	modal	A lydian	(E diatonic)	Tymoczko
+106	186	0	195	0	modal	A lydian	(E diatonic)	Tymoczko
+106	11	0	13	0	octa	0,1		Forte
+106	11	0	12	2/4	octa	0,1	bar 11 can be both A acoustic & octa	Tymoczko
+106	66	0	67	0	octa	0,1		Tymoczko
+106	66	2/4	67	0	octa	0,1		Tymoczko
+106	1	0	7	0	wt	1		Tymoczko
+106	21	0	25	0	wt	1		Tymoczko
+106	52	0	64	0	wt	1		Tymoczko
+106	117	0	125	0	wt	1		Tymoczko
+106	133	0	141	0	wt	1		Tymoczko
+106	125	0	133	0	wt	0		Tymoczko
+106	148	0	156	0	wt	0		Tymoczko
+106	158	0	160	0	wt	0		Tymoczko
+106	166	0	186	0	wt	1		Tymoczko
+106	196	0	200	0	wt	1		Tymoczko
+106	244	0	256	0	wt	1		Tymoczko
+066-02					majmin	G	the entire piece is on the more traditional side of harmony but with interesting departures from G and a use of G major that focuses on the pentatonic subset. A more fine-grained analysis would be due if we were to use this	JH
+095-01	1	0	43	0	modal	A aeolian		Uchida
+095-01	1	0	6	0	modal	A aeolian		Uchida
+095-01	6	0	14	0	modal	A aeolian		Uchida
+095-01	44	0	46	1/4			planing of aug triads	Uchida
+095-01	54	0	57	0			planing of aug triads + chromatic contrary motion	Uchida
+095-01	57	0	59	0	wt	1	Ab tonal center	Uchida
+095-01	65	0	71	0	wt	0+1	alternation of wt scales, "obscured" feeling of tonal center	Uchida
+095-01	57	0	59	0	wt	0	Ab pedal -> tonal center	Uchida
+095-01	97	0	115	0	modal	A aeolian		Uchida
+095-01	142	0	148	0			planing of triads + contrary bass motion	Uchida
+095-01	154	0	157	0	wt	1	Ab tonal center	Uchida
+095-02	5	0	9	0	modal	C# aeolian	third related progressions	Uchida
+095-02	11	0	13	0	wt	1	planing of wt harmonies	Uchida
+100-01	1	0	5	0	penta	B penta		O'Connell
+100-01	23	0	25	0	penta	B penta		O'Connell
+100-01	27	0	30	3/4	penta	B penta		O'Connell
+100-01	97	0	99	0	penta	B penta		O'Connell
+100-01	1	0	99	0	penta			Uchida, O'conell
+100-02	33	0	34	0	octa	0,1		Forte
+100-02	67	0	68	0	octa(?)	0,1	4/8 notes 	Forte
+100-03	37	0	41	0	octa	0,2		Forte
+100-03	96	0	98	0	octa	0,2		Forte
+100-03	64	0	71	0	wt	0+1	alternation of wt scales, chromaticism, no tonal center	Uchida
+110-01	55	0	57	0	octa	0,2		Forte
+110-02	48	0	51	0	wt	1	planing of wt harmonies	Uchida
+110-03	12	0	16	0	octa	0,1		Forte
+111-01	6	0	9	0	acoustic	Eb acoustic		Tymoczko
+111-01	20	0	24	0	acoustic	Db acoustic		Tymoczko
+111-01	37	0	40	0	majmin	C# maj		Tymoczko
+111-01	42	0	44	0	majmin	F maj		Tymoczko
+111-01	9	0	10	0	modal	Eb mixolydian		Tymoczko
+111-01	17	0	18	0	modal	Bb mixolydian		Tymoczko
+111-01	18	0	19	0	modal	Eb mixolydian		Tymoczko
+111-01	19	0	20	0	modal	Eb dorian		Tymoczko
+111-01	24	0	31	0	modal	E lydian	pentatonic thirds RH, sounds penta to me	Tymoczko
+111-01	44	0	46	0	modal?	B harmonic min		Tymoczko
+111-01	13	0	18	0	octa		mc to check - score missing	Forte
+111-01	13	0	17	0	octa	1, 2		Tymoczko
+111-01	31	0	33	0	penta	Bb penta		Tymoczko
+111-01	47	0	49	0	penta	Bb penta		Tymoczko
+111-01	1	0	6	0	wt	1		Tymoczko
+111-01	40	0	42	0	wt	1		Tymoczko
+111-02	7	1/4	12	0			planing of maj/min/aug triads 	Uchida
+111-02	14	0	16	0	modal	E dorian	pentatonic LH + melody in E dorian 	Uchida
+111-02	17	0	20	0	wt	0+1	alternating wt scales	Uchida
+111-02	54	0	56	0	penta	Bb + E	alternating penta distant a tritone apart, chromatic movement	Uchida
+113-04	65	0	67	0	octa		mc to check - score missing	Forte
+117-02	42	0	48	0	penta	Eb		Loyd
+117-02	1	0	42	0	wt	0		Loyd
+117-02	1	0	5	0	wt	0	chromatic character, overlapping octa segments	Loyd
+117-02	7	0	10	0	wt	0		Loyd
+117-02	62	0	64	0	wt	0		Loyd
+117-02	48	0	50	0	wt	0		Loyd
+117-02	48	0	65	0	wt	0		Loyd
+117-03	21	3/4	22	0	acoustic	G acoustic		Tymoczko
+117-03	24	0	25	0	acoustic	G acoustic		Tymoczko
+117-03	15	0	18	0	acoustic	C acoustic		Tymoczko
+117-03	21	0	21	3/4	modal	D dorian		Tymoczko
+117-03	23	0	24	0	modal	D dorian		Tymoczko
+117-03	26	0	27	0	modal	Eb dorian		Tymoczko
+117-03	1	0	5	2/4	modal	Bb phrygian	pentatonic tune	Tymoczko
+117-03	9	0	13	0	modal	Eb dorian		Tymoczko
+117-03	13	0	15	0	modal	Bb phrygian		Tymoczko
+117-03	5	2/4	6	0	modal?	Gb Harmonic maj	pentatonic tune	Tymoczko
+117-03	22	0	23	0	wt	1		Tymoczko
+117-03	25	0	26	0	wt	0		Tymoczko
+117-04	1	0	3	0	octa	(0,1)		Forte
+117-04	46	0	48	0	octa	(0,1)	CHECK MC (Forte reports mm49-50)	Forte
+117-05	73	0	81	0	acoustic	E acoustic		Tymoczko
+117-05	1	0	62	0	majmin	B maj		Tymoczko
+117-05	81	0	86	0	majmin	B maj		Tymoczko
+117-05	66	0	71	0	modal	G natural min (aeolian)	partially penta melodic theme	Tymoczko
+117-05	71	3/4	73	0	modal	G # dorian		Tymoczko
+117-05	86	0	87	0	modal	B mixolydian	partially penta melodic theme	Tymoczko
+117-05	87	0	88	0	modal	B mixolydian		Tymoczko
+117-05	86	0	92	0	modal	B mixolydian		Tymoczko
+117-05	24	0	28	0	octa	0,1		Forte
+117-06	33	0	34	3/4	octa	1,2		Forte
+117-06	33	0	34	3/4	octa	1,2		Forte
+117-08					penta		essentially the whole piece	O'Connell
+117-11	82	0	86	0	octa		mc to check - score missing	Forte
+123-01	1	0	2	0	octa	0,1	Ab odd note	Parks
+123-01	33	0	35	0	octa	0,2		Parks
+123-01	36	0	38	0	octa	1,2		Parks
+123-01	29	0	30	0	octa	0,1		Parks
+123-01	30	0	31	0	octa	0,2		Parks
+123-01	29	0	38	0	octa			Parks
+123-02	2	0	4	0	octa	1,2		Forte
+123-03	66	0	75	0	octa	1,2		Forte
+123-04	58	0	67	0	octa	0,1		Forte
+123-04	67	0	68	0	octa	1,2		Forte
+123-05	7	0	8	0	majmin	Ab maj	E odd note	Alegant
+123-05	23	0	29	0	majmin	Bb maj		Alegant
+123-05	1	3/4	3	3/4	penta	Eb		Alegant
+123-05	3	3/4	5	3/4	penta	Eb		Alegant
+123-05	5	3/4	7	1	penta	Ab		Alegant
+123-05	14	3/4	16	2/4	penta	Db and Ab penta		Alegant
+123-06	54	0	57	1/4	octa	1,2		Forte
+123-07	16	0	19	0	octa	1,2	chromatic character	Tobin
+123-07	22	0	24	0	octa(?)	(0,1) (0,2) (1,2)	chromatic character, overlapping octa segments	Tobin
+123-07	39	0	42	0	octa(?)	(0,1) (0,2) (1,2)	overlapping octa segments	Tobin
+123-07	24	0	25	0	wt	1		Tobin
+123-08	16	0	18	0	modal	D lydian	D lydian=wt 0 + wt 1	Tobin
+123-08	11	0	14	0	octa	0,1		Tobin
+123-08	1	0	2	0	octa	0,1	F odd note 	Tobin
+123-08	48	0	49	3/8	octa	0,1		Tobin
+123-08	62	0	65	0	octa	0,1		Tobin
+123-08	4	1/4	5	0	octa	(0,1), (1,2)	mixed octatonics, but octatonic as a whole	Tobin
+123-08	6	1/4	7	0	octa	(0,1), (1,2)	mixed octatonics, but octatonic as a whole	Tobin
+123-08	7	1/4	8	0	octa	(0,1), (0,2)	mixed octatonics, but octatonic as a whole	Tobin
+123-08	46	0	51	0	octa	0,1		Forte
+123-12	51	0	52	0	octa	0,2	Bb odd note	Forte
+123-12	17	0	18	0	penta			Tobin
+123-12	1	0	3	0	wt(?)	0+1	alternating whole tone segments	Tobin
+100-01	7	0	9	0	majmin???	B maj	penta tune and context, addition of A# and E to pentatonic harmony	Uchida
+100-01	19	0	23	0	penta			Uchida
+100-01	33	0	37	0	modal	C# mixolydian		Uchida
+100-01	37	0	45	0	penta			Uchida
+100-01	19	0	65	0	penta			Uchida
+100-01	80	0	82	0	penta		combination of 2 penta harmonies	Uchida
+113-02	1	0	4	0	penta		pentatonic tune alone	Schmitz
+113-02	21	0	29	0	penta		pentatonic tune with accompainment of seconds	Schmitz
+113-02	39	0	47	0	wt	0		Schmitz
+117-08	8	0	10	0	wt + penta		penta melody over wt harmony	Uchida

@@ -5,6 +5,7 @@ import os
 import re
 import gzip
 import json
+from fractions import Fraction as frac
 import pandas as pd
 import numpy as np
 from IPython.display import display, HTML
@@ -250,6 +251,70 @@ def get_correlations(data_folder, long=True):
     return result
 
 
+def get_human_analyses(debussy_repo='.'):
+    dtypes = {
+        'mc': 'Int64',
+        'mn': 'Int64'
+    }
+    conv = {
+        'quarterbeats': frac,
+    }
+    analyses_dir = os.path.join(debussy_repo, 'analyses')
+    analyses_path = os.path.join(analyses_dir, 'analyses.tsv')
+    mc_qb_path = os.path.join(analyses_dir, 'mc_qb.tsv')
+    analyses = pd.read_csv(analyses_path, sep='\t')
+    mc_qb = pd.read_csv(mc_qb_path, sep='\t', dtype=dtypes, converters=conv)
+    mc_qb = parse_interval_index(mc_qb.set_index('qb_interval')).set_index('fnames', append=True).swaplevel()
+
+    @lru_cache
+    def lesure2measures(L):
+        nonlocal mc_qb
+        L = str(L)
+        candidates = [piece for piece in mc_qb.index.levels[0] if L in piece]
+        if len(candidates) != 1:
+            print(f"Pieces corresponding to L='{L}': {candidates}")
+        return candidates[0], mc_qb.loc[candidates[0]]
+
+    def mc_pos2qb_pos(df, mc, mc_offset):
+        mc = int(mc)
+        mc_offset = frac(mc_offset) * 4.0
+        try:
+            row = df.set_index('mc').loc[mc]
+        except KeyError:
+            last_mc = df.mc.max()
+            if mc > last_mc + 1:
+                print(f"L={L} Does not contain MC {mc}.")
+            return pd.NA
+        qb = row['quarterbeats']
+        return qb + mc_offset
+
+    from_to_pos = []
+    for L, mc_start, mc_start_off, mc_end, mc_end_off in analyses.iloc[:, :5].itertuples(
+            index=False):
+        try:
+            piece, df = lesure2measures(L)
+        except Exception:
+            from_to_pos.append((pd.NA, pd.NA, pd.NA))
+            continue
+        if any(pd.isnull(arg) for arg in (mc_start, mc_start_off, mc_end, mc_end_off)):
+            from_to_pos.append((pd.NA, pd.NA, pd.NA))
+            continue
+        try:
+            start_qb = mc_pos2qb_pos(df, mc_start, mc_start_off)
+        except Exception:
+            print(f"L={L}, mc_start={mc_start}, mc_start_off={mc_start_off}")
+            raise
+        try:
+            end_qb = mc_pos2qb_pos(df, mc_end, mc_end_off)
+        except Exception:
+            print(f"L={L}, mc_start={mc_start}, mc_start_off={mc_start_off}")
+            raise
+        from_to_pos.append((piece, start_qb, end_qb))
+    from_to_df = pd.DataFrame(from_to_pos, index=analyses.index, columns=['fname', 'from_qb', 'to_qb'])
+    analyses = pd.concat([analyses, from_to_df], axis=1)
+    return analyses
+
+
 def get_maj_min_coeffs(debussy_repo='.', long=True, get_arg_max=False):
     """Returns a dictionary of all pitch-class matrices' maximum correlations with a
     major and a minor profile."""
@@ -444,14 +509,14 @@ def get_metric(metric_type, metadata_matrix,
                show_plot=False, save_name=False, title=False, figsize=(20, 25), scatter=False,
                unified=False, boxplot=False, ordinal=False, ordinal_col=False
                ):
-    """Wrapper that allows to compute the desired metric on the whole data, store it in a 
+    """Wrapper that allows to compute the desired metric on the whole data, store it in a
        dataframe, produce the desired visualization and print the desired test.
 
     Args:
         metric_type (str): name of the metric. Should be one of:
                                                                 center_of_mass, mean_resonance, moment_of_inertia,
-                                                                percentage_resonance, percentage_resonance_entropy, 
-                                                                partition_entropy, inverse_coherence 
+                                                                percentage_resonance, percentage_resonance_entropy,
+                                                                partition_entropy, inverse_coherence
         metadata_matrix (pd.DataFrame): df in which to store the computed metric
         mag_phase_mx_dict (np.array, optional): _description_. Defaults to False.
         max_mags (np.array, optional): _description_. Defaults to False.
@@ -469,7 +534,7 @@ def get_metric(metric_type, metadata_matrix,
         boxplot (bool, optional): to use boxplots instead of regplots (suggested for ordinal plots). Defaults to False.
         ordinal (bool, optional): whether to show the time evolution as an ordinal number. Defaults to False.
         ordinal_col (str, optional): the column that should be used as ordinal values. Defaults to 'years_ordinal'.
-        
+
     Returns:
         dict/pd.DataFrame: either the dictionary name:metric or the dataframe (if store_matrix=True)
     """
@@ -513,7 +578,7 @@ def get_metric(metric_type, metadata_matrix,
                   max_mags.items()}
     else:
         return 'Metric not implemented, choose among: center_of_mass, mean_resonance, moment_of_inertia, percentage_resonance, percentage_resonance_entropy, partition_entropy, inverse_coherence'
-    
+
     if type(cols) != str:
         print_check_examples(metric, metadata_matrix, 'l000_etude')
 

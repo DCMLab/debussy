@@ -13,7 +13,8 @@ from wavescapes import apply_dft_to_pitch_class_matrix, build_utm_from_one_row
 
 from utils import most_resonant, utm2long, long2utm, max_pearsonr_by_rotation, center_of_mass, \
     partititions_entropy, make_plots, \
-    make_adj_list, pitch_class_matrix_to_tritone, testing_ols, add_to_metrics
+    make_adj_list, pitch_class_matrix_to_tritone, testing_ols, add_to_metrics, \
+    most_resonant_penta_dia
 
 
 NORM_METHODS = ['0c', 'post_norm', 'max_weighted', 'max']
@@ -369,6 +370,15 @@ def get_most_resonant(mag_phase_mx_dict):
         dict(zip(mag_phase_mx_dict.keys(), inv_entropy))
     )
 
+def get_most_resonant_penta_dia(mag_phase_mx_dict, ninefold_dict, clf):
+    max_coeff, max_mag, inv_entropy = zip(*(most_resonant_penta_dia(mag_phase_mx_dict[piece][..., 0], ninefold_dict[piece], clf)
+                                            for piece in mag_phase_mx_dict.keys()))
+    return (
+        dict(zip(mag_phase_mx_dict.keys(), max_coeff)),
+        dict(zip(mag_phase_mx_dict.keys(), max_mag)),
+        dict(zip(mag_phase_mx_dict.keys(), inv_entropy))
+    )
+
 
 @lru_cache
 def get_pcms(debussy_repo='.', long=True):
@@ -554,21 +564,21 @@ def get_metric(metric_type, metadata_matrix,
                         max_coeff == i]
 
                 ).sum()
-                for i in range(6)
+                for i in range(len(cols))
             ]),
             max_coeff.shape[0] * max_coeff.shape[1])
             for fname, max_coeff in max_coeffs.items()
 
         }
     elif metric_type == 'percentage_resonance':
-        metric = {fname: np.divide(np.array([(max_coeff == i).sum() for i in range(6)]),
+        metric = {fname: np.divide(np.array([(max_coeff == i).sum() for i in range(len(cols))]),
                                    max_coeff.shape[0] * max_coeff.shape[1]) for fname, max_coeff in
                   max_coeffs.items()}
 
     elif metric_type == 'percentage_resonance_entropy':
         metric = {fname: np.divide(
             np.array([(inv_entropies[fname] * (max_coeff == i)).sum()
-                     for i in range(6)]),
+                     for i in range(len(cols))]),
             max_coeff.shape[0] * max_coeff.shape[1]) for fname, max_coeff in max_coeffs.items()}
     elif metric_type == 'partition_entropy':
         metric = {fname: partititions_entropy(make_adj_list(max_coeff)) for fname, max_coeff in

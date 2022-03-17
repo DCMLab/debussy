@@ -20,6 +20,7 @@ from networkx.algorithms.components import connected_components
 # SQUARE <-> LONG matrix transformations
 ########################################
 
+
 def utm2long(utm):
     n, m = utm.shape[:2]
     assert n == m, f"Upper triangular matrix is expected to be square, not ({n}, {m})."
@@ -82,7 +83,9 @@ def comp2str(c, dec=2):
     ang = -round(np.angle(c, True)) % 360
     return f"{magn}+{ang}°"
 
+
 comp2str_vec = np.vectorize(comp2str)
+
 
 def comp2mag_phase(c, dec=2):
     magn = np.round(abs(c), dec)
@@ -127,7 +130,7 @@ def get_coeff(dft, x, y, coeff=None, deg=False, invert_x=False):
         xs, ys, n_coeff = dft.shape
     if coeff is not None:
         assert 0 <= coeff < n_coeff, f"0 <= coeff < {n_coeff}"
-    assert 0 <= x < xs, f"0 <= x < {xs}; received x = {x}" 
+    assert 0 <= x < xs, f"0 <= x < {xs}; received x = {x}"
     assert 0 <= y < ys, f"0 <= y < {ys}; received y = {y}"
     if invert_x:
         x = y - x
@@ -162,11 +165,14 @@ def most_resonant(mag_mx, add_one=False):
     if is_square:
         # so we don't apply entropy to zero-vectors
         mag_mx = utm2long(mag_mx)
-    utm_entropy = 1 - (entropy(mag_mx, axis=-1) / np.log(mag_mx.shape[-1]))  # entropy and np.log have same base e
-    utm_entropy = MinMaxScaler().fit_transform(utm_entropy.reshape(-1, 1)).reshape(-1)
+    # entropy and np.log have same base e
+    utm_entropy = 1 - (entropy(mag_mx, axis=-1) / np.log(mag_mx.shape[-1]))
+    utm_entropy = MinMaxScaler().fit_transform(
+        utm_entropy.reshape(-1, 1)).reshape(-1)
     if is_square:
         utm_entropy = long2utm(utm_entropy)
     return utm_argmax, utm_max, utm_entropy
+
 
 def most_resonant2color(max_coeff, opacity, hue_segments=6, **kwargs):
     if hue_segments is None:
@@ -180,6 +186,7 @@ def most_resonant2color(max_coeff, opacity, hue_segments=6, **kwargs):
     else:
         mag_phase_mx = np.column_stack([opacity, phase])
     return circular_hue(mag_phase_mx, **kwargs)
+
 
 def make_color_legend(file_path=None):
     """Produce a circular legend for the most_resonant summary wavescapes."""
@@ -219,6 +226,7 @@ PITCH_CLASS_PROFILES = {'mozart_major': [0.20033700035703508,
                                          0.012129908077215472,
                                          0.020386372564054407,
                                          0.07959216183789804]}
+
 
 @lru_cache
 def get_precomputed_rotations(key):
@@ -265,11 +273,11 @@ def max_pearsonr_by_rotation(A, b, get_arg_max=False):
                             f"compare has length {n}."
     norm_by = A.std(axis=1, keepdims=True) * b_std * n
     all_correlations = (A - A.mean(axis=1, keepdims=True)) @ B
-    all_correlations = np.divide(all_correlations, norm_by, out=np.zeros_like(all_correlations), where=norm_by > 0)
+    all_correlations = np.divide(all_correlations, norm_by, out=np.zeros_like(
+        all_correlations), where=norm_by > 0)
     if get_arg_max:
         return np.stack([all_correlations.max(axis=1), all_correlations.argmax(axis=1)]).T
     return all_correlations.max(axis=1)
-
 
 
 def pitch_class_matrix_to_tritone(pc_mat):
@@ -277,7 +285,7 @@ def pitch_class_matrix_to_tritone(pc_mat):
     This functions takes a list of N pitch class distributions,
     modelised by a matrix of float numbers, and apply the 
     DFT individually to all the pitch class distributions.
-    
+
     Args:
         pc_mat (np.array): pitch class matrix
 
@@ -285,7 +293,8 @@ def pitch_class_matrix_to_tritone(pc_mat):
         np.array: matrix of tritone presence
     """
     coeff_nmb = 6
-    res = np.linalg.norm(np.multiply(pc_mat, np.roll(pc_mat, coeff_nmb, axis=-1))[...,:coeff_nmb], axis=-1)
+    res = np.linalg.norm(np.multiply(pc_mat, np.roll(
+        pc_mat, coeff_nmb, axis=-1))[..., :coeff_nmb], axis=-1)
     return res
 
 
@@ -306,7 +315,8 @@ def center_of_mass(utm):
     shape_y, shape_z = np.shape(utm)[1:3]
     for i in range(shape_z):
         utm_interest = utm[:, :, i]
-        vcoms.append(ndimage.measurements.center_of_mass(utm_interest)[0] / shape_y)
+        vcoms.append(ndimage.measurements.center_of_mass(
+            utm_interest)[0] / shape_y)
     return vcoms
 
 
@@ -343,7 +353,8 @@ def make_adj_list(max_coeff):
             if i < len(max_coeff[i]) - 1:
                 for x in range(max(0, j - 1), min(len(max_coeff[i + 1]), j + 2)):
                     if (max_coeff[i][j] == max_coeff[i + 1][x]):
-                        add_to_adj_list(adj_list, utm_index[i][j], utm_index[i + 1][x])
+                        add_to_adj_list(
+                            adj_list, utm_index[i][j], utm_index[i + 1][x])
     return adj_list
 
 
@@ -370,7 +381,7 @@ def partititions_entropy(adj_list):
 
 
 def make_plots(metadata_metrics, save_name, title, cols,
-               figsize=(20,25), unified=False, 
+               figsize=(20, 25), unified=False,
                scatter=False, boxplot=False, ordinal=False, ordinal_col='years_ordinal'):
     """Creates custom plots to show the evolution of the metrics.
 
@@ -386,11 +397,11 @@ def make_plots(metadata_metrics, save_name, title, cols,
         ordinal (bool, optional): whether to show the time evolution as an ordinal number. Defaults to False.
         ordinal_col (str, optional): the column that should be used as ordinal values. Defaults to 'years_ordinal'.
     """
-    
+
     if unified:
-        fig, axs = plt.subplots(1,1, figsize=(15,10))
+        fig, axs = plt.subplots(1, 1, figsize=(15, 10))
     else:
-        fig, axs = plt.subplots(3,2, figsize=figsize)
+        fig, axs = plt.subplots(3, 2, figsize=figsize)
         axs = axs.flatten()
 
     fig.suptitle(title)
@@ -398,32 +409,42 @@ def make_plots(metadata_metrics, save_name, title, cols,
         len_cols = 2
     else:
         len_cols = len(cols) + 1
-    
+
     for i in range(1, len_cols):
         if type(cols) == str:
             col = cols
         else:
+            if len_cols > 7:
+                if i == 1:
+                    continue
             col = cols[i-1]
             
         if ordinal:
             x_col = ordinal_col
         else:
             x_col = 'year'
-        
+
         if not unified:
-            axs[i-1].set_title(f"Coefficient {i}")
-            if boxplot:
-                sns.boxplot(x=x_col, y=col, data=metadata_metrics, ax=axs[i-1])
+            if len_cols > 7:
+                ax = axs[i-2]
             else:
-                sns.regplot(x=x_col, y=col, data=metadata_metrics, ax=axs[i-1])
+                ax = axs[i-1] 
+        
+            ax.set_title(f"Coefficient {i}")
+            if boxplot:
+                sns.boxplot(x=x_col, y=col, data=metadata_metrics, ax=ax)
+            else:
+                sns.regplot(x=x_col, y=col, data=metadata_metrics, ax=ax)
         else:
             if boxplot:
                 sns.boxplot(x=x_col, y=col, data=metadata_metrics)
             else:
-                sns.regplot(x=x_col, y=col, data=metadata_metrics, scatter=scatter, label=f"Coefficient {i}")
+                sns.regplot(x=x_col, y=col, data=metadata_metrics,
+                            scatter=scatter, label=f"Coefficient {i}")
             plt.legend()
-    
+
     plt.savefig(f'figures/{save_name}.png')
+
 
 def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal'):
     """Function used to test the predictiveness of each measure with respect to 
@@ -435,17 +456,18 @@ def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal
         ordinal (bool, optional): whether to show the time evolution as an ordinal number. Defaults to False.
         ordinal_col (str, optional): the column that should be used as ordinal values. Defaults to 'years_ordinal'.
     """
-        
+
     scaler = StandardScaler()
-      
+
     if type(cols) != str:
         metadata_sm = metadata_matrix[metadata_matrix[cols[0]].notnull()]
         metadata_sm[cols] = scaler.fit_transform(metadata_sm[cols])
     else:
         metadata_sm = metadata_matrix[metadata_matrix[cols].notnull()]
-        metadata_sm[cols] = scaler.fit_transform(np.array(metadata_sm[cols]).reshape(-1, 1))
+        metadata_sm[cols] = scaler.fit_transform(
+            np.array(metadata_sm[cols]).reshape(-1, 1))
         cols = [cols]
-    
+
     for col in cols:
         y = metadata_sm[col]
         if ordinal:
@@ -480,3 +502,94 @@ def add_to_metrics(metrics_df, dict_metric, name_metrics):
         df_tmp.columns = name_metrics
     metrics_df = metrics_df.merge(df_tmp, left_index=True, right_index=True)
     return metrics_df
+
+
+########################################
+# utils for penta dia classification
+########################################
+
+
+def make_training_set(analyses_df, ninefold_dict, full=True, normalize=True, clean=True, binary=True):
+    
+    to_df_ext = []
+
+    if full:
+        for i in range(len(analyses_df)):
+            for j in range(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1):
+                for z in range(j):
+                    try:
+                        to_df_ext.append(
+                            [analyses_df['fname'][i]] +
+                            list(ninefold_dict[analyses_df['fname'][i]][squareix2longix(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1 - j, int(analyses_df['to_qb'][i]) - z, int(analyses_df['length_qb'][i]))]) +
+                            [analyses_df['structure'][i]]
+                        )
+                    except Exception as e:
+                        print('Not found', e)
+    else:
+        for i in range(len(analyses_df)):
+            try:
+                to_df_ext.append(
+                    [analyses_df['fname'][i]] +
+                    list(ninefold_dict[analyses_df['fname'][i]][squareix2longix(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1, int(analyses_df['to_qb'][i]), int(analyses_df['length_qb'][i]))]) +
+                    [analyses_df['structure'][i]]
+                )
+            except Exception as e:
+                print('Not found', e)
+
+    ground_truth_train = pd.DataFrame(to_df_ext,
+                                      columns=['fname', 'coeff1', 'coeff2', 'coeff3', 'coeff4', 'coeff5', 'coeff6', 'major', 'minor', 'tritone', 'structure']
+                                      )
+    
+    if normalize:
+        ground_truth_train['tritone'] = ground_truth_train[['tritone']] / ground_truth_train[['tritone']].apply(np.max, axis=0)
+
+    ground_truth_train = ground_truth_train.drop_duplicates()
+    ground_truth_train = ground_truth_train[ground_truth_train['structure'].notnull()]
+    
+    if clean:
+        ground_truth_train = ground_truth_train[ground_truth_train['structure'].isin(['majmin', 'penta', 'octa', 'wt'])]
+
+    if binary:
+        ground_truth_train['diatonic'] = [1 if 'majmin' in str(x) else 0 for x in ground_truth_train['structure']]
+        ground_truth_train['pentatonic'] = [1 if 'penta' in str(x) else 0 for x in ground_truth_train['structure']]
+        ground_truth_train['octatonic'] = [1 if 'octa' in str(x) else 0 for x in ground_truth_train['structure']]
+        ground_truth_train['wholetone'] = [1 if 'wt' in str(x) else 0 for x in ground_truth_train['structure']]
+
+    return ground_truth_train
+
+
+def most_resonant_penta_dia(mag_mx, ninefold_mat, clf, add_one=False):
+    """ Inpute: NxNx6 matrix of magnitudes or N(N+1)/2x6 long format
+        Computes 3 NxNx1 matrices containing:
+        the inverse entropy of the 6 coefficients at each point of the matrix
+        the maximum value among the 6 coefficients
+        the max coefficient
+    """
+    is_square = mag_mx.ndim == 3
+    utm_max = np.max(mag_mx, axis=-1)
+    utm_argmax = np.argmax(mag_mx, axis=-1)
+    if add_one:
+        utm_argmax = np.triu(utm_argmax + 1)
+    if is_square:
+        # so we don't apply entropy to zero-vectors
+        mag_mx = utm2long(mag_mx)
+    
+        is_long = ninefold_mat.ndim == 2
+
+        if is_long:
+            ninefold_mat = long2utm(ninefold_mat)
+
+    
+    to_predict = ninefold_mat[utm_argmax == 4]
+    predictions = clf.predict(to_predict)
+    utm_argmax[utm_argmax == 4] = [6 if pred == 0 else 4 for pred in predictions]
+    
+
+    # entropy and np.log have same base e
+    utm_entropy = 1 - (entropy(mag_mx, axis=-1) / np.log(mag_mx.shape[-1]))
+    utm_entropy = MinMaxScaler().fit_transform(
+        utm_entropy.reshape(-1, 1)).reshape(-1)
+    if is_square:
+        utm_entropy = long2utm(utm_entropy)
+    return utm_argmax, utm_max, utm_entropy
+

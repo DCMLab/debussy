@@ -8,9 +8,8 @@ from matplotlib import pyplot as plt
 from tqdm import tqdm
 import numpy as np
 from wavescapes import normalize_dft, \
-    circular_hue, \
     Wavescape  # pip install https://github.com/DCMLab/wavescapes/archive/refs/heads/johannes.zip
-
+from wavescapes.color import circular_hue
 from etl import get_dfts, resolve_dir, get_pcms, get_mag_phase_mx
 from utils import pitch_class_matrix_to_tritone, max_pearsonr_by_rotation, most_resonant, \
     most_resonant2color, long2utm

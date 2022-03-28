@@ -293,8 +293,10 @@ def pitch_class_matrix_to_tritone(pc_mat):
         np.array: matrix of tritone presence
     """
     coeff_nmb = 6
-    res = np.linalg.norm(np.multiply(pc_mat, np.roll(
-        pc_mat, coeff_nmb, axis=-1))[..., :coeff_nmb], axis=-1)
+    res = np.linalg.norm(np.multiply(pc_mat/np.linalg.norm(pc_mat, axis=1).reshape(-1, 1),
+                                     np.roll(pc_mat/np.linalg.norm(pc_mat,
+                                             axis=1).reshape(-1, 1), coeff_nmb, axis=-1)
+                                     )[..., :coeff_nmb], axis=-1)
     return res
 
 
@@ -418,7 +420,7 @@ def make_plots(metadata_metrics, save_name, title, cols,
                 if i == 1:
                     continue
             col = cols[i-1]
-            
+
         if ordinal:
             x_col = ordinal_col
         else:
@@ -428,8 +430,8 @@ def make_plots(metadata_metrics, save_name, title, cols,
             if len_cols > 7:
                 ax = axs[i-2]
             else:
-                ax = axs[i-1] 
-        
+                ax = axs[i-1]
+
             ax.set_title(f"Coefficient {i}")
             if boxplot:
                 sns.boxplot(x=x_col, y=col, data=metadata_metrics, ax=ax)
@@ -509,22 +511,33 @@ def add_to_metrics(metrics_df, dict_metric, name_metrics):
 ########################################
 
 
-def make_training_set(analyses_df, ninefold_dict, full=True, normalize=True, clean=True, binary=True):
-    
+def make_training_set(analyses_df, ninefold_dict, full=True, normalize=True, clean=True, binary=True, extend=False, pcms=False):
+
     to_df_ext = []
 
     if full:
         for i in range(len(analyses_df)):
             for j in range(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1):
                 for z in range(j):
-                    try:
-                        to_df_ext.append(
-                            [analyses_df['fname'][i]] +
-                            list(ninefold_dict[analyses_df['fname'][i]][squareix2longix(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1 - j, int(analyses_df['to_qb'][i]) - z, int(analyses_df['length_qb'][i]))]) +
-                            [analyses_df['structure'][i]]
-                        )
-                    except Exception as e:
-                        print('Not found', e)
+                    if extend:
+                        try:
+                            to_df_ext.append(
+                                [analyses_df['fname'][i]] +
+                                list(ninefold_dict[analyses_df['fname'][i]][squareix2longix(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1 - j, int(analyses_df['to_qb'][i]) - z, int(analyses_df['length_qb'][i]))]) +
+                                list(pcms[analyses_df['fname'][i]][squareix2longix(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1 - j, int(analyses_df['to_qb'][i]) - z, int(analyses_df['length_qb'][i]))]) +
+                                [analyses_df['structure'][i]]
+                            )
+                        except Exception as e:
+                            print('Not found', e)
+                    else:
+                        try:
+                            to_df_ext.append(
+                                [analyses_df['fname'][i]] +
+                                list(ninefold_dict[analyses_df['fname'][i]][squareix2longix(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1 - j, int(analyses_df['to_qb'][i]) - z, int(analyses_df['length_qb'][i]))]) +
+                                [analyses_df['structure'][i]]
+                            )
+                        except Exception as e:
+                            print('Not found', e)
     else:
         for i in range(len(analyses_df)):
             try:
@@ -536,24 +549,41 @@ def make_training_set(analyses_df, ninefold_dict, full=True, normalize=True, cle
             except Exception as e:
                 print('Not found', e)
 
-    ground_truth_train = pd.DataFrame(to_df_ext,
-                                      columns=['fname', 'coeff1', 'coeff2', 'coeff3', 'coeff4', 'coeff5', 'coeff6', 'major', 'minor', 'tritone', 'structure']
-                                      )
-    
+    if extend:
+        ground_truth_train = pd.DataFrame(to_df_ext,
+                                        columns=['fname', 'coeff1', 'coeff2', 'coeff3', 'coeff4',
+                                                'coeff5', 'coeff6', 'major', 'minor', 'tritone', 
+                                                0,1,2,3,4,5,6,7,8,9,10,11,
+                                                'structure']
+                                        )
+
+    else:
+        ground_truth_train = pd.DataFrame(to_df_ext,
+                                        columns=['fname', 'coeff1', 'coeff2', 'coeff3', 'coeff4',
+                                                'coeff5', 'coeff6', 'major', 'minor', 'tritone', 'structure']
+                                        )
+
     if normalize:
-        ground_truth_train['tritone'] = ground_truth_train[['tritone']] / ground_truth_train[['tritone']].apply(np.max, axis=0)
+        ground_truth_train['tritone'] = ground_truth_train[[
+            'tritone']] / ground_truth_train[['tritone']].apply(np.max, axis=0)
 
     ground_truth_train = ground_truth_train.drop_duplicates()
-    ground_truth_train = ground_truth_train[ground_truth_train['structure'].notnull()]
-    
+    ground_truth_train = ground_truth_train[ground_truth_train['structure'].notnull(
+    )]
+
     if clean:
-        ground_truth_train = ground_truth_train[ground_truth_train['structure'].isin(['majmin', 'penta', 'octa', 'wt'])]
+        ground_truth_train = ground_truth_train[ground_truth_train['structure'].isin(
+            ['majmin', 'penta', 'octa', 'wt'])]
 
     if binary:
-        ground_truth_train['diatonic'] = [1 if 'majmin' in str(x) else 0 for x in ground_truth_train['structure']]
-        ground_truth_train['pentatonic'] = [1 if 'penta' in str(x) else 0 for x in ground_truth_train['structure']]
-        ground_truth_train['octatonic'] = [1 if 'octa' in str(x) else 0 for x in ground_truth_train['structure']]
-        ground_truth_train['wholetone'] = [1 if 'wt' in str(x) else 0 for x in ground_truth_train['structure']]
+        ground_truth_train['diatonic'] = [1 if 'majmin' in str(
+            x) else 0 for x in ground_truth_train['structure']]
+        ground_truth_train['pentatonic'] = [1 if 'penta' in str(
+            x) else 0 for x in ground_truth_train['structure']]
+        ground_truth_train['octatonic'] = [1 if 'octa' in str(
+            x) else 0 for x in ground_truth_train['structure']]
+        ground_truth_train['wholetone'] = [1 if 'wt' in str(
+            x) else 0 for x in ground_truth_train['structure']]
 
     return ground_truth_train
 
@@ -573,17 +603,16 @@ def most_resonant_penta_dia(mag_mx, ninefold_mat, clf, add_one=False):
     if is_square:
         # so we don't apply entropy to zero-vectors
         mag_mx = utm2long(mag_mx)
-    
+
         is_long = ninefold_mat.ndim == 2
 
         if is_long:
             ninefold_mat = long2utm(ninefold_mat)
 
-    
     to_predict = ninefold_mat[utm_argmax == 4]
     predictions = clf.predict(to_predict)
-    utm_argmax[utm_argmax == 4] = [6 if pred == 0 else 4 for pred in predictions]
-    
+    utm_argmax[utm_argmax == 4] = [
+        6 if pred == 0 else 4 for pred in predictions]
 
     # entropy and np.log have same base e
     utm_entropy = 1 - (entropy(mag_mx, axis=-1) / np.log(mag_mx.shape[-1]))
@@ -592,4 +621,3 @@ def most_resonant_penta_dia(mag_mx, ninefold_mat, clf, add_one=False):
     if is_square:
         utm_entropy = long2utm(utm_entropy)
     return utm_argmax, utm_max, utm_entropy
-

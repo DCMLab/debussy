@@ -534,6 +534,7 @@ def make_training_set(analyses_df, ninefold_dict, full=True, normalize=True, cle
                             to_df_ext.append(
                                 [analyses_df['fname'][i]] +
                                 list(ninefold_dict[analyses_df['fname'][i]][squareix2longix(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1 - j, int(analyses_df['to_qb'][i]) - z, int(analyses_df['length_qb'][i]))]) +
+                                [squareix2longix(int(analyses_df['to_qb'][i]) - int(analyses_df['from_qb'][i]) - 1 - j, int(analyses_df['to_qb'][i]) - z, int(analyses_df['length_qb'][i]))] + 
                                 [analyses_df['structure'][i]]
                             )
                         except Exception as e:
@@ -560,7 +561,8 @@ def make_training_set(analyses_df, ninefold_dict, full=True, normalize=True, cle
     else:
         ground_truth_train = pd.DataFrame(to_df_ext,
                                         columns=['fname', 'coeff1', 'coeff2', 'coeff3', 'coeff4',
-                                                'coeff5', 'coeff6', 'major', 'minor', 'tritone', 'structure']
+                                                'coeff5', 'coeff6', 'major', 'minor', 'tritone', 
+                                                'point', 'structure']
                                         )
 
     if normalize:

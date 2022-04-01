@@ -82,6 +82,64 @@ def squareix2longix(x, y, n):
     return sum(islice(range(n, -1, -1), x)) + y - x
 
 
+def get_from_to(arr, from_qb, to_qb, long=True):
+    """ This auxiliary function does the indexing for you if you need to retrieve a particular
+    value from a matrix, i.e. the upper node of one triangle.
+
+    Parameters
+    ----------
+    arr : np.array
+        Matrix from which you want to retrieve one entry.
+    from_qb : int
+        First (leftmost) quarterbeat covered by the triangle.
+    to_qb : int
+        First quarterbeat to the right not covered by the triangle, i.e. exclusive right interval border.
+    long : bool, optional
+        If True, the matrix is assumed to be in long format, otherwise square format.
+
+    Returns
+    -------
+
+    """
+    assert to_qb > from_qb, f"to_qb ({to_qb}) needs to be larger than from_qb ({from_qb}) because it is an exclusive interval boundary, i.e. not part of the selected triangle"
+    x = to_qb - from_qb - 1
+    y = to_qb - 1
+    if long:
+        n = longn2squaren(arr.shape[0])
+        long_ix = squareix2longix(x, y, n)
+        return arr[long_ix]
+    return arr[x, y]
+
+
+def get_all_from_to(arr, from_qb, to_qb, long=True):
+    """ This auxiliary function does the indexing for you if you need to retrieve from a matrix
+    the entries for all entries contained in a given interval.
+
+    Parameters
+    ----------
+    arr : np.array
+        Matrix from which you want to retrieve one entry.
+    from_qb : int
+        First (leftmost) quarterbeat covered by the triangle.
+    to_qb : int
+        First quarterbeat to the right not covered by the triangle, i.e. exclusive right interval border.
+    long : bool, optional
+        If True, the matrix is assumed to be in long format and long format is returned. Otherwise square format.
+
+    Returns
+    -------
+
+    """
+    assert to_qb > from_qb, f"to_qb ({to_qb}) needs to be larger than from_qb ({from_qb}) because it is an exclusive interval boundary, i.e. not part of the selected triangle"
+    length = to_qb - from_qb
+    if long:
+        arr = long2utm(arr)
+    slice = arr[:length, from_qb:to_qb]
+    if long:
+        return utm2long(slice)
+    return slice
+
+
 ########################################
 # Inspecting complex matrices
 ########################################
@@ -102,7 +160,7 @@ def comp2mag_phase(c, dec=2):
     return magn, ang
 
 
-def get_coeff(dft, x, y, coeff=None, deg=False, invert_x=False):
+def get_coeff(dft, x, y, coeff=None, deg=False, from_to=False):
     """View magnitude and phase of a particular point in the matrix.
 
     Parameters
@@ -110,7 +168,7 @@ def get_coeff(dft, x, y, coeff=None, deg=False, invert_x=False):
     dft : np.array
         (NxNx7) complex square matrix or (Nx7) complex long matrix.
     x : int
-        By default, x designates the row of the wavescape ('length-to notation'). If `invert_x` is 
+        By default, x designates the row of the wavescape ('length-to notation'). If `from_to` is
         set to True, x is the leftmost index of the selected interval ('from-to notation').
     y : int
         y-1 is the rightmost index of the selected interval.
@@ -120,7 +178,7 @@ def get_coeff(dft, x, y, coeff=None, deg=False, invert_x=False):
     deg : bool, optional
         By default, the complex number will be converted into a string containing the rounded
         magnitude and the angle in degrees. Pass false to get the raw complex number.
-    invert_x : bool, optional
+    from_to : bool, optional
         See `x`.
 
     Returns
@@ -141,7 +199,7 @@ def get_coeff(dft, x, y, coeff=None, deg=False, invert_x=False):
         assert 0 <= coeff < n_coeff, f"0 <= coeff < {n_coeff}"
     assert 0 <= x < xs, f"0 <= x < {xs}; received x = {x}"
     assert 0 <= y < ys, f"0 <= y < {ys}; received y = {y}"
-    if invert_x:
+    if from_to:
         x = y - x
     if is_long:
         ix = squareix2longix(x, y, n)

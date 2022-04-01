@@ -1,5 +1,5 @@
 from functools import lru_cache
-from itertools import islice
+from itertools import accumulate, islice
 
 from matplotlib import pyplot as plt
 from wavescapes import legend_decomposition
@@ -41,6 +41,7 @@ def long2utm(long):
     return A
 
 
+@lru_cache
 def longix2squareix(ix, n, from_to=False):
     """ Turn the index of a long format UTM (upper triangle matrix) into
     coordinates of a square format UTM.
@@ -61,12 +62,20 @@ def longix2squareix(ix, n, from_to=False):
     (int, int)
         See `from_to`.
     """
-    x, y = divmod(ix, n)
+    for x, diag_ix in enumerate(accumulate(range(n, 1, -1))):
+        # the accumulated backwards range corresponds to the long indices put on a diagonal
+        if ix == diag_ix:
+            return x + 1, x + 1
+        if ix > diag_ix:
+            continue
+        y = n - (diag_ix - ix)
+        break
     if from_to:
         x = y - x
     return x, y
 
 
+@lru_cache
 def squareix2longix(x, y, n):
     assert x < n and y < n, "Coordinates need to be smaller than n."
     assert y >= x, f"Coordinates ({x}, {y}) are not within an upper triangular matrix."

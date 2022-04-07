@@ -488,7 +488,7 @@ def make_plots(metadata_metrics, save_name, title, cols,
                 if i == 1:
                     continue
             col = cols[i-1]
-
+        
         if ordinal:
             x_col = ordinal_col
         else:
@@ -509,14 +509,15 @@ def make_plots(metadata_metrics, save_name, title, cols,
             if boxplot:
                 sns.boxplot(x=x_col, y=col, data=metadata_metrics)
             else:
-                sns.regplot(x=x_col, y=col, data=metadata_metrics,
-                            scatter=scatter, label=f"Coefficient {i}")
+                p = sns.regplot(x=x_col, y=col, data=metadata_metrics,
+                            scatter=scatter, label=f"Coefficient {i+3}")
+        
             plt.legend()
-
+    p.set_ylabel(col[:-2])
     plt.savefig(f'figures/{save_name}.png')
 
 
-def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal'):
+def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal', melted=False):
     """Function used to test the predictiveness of each measure with respect to 
        the time period.
 
@@ -539,20 +540,25 @@ def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal
         cols = [cols]
 
 
-    metadata_sm = pd.melt(metadata_sm, id_vars=['year', 'last_mc'], value_vars=cols)
-    metadata_sm = metadata_sm[~metadata_sm['variable'].str.endswith('2')]
-    #print(metadata_sm)
+    if melted:
+        metadata_sm = pd.melt(metadata_sm, id_vars=['year', 'last_mc'], value_vars=cols)
+        metadata_sm = metadata_sm[~metadata_sm['variable'].str.endswith('2')]
+        #print(metadata_sm)
+        results = smf.ols(formula='value ~ year * C(variable) + last_mc + 1 ', data=metadata_sm).fit()
+        print('testing results')
+        print(results.summary())
+
+    else:
+        for col in cols:
+            if col[-1] not in ['1', '2', '3']:
+                results = smf.ols(formula=f'{col} ~ year + last_mc + 1 ', data=metadata_sm).fit()
+                print('testing results')
+                print(results.summary())
+
     if ordinal:
         print(ordinal_col) # use ordinal col
     
-    results = smf.ols(formula='value ~ year * C(variable) + last_mc + 1 ', data=metadata_sm).fit()
-    #for col in cols:
-    #    if col[-1] in ['4', '5']:
-    #        results = smf.ols(formula=f'{col} ~ year * last_mc + 1 ', data=metadata_sm).fit()
-    #        #results = sm.OLS(y, X).fit()
-    print('testing results')
-    print(results.summary())
-
+    
 
 def add_to_metrics(metrics_df, dict_metric, name_metrics):
     """Function to add the newly computed metrics to the dataframe.

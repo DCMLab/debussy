@@ -60,8 +60,17 @@ L	mc_start	mc_start_offset	mc_end	mc_end_offset	structure	transposition	comments
 100-01	27	0	30	3/4	penta	B penta		O'Connell
 100-01	97	0	99	0	penta	B penta		O'Connell
 100-01	1	0	99	0	penta			Uchida, O'conell
+100-01	7	0	9	0	majmin???	B maj	penta tune and context, addition of A# and E to pentatonic harmony	Uchida
+100-01	19	0	23	0	penta			Uchida
+100-01	33	0	37	0	modal	C# mixolydian		Uchida
+100-01	37	0	45	0	penta			Uchida
+100-01	19	0	65	0	penta			Uchida
+100-01	80	0	82	0	penta		combination of 2 penta harmonies	Uchida
 100-02	33	0	34	0	octa	0,1		Forte
 100-02	67	0	68	0	octa(?)	0,1	4/8 notes 	Forte
+100-02	66	0	69	0	majmin	F# maj	check "inconsistency" with Forte's analysis 	Uchida
+100-02	1	0	5	0	majmin	C# maj		Uchida
+100-02	98	0	107	0	majmin	A maj		Uchida
 100-03	37	0	41	0	octa	0,2		Forte
 100-03	96	0	98	0	octa	0,2		Forte
 100-03	64	0	71	0	wt	0+1	alternation of wt scales, chromaticism, no tonal center	Uchida
@@ -88,6 +97,9 @@ L	mc_start	mc_start_offset	mc_end	mc_end_offset	structure	transposition	comments
 111-02	14	0	16	0	modal	E dorian	pentatonic LH + melody in E dorian 	Uchida
 111-02	17	0	20	0	wt	0+1	alternating wt scales	Uchida
 111-02	54	0	56	0	penta	Bb + E	alternating penta distant a tritone apart, chromatic movement	Uchida
+113-02	1	0	4	0	penta		pentatonic tune alone	Schmitz
+113-02	21	0	29	0	penta		pentatonic tune with accompainment of seconds	Schmitz
+113-02	39	0	47	0	wt	0		Schmitz
 113-04	65	0	67	0	octa		mc to check - score missing	Forte
 117-02	42	0	48	0	penta	Eb		Loyd
 117-02	1	0	42	0	wt	0		Loyd
@@ -110,20 +122,32 @@ L	mc_start	mc_start_offset	mc_end	mc_end_offset	structure	transposition	comments
 117-03	25	0	26	0	wt	0		Tymoczko
 117-04	1	0	3	0	octa	(0,1)		Forte
 117-04	46	0	48	0	octa	(0,1)	CHECK MC (Forte reports mm49-50)	Forte
+117-05	1	0	3	0	penta			Kopp
+117-05	1	0	7	0	penta			Kopp
+117-05	14	0	18	0	penta			Kopp
+117-05	18	0	21	0	majmin	B maj		Kopp
+117-05	10	0	11	7/16	penta			Kopp
+117-05	3	0	4	0	penta		D# odd note	Kopp
+117-05	24	0	30	0	octa			Kopp
+117-05	49	0	64	0	majmin	B maj	unresolved leading tones	Kopp
+117-05	74	0	81	0	penta		penta RH+ chromaticism, check inconsistency with Tymoczko	Kopp
+117-05	86	0	94	0	penta		check Tymoczko	Kopp
 117-05	73	0	81	0	acoustic	E acoustic		Tymoczko
-117-05	1	0	62	0	majmin	B maj		Tymoczko
+117-05	1	0	62	0	majmin	B maj	check Kopp's comment on conventional analysis	Tymoczko
 117-05	81	0	86	0	majmin	B maj		Tymoczko
-117-05	66	0	71	0	modal	G natural min (aeolian)	partially penta melodic theme	Tymoczko
+117-05	66	0	71	0	modal	G natural min (aeolian)	partially penta melodic theme, penta according to Kopp (combination of two penta sets)	Tymoczko
 117-05	71	3/4	73	0	modal	G # dorian		Tymoczko
-117-05	86	0	87	0	modal	B mixolydian	partially penta melodic theme	Tymoczko
+117-05	86	0	87	0	modal	B mixolydian	partially penta melodic theme, penta according to Kopp	Tymoczko
 117-05	87	0	88	0	modal	B mixolydian		Tymoczko
 117-05	86	0	92	0	modal	B mixolydian		Tymoczko
 117-05	24	0	28	0	octa	0,1		Forte
 117-06	33	0	34	3/4	octa	1,2		Forte
 117-06	33	0	34	3/4	octa	1,2		Forte
 117-08					penta		essentially the whole piece	O'Connell
+117-08	8	0	10	0	wt + penta		penta melody over wt harmony	Uchida
 117-11	82	0	86	0	octa		mc to check - score missing	Forte
-123-01	1	0	2	0	octa	0,1	Ab odd note	Parks
+123-01	1	0	2	0	octa?	0,1	Ab odd note	Parks
+123-01	1	0	2	0	penta?		check "inconsistency" with Parks's analysis 	Webb
 123-01	33	0	35	0	octa	0,2		Parks
 123-01	36	0	38	0	octa	1,2		Parks
 123-01	29	0	30	0	octa	0,1		Parks
@@ -156,13 +180,9 @@ L	mc_start	mc_start_offset	mc_end	mc_end_offset	structure	transposition	comments
 123-12	51	0	52	0	octa	0,2	Bb odd note	Forte
 123-12	17	0	18	0	penta			Tobin
 123-12	1	0	3	0	wt(?)	0+1	alternating whole tone segments	Tobin
-100-01	7	0	9	0	majmin???	B maj	penta tune and context, addition of A# and E to pentatonic harmony	Uchida
-100-01	19	0	23	0	penta			Uchida
-100-01	33	0	37	0	modal	C# mixolydian		Uchida
-100-01	37	0	45	0	penta			Uchida
-100-01	19	0	65	0	penta			Uchida
-100-01	80	0	82	0	penta		combination of 2 penta harmonies	Uchida
-113-02	1	0	4	0	penta		pentatonic tune alone	Schmitz
-113-02	21	0	29	0	penta		pentatonic tune with accompainment of seconds	Schmitz
-113-02	39	0	47	0	wt	0		Schmitz
-117-08	8	0	10	0	wt + penta		penta melody over wt harmony	Uchida
+117-09	19	0	25	0	modal	Bb aeolian		Uchida
+123-01	10	0	18	0	penta + majmin	F# penta + G maj	F#penta harmony accompanied by G maj triads -> bitonality	Uchida
+136-07	7	0	10	0	penta 	Db	chromatic background + penta motive made of maj seconds	Uchida
+136-07	11	0	10	0	penta 	F	chromatic background + penta motive-> tritones overall	Uchida
+123-09	21	0	25	0	majmin	C		Webb
+123-09	44	0	46	1	penta			Webb

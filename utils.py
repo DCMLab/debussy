@@ -12,6 +12,7 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 import seaborn as sns
 import statsmodels.api as sm
 import pandas as pd
+import statsmodels.formula.api as smf
 
 import networkx as nx
 from networkx.algorithms.components import connected_components
@@ -537,16 +538,20 @@ def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal
             np.array(metadata_sm[cols]).reshape(-1, 1))
         cols = [cols]
 
-    for col in cols:
-        y = metadata_sm[col]
-        if ordinal:
-            X = metadata_sm[[ordinal_col, 'last_mc']]
-        else:
-            X = metadata_sm[['year', 'last_mc']]
-        X = sm.add_constant(X)
-        results = sm.OLS(y, X).fit()
-        print('testing results')
-        print(results.summary())
+
+    metadata_sm = pd.melt(metadata_sm, id_vars=['year', 'last_mc'], value_vars=cols)
+    metadata_sm = metadata_sm[~metadata_sm['variable'].str.endswith('2')]
+    #print(metadata_sm)
+    if ordinal:
+        print(ordinal_col) # use ordinal col
+    
+    results = smf.ols(formula='value ~ year * C(variable) + last_mc + 1 ', data=metadata_sm).fit()
+    #for col in cols:
+    #    if col[-1] in ['4', '5']:
+    #        results = smf.ols(formula=f'{col} ~ year * last_mc + 1 ', data=metadata_sm).fit()
+    #        #results = sm.OLS(y, X).fit()
+    print('testing results')
+    print(results.summary())
 
 
 def add_to_metrics(metrics_df, dict_metric, name_metrics):

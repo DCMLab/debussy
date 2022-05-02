@@ -128,6 +128,7 @@ L	mc_start	mc_start_offset	mc_end	mc_end_offset	structure	transposition	comments
 117-05	18	0	21	0	majmin	B maj		Kopp
 117-05	10	0	11	7/16	penta			Kopp
 117-05	3	0	4	0	penta		D# odd note	Kopp
+117-05	24	0	30	0	octa			Kopp
 117-05	24	0	30	0	octa	(0,1)		Kopp
 117-05	49	0	64	0	majmin	B maj	unresolved leading tones	Kopp
 117-05	74	0	81	0	penta		penta RH+ chromaticism, check inconsistency with Tymoczko	Kopp

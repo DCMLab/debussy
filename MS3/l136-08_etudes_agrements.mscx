@@ -22,20 +22,16 @@
     <showFrames>1</showFrames>
     <showMargins>0</showMargins>
     <metaTag name="arranger"></metaTag>
-    <metaTag name="composed_end">1915</metaTag>
-    <metaTag name="composed_start">1915</metaTag>
     <metaTag name="composer"></metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-03-05</metaTag>
     <metaTag name="lyricist"></metaTag>
     <metaTag name="movementNumber"></metaTag>
     <metaTag name="movementTitle"></metaTag>
-    <metaTag name="pdf">https://imslp.org/wiki/Special:ReverseLookup/246285</metaTag>
     <metaTag name="platform">Microsoft Windows</metaTag>
     <metaTag name="poet"></metaTag>
     <metaTag name="source"></metaTag>
     <metaTag name="translator"></metaTag>
-    <metaTag name="typesetter">tunescribers.com</metaTag>
     <metaTag name="workNumber"></metaTag>
     <metaTag name="workTitle">Pour les agréments</metaTag>
     <Order id="orchestral" customized="1">
@@ -2134,38 +2130,15 @@
             </BarLine>
           </voice>
         </Measure>
-      <Measure len="2/4">
-        <stretch>0.4</stretch>
-        <LayoutBreak>
-          <subtype>line</subtype>
-          </LayoutBreak>
+      <Measure>
         <voice>
-          <StaffText>
-            <offset x="-5.6631" y="-4.80116"/>
-            <text>2
-4</text>
-            </StaffText>
-          <SystemText>
-            <swing unit="" ratio="60"/>
-            <style>Tempo</style>
-            <minDistance>-0.666592</minDistance>
-            <offset x="0" y="-2.50746"/>
-            <text><b></b>Stretto</text>
-            </SystemText>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-7.28309" y="-2.97033"/>
-            <text>( )</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Spanner type="HairPin">
             <HairPin>
               <subtype>0</subtype>
-              <Segment>
-                <subtype>0</subtype>
-                <offset x="0" y="7.19088"/>
-                <off2 x="-1.27334" y="0"/>
-                </Segment>
               </HairPin>
             <next>
               <location>
@@ -2182,22 +2155,13 @@
               <text>6</text>
               </Number>
             </Tuplet>
-          <Beam>
-            <StemDirection>down</StemDirection>
-            </Beam>
           <Chord>
             <staffMove>1</staffMove>
             <durationType>32nd</durationType>
             <Note>
-              <Spanner type="Tie">
-                <prev>
-                  <location>
-                    <staves>1</staves>
-                    <measures>-1</measures>
-                    <fractions>1/2</fractions>
-                    </location>
-                  </prev>
-                </Spanner>
+              <Accidental>
+                <subtype>accidentalFlat</subtype>
+                </Accidental>
               <pitch>61</pitch>
               <tpc>9</tpc>
               </Note>
@@ -2217,10 +2181,6 @@
             <durationType>32nd</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o1 x="-9.28018" y="3.81518"/>
-                  <o4 x="4.37472" y="1.09368"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -2278,11 +2238,6 @@
           <Spanner type="HairPin">
             <HairPin>
               <subtype>1</subtype>
-              <Segment>
-                <subtype>0</subtype>
-                <offset x="0" y="7.31813"/>
-                <off2 x="0" y="0"/>
-                </Segment>
               </HairPin>
             <next>
               <location>
@@ -2298,8 +2253,6 @@
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
@@ -2376,8 +2329,6 @@
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <staffMove>1</staffMove>
             <durationType>32nd</durationType>
@@ -2460,20 +2411,14 @@
           <endTuplet/>
           </voice>
         </Measure>
-      <Measure len="2/4">
-        <stretch>0.4</stretch>
+      <Measure>
         <LayoutBreak>
-          <subtype>page</subtype>
+          <subtype>line</subtype>
           </LayoutBreak>
         <voice>
           <Spanner type="HairPin">
             <HairPin>
               <subtype>0</subtype>
-              <Segment>
-                <subtype>0</subtype>
-                <offset x="0.933478" y="5.20813"/>
-                <off2 x="-0.933478" y="0"/>
-                </Segment>
               </HairPin>
             <next>
               <location>
@@ -2489,9 +2434,6 @@
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            <StemDirection>down</StemDirection>
-            </Beam>
           <Chord>
             <staffMove>1</staffMove>
             <durationType>32nd</durationType>
@@ -2518,10 +2460,6 @@
             <durationType>32nd</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o1 x="-7.81249" y="3.76157"/>
-                  <o4 x="2.7282" y="2.40342"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -2576,11 +2514,6 @@
           <Spanner type="HairPin">
             <HairPin>
               <subtype>1</subtype>
-              <Segment>
-                <subtype>0</subtype>
-                <offset x="0" y="5.13521"/>
-                <off2 x="0" y="0"/>
-                </Segment>
               </HairPin>
             <next>
               <location>
@@ -2596,8 +2529,6 @@
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
@@ -2664,8 +2595,6 @@
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <staffMove>1</staffMove>
             <durationType>32nd</durationType>
@@ -2677,10 +2606,6 @@
               <tpc>21</tpc>
               </Note>
             </Chord>
-          <Clef>
-            <concertClefType>F</concertClefType>
-            <transposingClefType>F</transposingClefType>
-            </Clef>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
@@ -2758,23 +2683,16 @@
           <KeySig>
             <accidental>-6</accidental>
             </KeySig>
-          <StaffText>
-            <offset x="-5.6631" y="-4.80116"/>
-            <text>6
-8</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="-6.13523" y="-7.54935"/>
             <text><b></b>Mouvt</text>
             </SystemText>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-7.18309" y="-2.68655"/>
-            <text>( )</text>
-            </StaffText>
           <Rest>
             <visible>0</visible>
             <dots>1</dots>
@@ -3621,7 +3539,7 @@ m.d. sans refrapper</text>
             <accidental>0</accidental>
             </KeySig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <text><b></b>Poco animando</text>
             </SystemText>
@@ -6658,8 +6576,10 @@ m.d. sans refrapper</text>
                   </Tie>
                 <next>
                   <location>
-                    <measures>1</measures>
-                    <fractions>-5/8</fractions>
+                    <voices>-1</voices>
+                    <measures>5</measures>
+                    <fractions>-9/16</fractions>
+                    <notes>1</notes>
                     </location>
                   </next>
                 </Spanner>
@@ -6669,21 +6589,12 @@ m.d. sans refrapper</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
-          <StaffText>
-            <offset x="-2.10178" y="-4.70635"/>
-            <text>3
-8</text>
-            </StaffText>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-3.69465" y="-2.7554"/>
-            <text>( )</text>
-            </StaffText>
-          <Beam>
-            </Beam>
+          <TimeSig>
+            <sigN>3</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Chord>
             <BeamMode>begin</BeamMode>
             <durationType>32nd</durationType>
@@ -6821,20 +6732,10 @@ m.d. sans refrapper</text>
                 <role>1</role>
                 <subtype>accidentalFlat</subtype>
                 </Accidental>
-              <Spanner type="Tie">
-                <prev>
-                  <location>
-                    <measures>-1</measures>
-                    <fractions>5/8</fractions>
-                    </location>
-                  </prev>
-                </Spanner>
               <pitch>59</pitch>
               <tpc>7</tpc>
               </Note>
             </Chord>
-          <Beam>
-            </Beam>
           <Chord>
             <BeamMode>begin</BeamMode>
             <durationType>eighth</durationType>
@@ -6878,23 +6779,16 @@ m.d. sans refrapper</text>
           <subtype>page</subtype>
           </LayoutBreak>
         <voice>
-          <StaffText>
-            <offset x="-2.10178" y="-4.70635"/>
-            <text>6
-8</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="0" y="-3.85604"/>
             <text><b></b>Tempo (poco animando)</text>
             </SystemText>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-3.49465" y="-2.7554"/>
-            <text>( )</text>
-            </StaffText>
           <Rest>
             <durationType>eighth</durationType>
             </Rest>
@@ -7361,7 +7255,7 @@ m.d. sans refrapper</text>
               </Note>
             </Chord>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <text><b></b>Cédez   -      -         -         -       -        -         -  </text>
             </SystemText>
@@ -7495,7 +7389,7 @@ m.d. sans refrapper</text>
             <accidental>3</accidental>
             </KeySig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <text><b></b>1er Mouvt</text>
             </SystemText>
@@ -7543,6 +7437,16 @@ m.d. sans refrapper</text>
               <tpc>17</tpc>
               </Note>
             <Note>
+              <Spanner type="Tie">
+                <prev>
+                  <location>
+                    <voices>1</voices>
+                    <measures>-5</measures>
+                    <fractions>9/16</fractions>
+                    <notes>-1</notes>
+                    </location>
+                  </prev>
+                </Spanner>
               <pitch>59</pitch>
               <tpc>19</tpc>
               </Note>
@@ -8614,7 +8518,7 @@ m.d. sans refrapper</text>
             <text><i></i><font face="ScoreText"></font><i><font face="Edwin"></font> sub</i></text>
             </Dynamic>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="0" y="-5.76272"/>
             <text><b></b>Rubato (poco scherzando)</text>
@@ -9958,7 +9862,7 @@ m.d. sans refrapper</text>
 legg.</text>
             </StaffText>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <text><b></b>1er Mouvt</text>
             </SystemText>
@@ -10212,26 +10116,20 @@ expressif</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="5/8">
-        <LayoutBreak>
-          <subtype>line</subtype>
-          </LayoutBreak>
+      <Measure>
         <voice>
-          <StaffText>
-            <offset x="-4.10879" y="-5.79084"/>
-            <text>5
-8</text>
-            </StaffText>
-          <Dynamic>
-            <subtype>mf</subtype>
-            <velocity>80</velocity>
-            </Dynamic>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-5.70126" y="-3.95937"/>
-            <text>( )</text>
-            </StaffText>
+          <KeySig>
+            <accidental>5</accidental>
+            </KeySig>
+          <TimeSig>
+            <sigN>5</sigN>
+            <sigD>8</sigD>
+            <Groups>
+              <Node pos="4" action="512"/>
+              <Node pos="8" action="273"/>
+              <Node pos="16" action="512"/>
+              </Groups>
+            </TimeSig>
           <Spanner type="HairPin">
             <HairPin>
               <subtype>0</subtype>
@@ -10252,16 +10150,10 @@ expressif</text>
               </Number>
             <direction>down</direction>
             </Tuplet>
-          <Beam>
-            <StemDirection>down</StemDirection>
-            </Beam>
           <Chord>
             <durationType>32nd</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o1 x="0.607638" y="-0.115741"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -10767,18 +10659,11 @@ expressif</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="5/8">
-        <LayoutBreak>
-          <subtype>line</subtype>
-          </LayoutBreak>
+      <Measure>
         <voice>
           <KeySig>
-            <accidental>5</accidental>
+            <accidental>-4</accidental>
             </KeySig>
-          <Dynamic>
-            <subtype>mf</subtype>
-            <velocity>80</velocity>
-            </Dynamic>
           <Spanner type="HairPin">
             <prev>
               <location>
@@ -10816,14 +10701,23 @@ expressif</text>
                 </next>
               </Spanner>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <pitch>76</pitch>
               <tpc>18</tpc>
               </Note>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>80</pitch>
               <tpc>22</tpc>
               </Note>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <Fingering>
                 <text>4</text>
                 </Fingering>
@@ -10834,14 +10728,23 @@ expressif</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>78</pitch>
               <tpc>20</tpc>
               </Note>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>82</pitch>
               <tpc>24</tpc>
               </Note>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <Fingering>
                 <text>5</text>
                 </Fingering>
@@ -10852,6 +10755,9 @@ expressif</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>75</pitch>
               <tpc>23</tpc>
               </Note>
@@ -10871,6 +10777,9 @@ expressif</text>
             <BeamMode>begin32</BeamMode>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>73</pitch>
               <tpc>21</tpc>
               </Note>
@@ -10889,6 +10798,9 @@ expressif</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <pitch>71</pitch>
               <tpc>19</tpc>
               </Note>
@@ -10907,6 +10819,9 @@ expressif</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>70</pitch>
               <tpc>24</tpc>
               </Note>
@@ -10931,6 +10846,9 @@ expressif</text>
             <BeamMode>begin</BeamMode>
             <durationType>16th</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>68</pitch>
               <tpc>22</tpc>
               </Note>
@@ -10953,6 +10871,9 @@ expressif</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>66</pitch>
               <tpc>20</tpc>
               </Note>
@@ -10977,6 +10898,9 @@ expressif</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <pitch>64</pitch>
               <tpc>18</tpc>
               </Note>
@@ -11001,6 +10925,9 @@ expressif</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>63</pitch>
               <tpc>23</tpc>
               </Note>
@@ -11023,21 +10950,27 @@ expressif</text>
               </Note>
             </Chord>
           <endTuplet/>
-          <KeySig>
-            <accidental>-4</accidental>
-            </KeySig>
           <Chord>
             <BeamMode>begin</BeamMode>
             <durationType>16th</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalFlat</subtype>
+                </Accidental>
               <pitch>61</pitch>
               <tpc>9</tpc>
               </Note>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <pitch>65</pitch>
               <tpc>13</tpc>
               </Note>
             <Note>
+              <Accidental>
+                <subtype>accidentalFlat</subtype>
+                </Accidental>
               <Fingering>
                 <text>3</text>
                 </Fingering>
@@ -11045,9 +10978,6 @@ expressif</text>
               <tpc>10</tpc>
               </Note>
             </Chord>
-          <Segment>
-            <leadingSpace>0.654727</leadingSpace>
-            </Segment>
           <Tuplet>
             <visible>0</visible>
             <normalNotes>2</normalNotes>
@@ -11068,14 +10998,23 @@ expressif</text>
                 </next>
               </Spanner>
             <Note>
+              <Accidental>
+                <subtype>accidentalFlat</subtype>
+                </Accidental>
               <pitch>63</pitch>
               <tpc>11</tpc>
               </Note>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <pitch>67</pitch>
               <tpc>15</tpc>
               </Note>
             <Note>
+              <Accidental>
+                <subtype>accidentalFlat</subtype>
+                </Accidental>
               <Fingering>
                 <text>2</text>
                 </Fingering>
@@ -11097,6 +11036,9 @@ expressif</text>
               <tpc>10</tpc>
               </Note>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <pitch>72</pitch>
               <tpc>14</tpc>
               </Note>
@@ -11270,11 +11212,10 @@ expressif</text>
           <KeySig>
             <accidental>-4</accidental>
             </KeySig>
-          <StaffText>
-            <offset x="-4.10879" y="-5.79084"/>
-            <text>6
-8</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <StaffText>
             <style>Expression</style>
             <text>sempre animando con fuoco</text>
@@ -11285,12 +11226,6 @@ expressif</text>
             <autoplace>0</autoplace>
             <offset x="0" y="6.17887"/>
             </Dynamic>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-5.70126" y="-4.16003"/>
-            <text>( )</text>
-            </StaffText>
           <Spanner type="HairPin">
             <HairPin>
               <subtype>0</subtype>
@@ -13164,7 +13099,7 @@ expressif</text>
             <accidental>4</accidental>
             </KeySig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <text><b></b>au Mouvt</text>
             </SystemText>
@@ -13838,24 +13773,17 @@ expressif</text>
             </Clef>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
-          <StaffText>
-            <offset x="-4.10879" y="-5.79084"/>
-            <text>3
-8</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>3</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Dynamic>
             <subtype>pp</subtype>
             <velocity>33</velocity>
             <offset x="0" y="4.35604"/>
             </Dynamic>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-5.60126" y="-3.95937"/>
-            <text>( )</text>
-            </StaffText>
           <Spanner type="HairPin">
             <prev>
               <location>
@@ -13864,15 +13792,10 @@ expressif</text>
                 </location>
               </prev>
             </Spanner>
-          <Beam>
-            </Beam>
           <Chord>
             <durationType>16th</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <autoplace>0</autoplace>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -14077,9 +14000,6 @@ expressif</text>
               <tpc>24</tpc>
               </Note>
             </Chord>
-          <Beam>
-            <StemDirection>down</StemDirection>
-            </Beam>
           <Chord>
             <BeamMode>begin</BeamMode>
             <durationType>16th</durationType>
@@ -14191,13 +14111,12 @@ expressif</text>
         </Measure>
       <Measure>
         <voice>
-          <StaffText>
-            <offset x="-3.00604" y="-5.41583"/>
-            <text>6
-8</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <text><b></b>Molto rit.  -         -         -       //</text>
             </SystemText>
@@ -14208,12 +14127,6 @@ expressif</text>
             <offset x="0.656208" y="3.9933"/>
             <text><i>più </i><font face="ScoreText"></font></text>
             </Dynamic>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-4.54018" y="-3.52396"/>
-            <text>( )</text>
-            </StaffText>
           <Chord>
             <durationType>eighth</durationType>
             <Note>
@@ -14407,7 +14320,7 @@ expressif</text>
             <accidental>-1</accidental>
             </KeySig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="0" y="-4.73324"/>
             <text><b></b>1er Mouvt</text>
@@ -16197,27 +16110,15 @@ expressif</text>
             </BarLine>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <LayoutBreak>
           <subtype>line</subtype>
           </LayoutBreak>
         <voice>
-          <StaffText>
-            <offset x="-5.6631" y="-4.80116"/>
-            <text>2
-4</text>
-            </StaffText>
-          <SystemText>
-            <swing unit="" ratio="60"/>
-            <style>Tempo</style>
-            <text><b></b>Stretto</text>
-            </SystemText>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-7.10588" y="-2.55474"/>
-            <text>( )</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Tuplet>
             <normalNotes>4</normalNotes>
             <actualNotes>6</actualNotes>
@@ -16227,18 +16128,11 @@ expressif</text>
               <text>6</text>
               </Number>
             </Tuplet>
-          <Beam>
-            <StemDirection>down</StemDirection>
-            </Beam>
           <Chord>
             <staffMove>1</staffMove>
             <durationType>32nd</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o1 x="0.947856" y="-1.31242"/>
-                  <o4 x="2.77066" y="0.218736"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -16315,8 +16209,6 @@ expressif</text>
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
@@ -16383,8 +16275,6 @@ expressif</text>
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <staffMove>1</staffMove>
             <durationType>32nd</durationType>
@@ -16452,7 +16342,7 @@ expressif</text>
           <endTuplet/>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <LayoutBreak>
           <subtype>line</subtype>
           </LayoutBreak>
@@ -16465,20 +16355,11 @@ expressif</text>
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            <StemDirection>down</StemDirection>
-            </Beam>
           <Chord>
             <staffMove>1</staffMove>
             <durationType>32nd</durationType>
             <Spanner type="Slur">
               <Slur>
-                <SlurSegment no="0">
-                  <o1 x="-1.84999" y="-3.9129"/>
-                  <o3 x="-0.654727" y="1.63682"/>
-                  <o4 x="0.82677" y="0.459317"/>
-                  <offset x="2.78259" y="0.529969"/>
-                  </SlurSegment>
                 </Slur>
               <next>
                 <location>
@@ -16549,8 +16430,6 @@ expressif</text>
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
@@ -16617,8 +16496,6 @@ expressif</text>
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <staffMove>1</staffMove>
             <durationType>32nd</durationType>
@@ -16685,9 +16562,6 @@ expressif</text>
               </Note>
             </Chord>
           <endTuplet/>
-          <BarLine>
-            <subtype>double</subtype>
-            </BarLine>
           </voice>
         </Measure>
       <Measure len="3/8">
@@ -16695,13 +16569,12 @@ expressif</text>
           <subtype>line</subtype>
           </LayoutBreak>
         <voice>
-          <StaffText>
-            <offset x="-4.55883" y="-5.45073"/>
-            <text>6
-8</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="0" y="-4.29155"/>
             <text><b></b>Cadenza</text>
@@ -16710,12 +16583,6 @@ expressif</text>
             <subtype>p</subtype>
             <velocity>49</velocity>
             </Dynamic>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>23</size>
-            <offset x="-5.99675" y="-3.33912"/>
-            <text>( )</text>
-            </StaffText>
           <Rest>
             <visible>0</visible>
             <durationType>eighth</durationType>
@@ -16739,11 +16606,8 @@ expressif</text>
           </voice>
         </Measure>
       <Measure len="3/8">
+        <irregular>1</irregular>
         <noOffset>-1</noOffset>
-        <MeasureNumber>
-          <visible>0</visible>
-          <text>50</text>
-          </MeasureNumber>
         <LayoutBreak>
           <subtype>line</subtype>
           </LayoutBreak>
@@ -16769,7 +16633,7 @@ expressif</text>
       <Measure>
         <voice>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="0" y="-2.4397"/>
             <text><b></b>au Mouvt</text>
@@ -18021,9 +17885,10 @@ expressif</text>
                   </Tie>
                 <next>
                   <location>
-                    <staves>-1</staves>
-                    <measures>1</measures>
-                    <fractions>-1/2</fractions>
+                    <voices>1</voices>
+                    <measures>3</measures>
+                    <fractions>-3/8</fractions>
+                    <notes>2</notes>
                     </location>
                   </next>
                 </Spanner>
@@ -18048,8 +17913,12 @@ expressif</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Rest>
             <visible>0</visible>
             <durationType>eighth</durationType>
@@ -18068,8 +17937,6 @@ expressif</text>
               <text>6</text>
               </Number>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
@@ -18134,15 +18001,11 @@ expressif</text>
           <endTuplet/>
           <Rest>
             <visible>0</visible>
-            <durationType>eighth</durationType>
-            </Rest>
-          <Rest>
-            <visible>0</visible>
-            <durationType>eighth</durationType>
+            <durationType>quarter</durationType>
             </Rest>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <voice>
           <Rest>
             <visible>0</visible>
@@ -18156,8 +18019,6 @@ expressif</text>
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
@@ -18248,10 +18109,6 @@ expressif</text>
             <visible>0</visible>
             <durationType>32nd</durationType>
             </Rest>
-          <Clef>
-            <concertClefType>F</concertClefType>
-            <transposingClefType>F</transposingClefType>
-            </Clef>
           <Rest>
             <visible>0</visible>
             <durationType>32nd</durationType>
@@ -18264,6 +18121,10 @@ expressif</text>
           <KeySig>
             <accidental>-6</accidental>
             </KeySig>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Chord>
             <dots>1</dots>
             <durationType>half</durationType>
@@ -18301,6 +18162,16 @@ expressif</text>
               <tpc>12</tpc>
               </Note>
             <Note>
+              <Spanner type="Tie">
+                <prev>
+                  <location>
+                    <voices>-1</voices>
+                    <measures>-3</measures>
+                    <fractions>3/8</fractions>
+                    <notes>-2</notes>
+                    </location>
+                  </prev>
+                </Spanner>
               <pitch>61</pitch>
               <tpc>9</tpc>
               </Note>
@@ -21792,8 +21663,12 @@ sonoro</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>3</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Chord>
             <durationType>eighth</durationType>
             <StemDirection>up</StemDirection>
@@ -21833,11 +21708,6 @@ sonoro</text>
           <Spanner type="HairPin">
             <HairPin>
               <subtype>1</subtype>
-              <Segment>
-                <subtype>0</subtype>
-                <offset x="0" y="2"/>
-                <off2 x="-3.72376" y="0"/>
-                </Segment>
               </HairPin>
             <next>
               <location>
@@ -21958,12 +21828,20 @@ sonoro</text>
             </Chord>
           <Rest>
             <offset x="0" y="2"/>
+            <durationType>quarter</durationType>
+            </Rest>
+          <Rest>
+            <offset x="0" y="2"/>
             <durationType>16th</durationType>
             </Rest>
           </voice>
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Beam>
             </Beam>
           <Chord>
@@ -22613,6 +22491,14 @@ sonoro</text>
               <tpc>20</tpc>
               </Note>
             <Note>
+              <Spanner type="Tie">
+                <prev>
+                  <location>
+                    <measures>-5</measures>
+                    <fractions>1/16</fractions>
+                    </location>
+                  </prev>
+                </Spanner>
               <pitch>54</pitch>
               <tpc>20</tpc>
               </Note>
@@ -24268,6 +24154,15 @@ sonoro</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Spanner type="Tie">
+                <prev>
+                  <location>
+                    <voices>-1</voices>
+                    <measures>-13</measures>
+                    <fractions>7/12</fractions>
+                    </location>
+                  </prev>
+                </Spanner>
               <pitch>51</pitch>
               <tpc>23</tpc>
               </Note>
@@ -25834,8 +25729,20 @@ sonoro</text>
           <endTuplet/>
           </voice>
         </Measure>
-      <Measure len="5/8">
+      <Measure>
         <voice>
+          <KeySig>
+            <accidental>5</accidental>
+            </KeySig>
+          <TimeSig>
+            <sigN>5</sigN>
+            <sigD>8</sigD>
+            <Groups>
+              <Node pos="4" action="512"/>
+              <Node pos="8" action="273"/>
+              <Node pos="16" action="512"/>
+              </Groups>
+            </TimeSig>
           <Chord>
             <durationType>32nd</durationType>
             <Spanner type="Slur">
@@ -25921,9 +25828,6 @@ sonoro</text>
               <tpc>19</tpc>
               </Note>
             </Chord>
-          <Beam>
-            <StemDirection>up</StemDirection>
-            </Beam>
           <Chord>
             <BeamMode>begin</BeamMode>
             <durationType>32nd</durationType>
@@ -26119,10 +26023,10 @@ sonoro</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="5/8">
+      <Measure>
         <voice>
           <KeySig>
-            <accidental>5</accidental>
+            <accidental>-4</accidental>
             </KeySig>
           <Chord>
             <durationType>32nd</durationType>
@@ -26136,6 +26040,9 @@ sonoro</text>
                 </next>
               </Spanner>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>30</pitch>
               <tpc>20</tpc>
               </Note>
@@ -26143,6 +26050,9 @@ sonoro</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>42</pitch>
               <tpc>20</tpc>
               </Note>
@@ -26173,6 +26083,9 @@ sonoro</text>
             <BeamMode>begin</BeamMode>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <pitch>52</pitch>
               <tpc>18</tpc>
               </Note>
@@ -26180,6 +26093,9 @@ sonoro</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>54</pitch>
               <tpc>20</tpc>
               </Note>
@@ -26187,6 +26103,9 @@ sonoro</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalSharp</subtype>
+                </Accidental>
               <pitch>56</pitch>
               <tpc>22</tpc>
               </Note>
@@ -26201,13 +26120,13 @@ sonoro</text>
                 </prev>
               </Spanner>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <pitch>59</pitch>
               <tpc>19</tpc>
               </Note>
             </Chord>
-          <KeySig>
-            <accidental>-4</accidental>
-            </KeySig>
           <Chord>
             <BeamMode>begin</BeamMode>
             <durationType>32nd</durationType>
@@ -26231,6 +26150,9 @@ sonoro</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <Fingering>
                 <placement>below</placement>
                 <text>4</text>
@@ -26242,6 +26164,9 @@ sonoro</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalNatural</subtype>
+                </Accidental>
               <pitch>55</pitch>
               <tpc>15</tpc>
               </Note>
@@ -26276,6 +26201,9 @@ sonoro</text>
               <subtype>articTenutoAbove</subtype>
               </Articulation>
             <Note>
+              <Accidental>
+                <subtype>accidentalFlat</subtype>
+                </Accidental>
               <pitch>58</pitch>
               <tpc>12</tpc>
               </Note>
@@ -26283,6 +26211,9 @@ sonoro</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalFlat</subtype>
+                </Accidental>
               <Fingering>
                 <placement>below</placement>
                 <text>4</text>
@@ -26335,6 +26266,9 @@ sonoro</text>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
+              <Accidental>
+                <subtype>accidentalFlat</subtype>
+                </Accidental>
               <Fingering>
                 <placement>below</placement>
                 <text>3</text>
@@ -26375,28 +26309,6 @@ sonoro</text>
             </Chord>
           <Chord>
             <durationType>eighth</durationType>
-            <Spanner type="Slur">
-              <Slur>
-                </Slur>
-              <next>
-                <location>
-                  </location>
-                </next>
-              </Spanner>
-            <Spanner type="Slur">
-              <Slur>
-                <SlurSegment no="0">
-                  <o1 x="-1.41176" y="-1.98464"/>
-                  <o4 x="-1.24807" y="-4.66493"/>
-                  <offset x="0.265983" y="-0.695648"/>
-                  </SlurSegment>
-                <up>up</up>
-                </Slur>
-              <next>
-                <location>
-                  </location>
-                </next>
-              </Spanner>
             <acciaccatura/>
             <StemDirection>up</StemDirection>
             <Note>
@@ -26407,20 +26319,6 @@ sonoro</text>
           <Chord>
             <dots>1</dots>
             <durationType>quarter</durationType>
-            <Spanner type="Slur">
-              <prev>
-                <location>
-                  <grace>0</grace>
-                  </location>
-                </prev>
-              </Spanner>
-            <Spanner type="Slur">
-              <prev>
-                <location>
-                  <grace>0</grace>
-                  </location>
-                </prev>
-              </Spanner>
             <Note>
               <pitch>39</pitch>
               <tpc>11</tpc>
@@ -26433,6 +26331,10 @@ sonoro</text>
           <KeySig>
             <accidental>-4</accidental>
             </KeySig>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Chord>
             <durationType>16th</durationType>
             <Articulation>
@@ -27815,8 +27717,12 @@ sonoro</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>3</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Chord>
             <durationType>quarter</durationType>
             <StemDirection>down</StemDirection>
@@ -27840,6 +27746,10 @@ sonoro</text>
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Rest>
             <offset x="0" y="1"/>
             <durationType>eighth</durationType>
@@ -28889,8 +28799,12 @@ sonoro</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Spanner type="HairPin">
             <HairPin>
               <subtype>0</subtype>
@@ -28919,8 +28833,6 @@ sonoro</text>
               <text>6</text>
               </Number>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
@@ -28990,11 +28902,6 @@ sonoro</text>
           <Spanner type="HairPin">
             <HairPin>
               <subtype>1</subtype>
-              <Segment>
-                <subtype>0</subtype>
-                <offset x="0" y="2.56148"/>
-                <off2 x="0" y="0"/>
-                </Segment>
               </HairPin>
             <next>
               <location>
@@ -29005,15 +28912,11 @@ sonoro</text>
             </Spanner>
           <Rest>
             <visible>0</visible>
-            <durationType>eighth</durationType>
-            </Rest>
-          <Rest>
-            <visible>0</visible>
-            <durationType>eighth</durationType>
+            <durationType>quarter</durationType>
             </Rest>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <voice>
           <Spanner type="HairPin">
             <prev>
@@ -29045,8 +28948,6 @@ sonoro</text>
             <numberType>2</numberType>
             <bracketType>2</bracketType>
             </Tuplet>
-          <Beam>
-            </Beam>
           <Chord>
             <durationType>32nd</durationType>
             <Note>
@@ -29116,11 +29017,6 @@ sonoro</text>
           <Spanner type="HairPin">
             <HairPin>
               <subtype>1</subtype>
-              <Segment>
-                <subtype>0</subtype>
-                <offset x="0" y="2.4195"/>
-                <off2 x="0" y="0"/>
-                </Segment>
               </HairPin>
             <next>
               <location>
@@ -29165,13 +29061,14 @@ sonoro</text>
             <durationType>32nd</durationType>
             </Rest>
           <endTuplet/>
-          <BarLine>
-            <subtype>double</subtype>
-            </BarLine>
           </voice>
         </Measure>
       <Measure len="3/8">
         <voice>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Spanner type="HairPin">
             <prev>
               <location>
@@ -29189,9 +29086,14 @@ sonoro</text>
               <subtype>articTenutoStaccatoBelow</subtype>
               </Articulation>
             <Note>
-              <Accidental>
-                <subtype>accidentalFlat</subtype>
-                </Accidental>
+              <Spanner type="Tie">
+                <prev>
+                  <location>
+                    <measures>-3</measures>
+                    <fractions>1/2</fractions>
+                    </location>
+                  </prev>
+                </Spanner>
               <pitch>61</pitch>
               <tpc>9</tpc>
               </Note>

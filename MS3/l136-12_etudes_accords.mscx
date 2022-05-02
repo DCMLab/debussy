@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <museScore version="3.02">
   <programVersion>3.6.2</programVersion>
-  <programRevision></programRevision>
+  <programRevision>3224f34</programRevision>
   <Score>
     <LayerTag id="0" tag="default"></LayerTag>
     <currentLayer>0</currentLayer>
@@ -22,20 +22,16 @@
     <showFrames>1</showFrames>
     <showMargins>0</showMargins>
     <metaTag name="arranger"></metaTag>
-    <metaTag name="composed_end">1915</metaTag>
-    <metaTag name="composed_start">1915</metaTag>
     <metaTag name="composer"></metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-02-14</metaTag>
     <metaTag name="lyricist"></metaTag>
     <metaTag name="movementNumber"></metaTag>
     <metaTag name="movementTitle"></metaTag>
-    <metaTag name="pdf">https://imslp.org/wiki/Special:ReverseLookup/246285</metaTag>
     <metaTag name="platform">Microsoft Windows</metaTag>
     <metaTag name="poet"></metaTag>
     <metaTag name="source"></metaTag>
     <metaTag name="translator"></metaTag>
-    <metaTag name="typesetter">tunescribers.com</metaTag>
     <metaTag name="workNumber"></metaTag>
     <metaTag name="workTitle"></metaTag>
     <Order id="orchestral" customized="1">
@@ -7577,17 +7573,6 @@
         <voice>
           <Spanner type="HairPin">
             <HairPin>
-              <subtype>1</subtype>
-              <placement>above</placement>
-              </HairPin>
-            <next>
-              <location>
-                <fractions>1/4</fractions>
-                </location>
-              </next>
-            </Spanner>
-          <Spanner type="HairPin">
-            <HairPin>
               <subtype>3</subtype>
               <endText></endText>
               <Segment>
@@ -7599,6 +7584,17 @@
             <next>
               <location>
                 <fractions>1/8</fractions>
+                </location>
+              </next>
+            </Spanner>
+          <Spanner type="HairPin">
+            <HairPin>
+              <subtype>1</subtype>
+              <placement>above</placement>
+              </HairPin>
+            <next>
+              <location>
+                <fractions>1/4</fractions>
                 </location>
               </next>
             </Spanner>
@@ -9066,7 +9062,7 @@ legg.</text>
               <next>
                 <location>
                   <voices>-1</voices>
-                  <measures>1</measures>
+                  <measures>-85</measures>
                   <fractions>-1/8</fractions>
                   </location>
                 </next>
@@ -9112,21 +9108,12 @@ legg.</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
-          <SystemText>
-            <swing unit="" ratio= "60"/>
-            <style>Tempo</style>
-            <offset x="-3.62946" y="-3.82504"/>
-            <text><b></b><font size="8"></font>3
-8</text>
-            </SystemText>
-          <StaffText>
-            <minDistance>-2.97265</minDistance>
-            <size>17</size>
-            <offset x="-4.76528" y="-2.3862"/>
-            <text>( )</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>3</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Chord>
             <durationType>16th</durationType>
             <Note>
@@ -9288,15 +9275,6 @@ legg.</text>
             </Chord>
           <Chord>
             <durationType>16th</durationType>
-            <Spanner type="Slur">
-              <prev>
-                <location>
-                  <voices>1</voices>
-                  <measures>-1</measures>
-                  <fractions>1/8</fractions>
-                  </location>
-                </prev>
-              </Spanner>
             <Note>
               <Accidental>
                 <subtype>accidentalNatural</subtype>
@@ -9328,26 +9306,16 @@ legg.</text>
         </Measure>
       <Measure>
         <voice>
-          <SystemText>
-            <swing unit="" ratio= "60"/>
-            <style>Tempo</style>
-            <minDistance>-5.18368</minDistance>
-            <offset x="-1.41577" y="-3.48963"/>
-            <text><b></b><font size="8"></font>6
-8</text>
-            </SystemText>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <SystemText>
             <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="0.5" y="-2.651"/>
             <text><b></b>rit.</text>
             </SystemText>
-          <StaffText>
-            <minDistance>-3.00783</minDistance>
-            <size>17</size>
-            <offset x="-2.55283" y="-2.11787"/>
-            <text>( )</text>
-            </StaffText>
           <Rest>
             <dots>1</dots>
             <durationType>16th</durationType>
@@ -13292,7 +13260,6 @@ legg.</text>
             <accidental>0</accidental>
             </KeySig>
           <TimeSig>
-            <visible>0</visible>
             <sigN>3</sigN>
             <sigD>8</sigD>
             </TimeSig>
@@ -13308,20 +13275,6 @@ legg.</text>
             <offset x="7.19812" y="3.05835"/>
             <text><i>sempre </i><font face="ScoreText"></font><i><font face="Edwin"></font> (lointain)</i></text>
             </Dynamic>
-          <StaffText>
-            <minDistance>-2.38097</minDistance>
-            <size>17</size>
-            <offset x="-3.91147" y="-1.91186"/>
-            <text>( )</text>
-            </StaffText>
-          <SystemText>
-            <swing unit="" ratio= "60"/>
-            <style>Tempo</style>
-            <minDistance>-3.0101</minDistance>
-            <offset x="-2.77565" y="-3.34983"/>
-            <text><b></b><font size="8"></font>3
-8</text>
-            </SystemText>
           <Chord>
             <dots>1</dots>
             <durationType>quarter</durationType>
@@ -26052,15 +26005,15 @@ legg.</text>
             </Chord>
           </voice>
         </Measure>
-      <Measure len="3/8">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>3</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Rest>
-            <visible>0</visible>
-            <durationType>quarter</durationType>
-            </Rest>
-          <Rest>
-            <visible>0</visible>
-            <durationType>eighth</durationType>
+            <durationType>measure</durationType>
+            <duration>3/8</duration>
             </Rest>
           <Clef>
             <concertClefType>F</concertClefType>
@@ -26070,6 +26023,10 @@ legg.</text>
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>6</sigN>
+            <sigD>8</sigD>
+            </TimeSig>
           <Spanner type="HairPin">
             <HairPin>
               <subtype>1</subtype>
@@ -27666,7 +27623,6 @@ legg.</text>
             <accidental>0</accidental>
             </KeySig>
           <TimeSig>
-            <visible>0</visible>
             <sigN>3</sigN>
             <sigD>8</sigD>
             </TimeSig>

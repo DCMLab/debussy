@@ -21,20 +21,16 @@
     <showFrames>1</showFrames>
     <showMargins>0</showMargins>
     <metaTag name="arranger"></metaTag>
-    <metaTag name="composed_end">1907</metaTag>
-    <metaTag name="composed_start">1907</metaTag>
-    <metaTag name="composer">Claude Debussy</metaTag>
+    <metaTag name="composer"></metaTag>
     <metaTag name="copyright"></metaTag>
     <metaTag name="creationDate">2022-02-07</metaTag>
     <metaTag name="lyricist"></metaTag>
     <metaTag name="movementNumber"></metaTag>
     <metaTag name="movementTitle"></metaTag>
-    <metaTag name="pdf">https://imslp.org/wiki/Special:ReverseLookup/256280</metaTag>
     <metaTag name="platform">Microsoft Windows</metaTag>
     <metaTag name="poet"></metaTag>
     <metaTag name="source"></metaTag>
     <metaTag name="translator"></metaTag>
-    <metaTag name="typesetter">tunescribers.com</metaTag>
     <metaTag name="workNumber"></metaTag>
     <metaTag name="workTitle"></metaTag>
     <Order id="orchestral" customized="1">
@@ -177,7 +173,7 @@
             <sigD>4</sigD>
             </TimeSig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="-6.8355" y="-3.953"/>
             <text>Cloches à travers les feuilles </text>
@@ -1478,7 +1474,7 @@
               </Note>
             </Chord>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="0" y="-6.18754"/>
             <text><b></b><font size="10"></font>Cédez</text>
@@ -1706,7 +1702,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <minDistance>0.235742</minDistance>
             <offset x="-2.37485" y="-5.95157"/>
@@ -1892,37 +1888,17 @@
             </Chord>
           </voice>
         </Measure>
-      <Measure len="2/4">
-        <LayoutBreak>
-          <subtype>line</subtype>
-          </LayoutBreak>
+      <Measure>
         <voice>
-          <StaffText>
-            <size>11</size>
-            <textLineSpacing>0.5</textLineSpacing>
-            <offset x="-1.35847" y="-3.49561"/>
-            <text><font size="10"></font><font face="ScoreText"></font>
-</text>
-            </StaffText>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>19</size>
-            <offset x="-2.748" y="-1.46945"/>
-            <text>( )</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Rest>
             <durationType>quarter</durationType>
             </Rest>
           <Chord>
             <durationType>eighth</durationType>
-            <Spanner type="Slur">
-              <Slur>
-                </Slur>
-              <next>
-                <location>
-                  </location>
-                </next>
-              </Spanner>
             <acciaccatura/>
             <Note>
               <pitch>79</pitch>
@@ -1931,13 +1907,6 @@
             </Chord>
           <Chord>
             <durationType>eighth</durationType>
-            <Spanner type="Slur">
-              <prev>
-                <location>
-                  <grace>0</grace>
-                  </location>
-                </prev>
-              </Spanner>
             <Spanner type="Slur">
               <Slur>
                 </Slur>
@@ -1960,14 +1929,6 @@
             </Chord>
           <Chord>
             <durationType>eighth</durationType>
-            <Spanner type="Slur">
-              <Slur>
-                </Slur>
-              <next>
-                <location>
-                  </location>
-                </next>
-              </Spanner>
             <acciaccatura/>
             <Note>
               <pitch>72</pitch>
@@ -1980,13 +1941,6 @@
               <prev>
                 <location>
                   <fractions>-1/8</fractions>
-                  </location>
-                </prev>
-              </Spanner>
-            <Spanner type="Slur">
-              <prev>
-                <location>
-                  <grace>0</grace>
                   </location>
                 </prev>
               </Spanner>
@@ -2003,6 +1957,10 @@
       <Measure>
         <visible>0</visible>
         <voice>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <StaffText>
             <offset x="-1.37659" y="-2.72858"/>
             <text><font size="7"></font>4
@@ -2021,41 +1979,21 @@
             </BarLine>
           </voice>
         </Measure>
-      <Measure len="2/4">
-        <LayoutBreak>
-          <subtype>page</subtype>
-          </LayoutBreak>
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Dynamic>
             <subtype>mp</subtype>
             <velocity>64</velocity>
             </Dynamic>
-          <StaffText>
-            <size>11</size>
-            <textLineSpacing>0.5</textLineSpacing>
-            <offset x="-1.35847" y="-3.49561"/>
-            <text><font size="10"></font><font face="ScoreText"></font>
-</text>
-            </StaffText>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>19</size>
-            <offset x="-2.748" y="-1.46945"/>
-            <text>( )</text>
-            </StaffText>
           <Rest>
             <durationType>quarter</durationType>
             </Rest>
           <Chord>
             <durationType>eighth</durationType>
-            <Spanner type="Slur">
-              <Slur>
-                </Slur>
-              <next>
-                <location>
-                  </location>
-                </next>
-              </Spanner>
             <acciaccatura/>
             <Note>
               <pitch>79</pitch>
@@ -2064,13 +2002,6 @@
             </Chord>
           <Chord>
             <durationType>eighth</durationType>
-            <Spanner type="Slur">
-              <prev>
-                <location>
-                  <grace>0</grace>
-                  </location>
-                </prev>
-              </Spanner>
             <Spanner type="Slur">
               <Slur>
                 </Slur>
@@ -2093,14 +2024,6 @@
             </Chord>
           <Chord>
             <durationType>eighth</durationType>
-            <Spanner type="Slur">
-              <Slur>
-                </Slur>
-              <next>
-                <location>
-                  </location>
-                </next>
-              </Spanner>
             <acciaccatura/>
             <Note>
               <pitch>72</pitch>
@@ -2113,13 +2036,6 @@
               <prev>
                 <location>
                   <fractions>-1/8</fractions>
-                  </location>
-                </prev>
-              </Spanner>
-            <Spanner type="Slur">
-              <prev>
-                <location>
-                  <grace>0</grace>
                   </location>
                 </prev>
               </Spanner>
@@ -2139,11 +2055,10 @@
           <text>12</text>
           </MeasureNumber>
         <voice>
-          <StaffText>
-            <offset x="-1.37659" y="-2.72858"/>
-            <text><font size="7"></font>4
-4</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Rest>
             <visible>0</visible>
             <durationType>half</durationType>
@@ -2189,7 +2104,7 @@
               </Arpeggio>
             </Chord>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="0" y="-4.36074"/>
             <text><b></b><font size="10"></font>Cédez</text>
@@ -2484,7 +2399,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <minDistance>-2.76426</minDistance>
             <offset x="-2.37485" y="-6.09003"/>
@@ -2523,17 +2438,6 @@
               <Fingering>
                 <text>5</text>
                 </Fingering>
-              <Spanner type="Tie">
-                <Tie>
-                  <up>up</up>
-                  </Tie>
-                <next>
-                  <location>
-                    <measures>3</measures>
-                    <fractions>3/4</fractions>
-                    </location>
-                  </next>
-                </Spanner>
               <pitch>73</pitch>
               <tpc>21</tpc>
               </Note>
@@ -2552,7 +2456,7 @@
                   </Tie>
                 <next>
                   <location>
-                    <measures>1</measures>
+                    <measures>4</measures>
                     <fractions>-1/2</fractions>
                     </location>
                   </next>
@@ -2564,39 +2468,17 @@
           </voice>
         </Measure>
       <Measure len="1/4">
-        <irregular>1</irregular>
-        <stretch>0</stretch>
-        <LayoutBreak>
-          <subtype>line</subtype>
-          </LayoutBreak>
         <voice>
-          <StaffText>
-            <size>11</size>
-            <textLineSpacing>0.5</textLineSpacing>
-            <offset x="-1.35847" y="-3.49561"/>
-            <text><font size="10"></font><font face="ScoreText"></font>
-</text>
-            </StaffText>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>19</size>
-            <offset x="-2.748" y="-1.46945"/>
-            <text>( )</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Chord>
             <durationType>quarter</durationType>
             <Note>
               <Fingering>
                 <text>4</text>
                 </Fingering>
-              <Spanner type="Tie">
-                <prev>
-                  <location>
-                    <measures>-1</measures>
-                    <fractions>1/2</fractions>
-                    </location>
-                  </prev>
-                </Spanner>
               <pitch>71</pitch>
               <tpc>19</tpc>
               </Note>
@@ -2607,11 +2489,7 @@
           </voice>
         </Measure>
       <Measure len="1/4">
-        <stretch>0.4</stretch>
-        <MeasureNumber>
-          <visible>0</visible>
-          <text>15</text>
-          </MeasureNumber>
+        <irregular>1</irregular>
         <voice>
           <Chord>
             <durationType>quarter</durationType>
@@ -2631,13 +2509,10 @@
           <subtype>page</subtype>
           </LayoutBreak>
         <voice>
-          <StaffText>
-            <size>19</size>
-            <textLineSpacing>0.5</textLineSpacing>
-            <offset x="-1.35847" y="-3.49561"/>
-            <text><font size="11"></font><font face="ScoreText"></font>
-</text>
-            </StaffText>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <RehearsalMark>
             <size>8</size>
             <bold>0</bold>
@@ -2646,12 +2521,6 @@
             <frameWidth>0.1</frameWidth>
             <text>15</text>
             </RehearsalMark>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>19</size>
-            <offset x="-2.73119" y="-1.59007"/>
-            <text>( )</text>
-            </StaffText>
           <Chord>
             <dots>1</dots>
             <durationType>half</durationType>
@@ -2681,14 +2550,6 @@
                 <role>1</role>
                 <subtype>accidentalSharp</subtype>
                 </Accidental>
-              <Spanner type="Tie">
-                <prev>
-                  <location>
-                    <measures>-3</measures>
-                    <fractions>-3/4</fractions>
-                    </location>
-                  </prev>
-                </Spanner>
               <pitch>73</pitch>
               <tpc>21</tpc>
               </Note>
@@ -2901,7 +2762,7 @@
               </Note>
             </Chord>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="-20.3001" y="-3.54053"/>
             <text><b></b><font size="10"></font>Cédez</text>
@@ -2921,7 +2782,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="-6.22007" y="-6.44696"/>
             <text><b></b>au Mouvt</text>
@@ -4408,7 +4269,7 @@
             <sigD>8</sigD>
             </TimeSig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="-6.22007" y="-5.55184"/>
             <text><b></b>Un peu animé et plus clair</text>
@@ -10106,7 +9967,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="0" y="-2.63295"/>
             <text><b></b>Retenu</text>
@@ -10480,7 +10341,7 @@
             <sigD>4</sigD>
             </TimeSig>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="-6.78981" y="-8.33989"/>
             <text>Tempo I</text>
@@ -12039,7 +11900,7 @@
           </LayoutBreak>
         <voice>
           <SystemText>
-            <swing unit="" ratio="60"/>
+            <swing unit="" ratio= "60"/>
             <style>Tempo</style>
             <offset x="-1.38098" y="-7.24662"/>
             <text><b></b><font size="10"></font>Plus lent jusqu'à la fin</text>
@@ -14179,12 +14040,12 @@
           <endTuplet/>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <voice>
-          <Dynamic>
-            <subtype>mp</subtype>
-            <velocity>64</velocity>
-            </Dynamic>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Spanner type="HairPin">
             <prev>
               <location>
@@ -14277,12 +14138,6 @@
               </Note>
             </Chord>
           <endTuplet/>
-          <StaffText>
-            <style>Expression</style>
-            <minDistance>0.0478889</minDistance>
-            <offset x="0" y="-2.59079"/>
-            <text><font size="8"></font>m. g.</text>
-            </StaffText>
           <Tuplet>
             <visible>0</visible>
             <normalNotes>2</normalNotes>
@@ -14378,6 +14233,10 @@
           <text>10</text>
           </MeasureNumber>
         <voice>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <StaffText>
             <style>Expression</style>
             <placement>below</placement>
@@ -14389,19 +14248,6 @@
             <offset x="-1.28008" y="-2.45235"/>
             <text>
 </text>
-            </StaffText>
-          <StaffText>
-            <size>19</size>
-            <textLineSpacing>0.5</textLineSpacing>
-            <offset x="-1.35847" y="-3.49561"/>
-            <text><font size="11"></font><font face="ScoreText"></font>
-</text>
-            </StaffText>
-          <StaffText>
-            <autoplace>0</autoplace>
-            <size>19</size>
-            <offset x="-2.73119" y="-4.07826"/>
-            <text>( )</text>
             </StaffText>
           <Spanner type="HairPin">
             <HairPin>
@@ -14680,8 +14526,12 @@
             </Chord>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Spanner type="HairPin">
             <prev>
               <location>
@@ -14854,6 +14704,10 @@
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <StaffText>
             <style>Expression</style>
             <placement>below</placement>
@@ -16145,6 +15999,10 @@
         </Measure>
       <Measure len="1/4">
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Tuplet>
             <normalNotes>4</normalNotes>
             <actualNotes>5</actualNotes>
@@ -16401,6 +16259,10 @@
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Tuplet>
             <normalNotes>4</normalNotes>
             <actualNotes>5</actualNotes>
@@ -24907,8 +24769,12 @@
             </Chord>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Chord>
             <durationType>quarter</durationType>
             <Spanner type="Slur">
@@ -24936,9 +24802,6 @@
               <tpc>15</tpc>
               </Note>
             </Chord>
-          <Beam>
-            <StemDirection>up</StemDirection>
-            </Beam>
           <Chord>
             <durationType>eighth</durationType>
             <Note>
@@ -25020,6 +24883,10 @@
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <StaffText>
             <style>Expression</style>
             <placement>below</placement>
@@ -25320,8 +25187,12 @@
           <endTuplet/>
           </voice>
         </Measure>
-      <Measure len="2/4">
+      <Measure>
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Chord>
             <durationType>quarter</durationType>
             <Spanner type="Slur">
@@ -25343,9 +25214,6 @@
               <tpc>15</tpc>
               </Note>
             </Chord>
-          <Beam>
-            <StemDirection>up</StemDirection>
-            </Beam>
           <Chord>
             <durationType>eighth</durationType>
             <Note>
@@ -25427,6 +25295,10 @@
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Tuplet>
             <visible>0</visible>
             <normalNotes>2</normalNotes>
@@ -25754,8 +25626,11 @@
         </Measure>
       <Measure len="1/4">
         <voice>
+          <TimeSig>
+            <sigN>2</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Rest>
-            <visible>0</visible>
             <durationType>measure</durationType>
             <duration>1/4</duration>
             </Rest>
@@ -25767,7 +25642,6 @@
       <Measure len="1/4">
         <voice>
           <Rest>
-            <visible>0</visible>
             <durationType>measure</durationType>
             <duration>1/4</duration>
             </Rest>
@@ -25775,6 +25649,10 @@
         </Measure>
       <Measure>
         <voice>
+          <TimeSig>
+            <sigN>4</sigN>
+            <sigD>4</sigD>
+            </TimeSig>
           <Rest>
             <visible>0</visible>
             <durationType>measure</durationType>

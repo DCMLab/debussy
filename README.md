@@ -2,8 +2,14 @@
 
 Delicious dataset
 
-Command for creating pitch class vectors: `python slices.py -q 1 -p pc -w 0.5 -o pcvs` where `-q 1` means slices of length 1 quarter, `-p pc` using pitch classes 0..11, `-w 0.5`
-weighting grace notes by half of their durations, and `-o pcvs` the output directory.
+Command for creating pitch class vectors: `dimcat pcvs -o pcvs -w 0.5 -p pc -q 1 --fillna 0.0 --round 5` (dimcat > 0.2.0) where 
+
+* `-o pcvs` stands for the output directory,
+* `-w 0.5` means weighting grace notes by half of their durations,
+* `-p pc` using pitch classes 0..11
+* `-q 1` means slices of length 1 quarter,
+* `--fillna 0.0` fills empty fields (=non-occurrent pitch classes) with 0.0
+* `--round 5` rounds the output to 5 (maximum available precision).
 
 
 # Overview

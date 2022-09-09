@@ -389,7 +389,7 @@ def get_pcms(debussy_repo='.', long=True):
 @lru_cache
 def get_pcvs(debussy_repo, pandas=False):
     pcvs_path = os.path.join(debussy_repo, 'pcvs',
-                             'debussy-w0.5-piece-wise-pc-q1-slices-pcvs.tsv')
+                             'debussy-1.0q_sliced-w0.5-pc-pcvs.tsv')
     pcvs = pd.read_csv(pcvs_path, sep='\t', index_col=[0, 1, 2])
     pcv_dfs = {fname: pcv_df.reset_index(
         level=[0, 1], drop=True) for fname, pcv_df in pcvs.groupby(level=1)}

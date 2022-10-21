@@ -513,11 +513,12 @@ def make_plots(metadata_metrics, save_name, title, cols,
                             scatter=scatter, label=f"Coefficient {i+3}")
         
             plt.legend()
-    p.set_ylabel(col[:-2])
+    if unified and not boxplot:
+        p.set_ylabel(col[:-2])
     plt.savefig(f'figures/{save_name}.png')
 
 
-def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal', melted=False):
+def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal', melted=True):
     """Function used to test the predictiveness of each measure with respect to 
        the time period.
 
@@ -529,24 +530,29 @@ def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal
     """
 
     scaler = StandardScaler()
-
     if type(cols) != str:
         metadata_sm = metadata_matrix[metadata_matrix[cols[0]].notnull()]
-        metadata_sm[cols] = scaler.fit_transform(metadata_sm[cols])
+        if not melted:  
+            metadata_sm[cols] = scaler.fit_transform(metadata_sm[cols])
     else:
         metadata_sm = metadata_matrix[metadata_matrix[cols].notnull()]
         metadata_sm[cols] = scaler.fit_transform(
             np.array(metadata_sm[cols]).reshape(-1, 1))
         cols = [cols]
 
-
+    
     if melted:
-        metadata_sm = pd.melt(metadata_sm, id_vars=['year', 'last_mc'], value_vars=cols)
-        metadata_sm = metadata_sm[~metadata_sm['variable'].str.endswith('2')]
+        metadata_sm = metadata_sm.reset_index()
+        metadata_sm['fname'] = metadata_sm['index']
+        metadata_sm = pd.melt(metadata_sm, id_vars=['fname', 'length_qb', 'year', 'last_mc'], value_vars=cols)
+        metadata_sm.to_csv('results/MOI_melted.csv', float_format='%.20f')
+        print(metadata_sm.head(1))
+        #metadata_sm = metadata_sm[~metadata_sm['variable'].str.endswith('2')]
         #print(metadata_sm)
         results = smf.ols(formula='value ~ year * C(variable) + last_mc + 1 ', data=metadata_sm).fit()
         print('testing results')
         print(results.summary())
+        
 
     else:
         for col in cols:
@@ -557,7 +563,7 @@ def testing_ols(metadata_matrix, cols, ordinal=False, ordinal_col='years_ordinal
 
     if ordinal:
         print(ordinal_col) # use ordinal col
-    
+    #return metadata_sm
     
 
 def add_to_metrics(metrics_df, dict_metric, name_metrics):

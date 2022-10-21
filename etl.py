@@ -551,6 +551,21 @@ def get_metric(metric_type, metadata_matrix,
     if metric_type == 'center_of_mass':
         metric = {fname: center_of_mass(
             mag_phase_mx[..., 0]) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
+    elif metric_type == 'center_of_mass_2':
+        metric = {fname: np.divide(np.array(
+            [
+                (
+                    max_mags[fname][max_coeff == i] *
+                        np.divide(np.indices(max_mags[fname].shape)[0], max_coeff.shape[1])[
+                        max_coeff == i]
+
+                ).sum()
+                for i in range(len(cols))
+            ]),
+            max_coeff.shape[0] * max_coeff.shape[1] / 2)
+            for fname, max_coeff in max_coeffs.items()
+
+        }
     elif metric_type == 'mean_resonance':
         metric = {fname: np.mean(mag_phase_mx[..., 0], axis=(
             0, 1)) for fname, mag_phase_mx in mag_phase_mx_dict.items()}
@@ -559,32 +574,32 @@ def get_metric(metric_type, metadata_matrix,
             [
                 (
                     max_mags[fname][max_coeff == i] *
-                    (np.flip(np.square(
-                        np.divide(np.indices(max_mags[fname].shape)[0], max_coeff.shape[1]))))[
+                    np.square(
+                        np.divide(np.indices(max_mags[fname].shape)[0], max_coeff.shape[1]))[
                         max_coeff == i]
 
                 ).sum()
                 for i in range(len(cols))
             ]),
-            max_coeff.shape[0] * max_coeff.shape[1])
+            max_coeff.shape[0] * max_coeff.shape[1] / 2)
             for fname, max_coeff in max_coeffs.items()
 
         }
     elif metric_type == 'percentage_resonance':
         metric = {fname: np.divide(np.array([(max_coeff == i).sum() for i in range(len(cols))]),
-                                   max_coeff.shape[0] * max_coeff.shape[1]) for fname, max_coeff in
+                                   max_coeff.shape[0] * max_coeff.shape[1] / 2) for fname, max_coeff in
                   max_coeffs.items()}
 
     elif metric_type == 'percentage_resonance_entropy':
         metric = {fname: np.divide(
             np.array([(inv_entropies[fname] * (max_coeff == i)).sum()
                      for i in range(len(cols))]),
-            max_coeff.shape[0] * max_coeff.shape[1]) for fname, max_coeff in max_coeffs.items()}
+            max_coeff.shape[0] * max_coeff.shape[1] / 2) for fname, max_coeff in max_coeffs.items()}
     elif metric_type == 'partition_entropy':
         metric = {fname: partititions_entropy(make_adj_list(max_coeff)) for fname, max_coeff in
                   max_coeffs.items()}
     elif metric_type == 'inverse_coherence':
-        metric = {fname: np.polyfit(np.arange(max_mag.shape[1]), np.mean(max_mag, axis=0), 1)[1] for fname, max_mag in
+        metric = {fname: np.polyfit((max_mag.shape[1] - np.arange(max_mag.shape[1]))/max_mag.shape[1], np.mean(max_mag, axis=0), 1)[0] for fname, max_mag in
                   max_mags.items()}
     else:
         return 'Metric not implemented, choose among: center_of_mass, mean_resonance, moment_of_inertia, percentage_resonance, percentage_resonance_entropy, partition_entropy, inverse_coherence'

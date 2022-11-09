@@ -6,3 +6,9 @@
 .ipynb_checkpoints
 __pycache__
 .idea
+results/
+data/
+figures/
+MS3/
+.vscode/
+analyses/
